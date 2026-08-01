@@ -12,17 +12,17 @@ the additional New 3DS shoulder buttons. It has been tested on a New Nintendo
 You need:
 
 - A New Nintendo 3DS, New Nintendo 3DS XL, or New Nintendo 2DS XL
-- A homebrew-capable system
-- The latest OpenXCOM-3DS release package
-- Legally owned, unmodified files from X-COM: UFO Defense, Terror From the
+- A homebrewed system. If you haven't done it yet, this is a good guide: https://3ds.hacks.guide/get-started.html
+- The release package
+- Your legal asset files from X-COM: UFO Defense, Terror From the
   Deep, or both
 
-The original Nintendo 3DS, Nintendo 3DS XL, and Nintendo 2DS are not supported.
+Note: The original Nintendo 3DS, Nintendo 3DS XL, and Nintendo 2DS are not supported.
 
 The original commercial X-COM data is not included in this repository or in
 release downloads.
 
-Third-party OXCE mods are not currently supported.
+Third-party OXCE mods are not directly supported at this time, but you are welcome to test them out.
 
 ## Installation
 
@@ -58,7 +58,7 @@ The game automatically creates and uses:
 sdmc:/3ds/OXCE/user/
 ```
 
-The `user` directory stores configuration, saved games, screenshots, and other
+The `user` directory stores configuration, saved games, and other
 generated files.
 
 ### 3. Install UFO Defense Data
@@ -165,13 +165,10 @@ During startup, the screen displays:
 - A percentage
 - A progress bar
 
-These represent real loading progress. Initial loading can take some time,
+These represent real loading progress. Initial loading can take some time, usually a minute or two
 especially when the game is scanning original resources for the first time.
 
-Do not close the game merely because one loading stage remains on screen for a
-while.
-
-OpenXCOM-3DS release builds contain OXCE's own `common` and `standard` support
+OpenXCOM-3DS release builds contain OXCE's 8.6.1 own `common` and `standard` support
 resources inside the `.3dsx`. You do not need to download or install those
 folders separately.
 
