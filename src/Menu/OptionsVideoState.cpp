@@ -1,0 +1,759 @@
+/*
+ * Copyright 2010-2016 OpenXcom Developers.
+ *
+ * This file is part of OpenXcom.
+ *
+ * OpenXcom is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * OpenXcom is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
+ */
+#include "OptionsVideoState.h"
+#include "../Engine/Language.h"
+#include "../Interface/TextButton.h"
+#include "../Engine/Action.h"
+#include "../Interface/Text.h"
+#include "../Interface/TextEdit.h"
+#include "../Interface/ToggleTextButton.h"
+#include "../Engine/Options.h"
+#include "../Engine/Screen.h"
+#include "../Interface/ArrowButton.h"
+#include "../Engine/FileMap.h"
+#include "../Engine/Logger.h"
+#include "../Interface/ComboBox.h"
+#include "../Engine/Game.h"
+#include "SetWindowedRootState.h"
+
+namespace OpenXcom
+{
+
+const std::string OptionsVideoState::GL_EXT = "OpenGL.shader";
+const std::string OptionsVideoState::GL_FOLDER = "Shaders/";
+const std::string OptionsVideoState::GL_STRING = "*";
+
+/**
+ * Initializes all the elements in the Video Options screen.
+ * @param game Pointer to the core game.
+ * @param origin Game section that originated this state.
+ */
+OptionsVideoState::OptionsVideoState(OptionsOrigin origin) : OptionsBaseState(origin)
+{
+	setCategory(_btnVideo);
+
+	// Create objects
+	_displaySurface = new InteractiveSurface(110, 32, 94, 18);
+	_txtDisplayResolution = new Text(114, 9, 94, 8);
+	_txtDisplayWidth = new TextEdit(this, 40, 17, 94, 26);
+	_txtDisplayX = new Text(16, 17, 132, 26);
+	_txtDisplayHeight = new TextEdit(this, 40, 17, 144, 26);
+	_btnDisplayResolutionUp = new ArrowButton(ARROW_BIG_UP, 14, 14, 186, 18);
+	_btnDisplayResolutionDown = new ArrowButton(ARROW_BIG_DOWN, 14, 14, 186, 36);
+
+	_txtLanguage = new Text(114, 9, 94, 52);
+	_cbxLanguage = new ComboBox(this, 104, 16, 94, 62);
+
+	_txtFilter = new Text(114, 9, 206, 52);
+	_cbxFilter = new ComboBox(this, 104, 16, 206, 62);
+
+	_txtMode = new Text(114, 9, 206, 22);
+	_cbxDisplayMode = new ComboBox(this, 104, 16, 206, 32);
+
+	_txtGeoScale = new Text(114, 9, 94, 82);
+	_cbxGeoScale = new ComboBox(this, 104, 16, 94, 92);
+
+	_txtBattleScale = new Text(114, 9, 94, 112);
+	_cbxBattleScale = new ComboBox(this, 104, 16, 94, 122);
+
+	_txtOptions = new Text(114, 9, 206, 82);
+	_btnLetterbox = new ToggleTextButton(104, 16, 206, 92);
+	_btnLockMouse = new ToggleTextButton(104, 16, 206, 110);
+	_btnRootWindowedMode = new ToggleTextButton(104, 16, 206, 128);
+
+	// Get available fullscreen modes
+	_res = SDL_ListModes(NULL, SDL_FULLSCREEN);
+	if (_res != (SDL_Rect**)-1 && _res != (SDL_Rect**)0)
+	{
+		int i;
+		_resCurrent = -1;
+		for (i = 0; _res[i]; ++i)
+		{
+			if (_resCurrent == -1 &&
+				((_res[i]->w == Options::displayWidth && _res[i]->h <= Options::displayHeight) || _res[i]->w < Options::displayWidth))
+			{
+				_resCurrent = i;
+			}
+		}
+		_resAmount = i;
+	}
+	else
+	{
+		_resCurrent = -1;
+		_resAmount = 0;
+		_btnDisplayResolutionDown->setVisible(false);
+		_btnDisplayResolutionUp->setVisible(false);
+		Log(LOG_WARNING) << "Couldn't get display resolutions";
+	}
+
+	add(_displaySurface);
+	add(_txtDisplayResolution, "text", "videoMenu");
+	add(_txtDisplayWidth, "resolution", "videoMenu");
+	add(_txtDisplayX, "resolution", "videoMenu");
+	add(_txtDisplayHeight, "resolution", "videoMenu");
+	add(_btnDisplayResolutionUp, "button", "videoMenu");
+	add(_btnDisplayResolutionDown, "button", "videoMenu");
+
+	add(_txtLanguage, "text", "videoMenu");
+	add(_txtFilter, "text", "videoMenu");
+
+	add(_txtMode, "text", "videoMenu");
+
+	add(_txtOptions, "text", "videoMenu");
+	add(_btnLetterbox, "button", "videoMenu");
+	add(_btnLockMouse, "button", "videoMenu");
+	add(_btnRootWindowedMode, "button", "videoMenu");
+
+	add(_cbxFilter, "button", "videoMenu");
+	add(_cbxDisplayMode, "button", "videoMenu");
+
+	add(_txtBattleScale, "text", "videoMenu");
+	add(_cbxBattleScale, "button", "videoMenu");
+
+	add(_txtGeoScale, "text", "videoMenu");
+	add(_cbxGeoScale, "button", "videoMenu");
+
+	add(_cbxLanguage, "button", "videoMenu");
+#ifdef NINTENDO_3DS
+	/* OXCE_3DS_VIDEO_COMPACT_LAYOUT */
+	/*
+	 * Center the three useful Video sections vertically.
+	 * Resolution is displayed for reference only.
+	 */
+	_txtDisplayResolution->setX(145);
+	_txtDisplayResolution->setY(24);
+	_txtDisplayResolution->setAlign(ALIGN_CENTER);
+
+	_displaySurface->setX(147);
+	_displaySurface->setY(34);
+
+	_txtDisplayWidth->setX(157);
+	_txtDisplayWidth->setY(42);
+
+	_txtDisplayX->setX(195);
+	_txtDisplayX->setY(42);
+
+	_txtDisplayHeight->setX(207);
+	_txtDisplayHeight->setY(42);
+
+	_txtLanguage->setX(145);
+	_txtLanguage->setY(76);
+	_cbxLanguage->setX(150);
+	_cbxLanguage->setY(86);
+
+	_txtFilter->setX(145);
+	_txtFilter->setY(108);
+	_cbxFilter->setX(150);
+	_cbxFilter->setY(118);
+#endif
+
+	centerAllSurfaces();
+
+	// Set up objects
+	_txtDisplayResolution->setText(tr("STR_DISPLAY_RESOLUTION"));
+
+	_displaySurface->setTooltip("STR_DISPLAY_RESOLUTION_DESC");
+	_displaySurface->onMouseIn((ActionHandler)&OptionsVideoState::txtTooltipIn);
+	_displaySurface->onMouseOut((ActionHandler)&OptionsVideoState::txtTooltipOut);
+
+	_txtDisplayWidth->setAlign(ALIGN_CENTER);
+	_txtDisplayWidth->setBig();
+	_txtDisplayWidth->setConstraint(TEC_NUMERIC_POSITIVE);
+	_txtDisplayWidth->onChange((ActionHandler)&OptionsVideoState::txtDisplayWidthChange);
+
+	_txtDisplayX->setAlign(ALIGN_CENTER);
+	_txtDisplayX->setBig();
+	_txtDisplayX->setText("x");
+
+	_txtDisplayHeight->setAlign(ALIGN_CENTER);
+	_txtDisplayHeight->setBig();
+	_txtDisplayHeight->setConstraint(TEC_NUMERIC_POSITIVE);
+	_txtDisplayHeight->onChange((ActionHandler)&OptionsVideoState::txtDisplayHeightChange);
+
+	std::ostringstream ssW, ssH;
+	ssW << Options::displayWidth;
+	ssH << Options::displayHeight;
+	_txtDisplayWidth->setText(ssW.str());
+	_txtDisplayHeight->setText(ssH.str());
+
+	_btnDisplayResolutionUp->onMouseClick((ActionHandler)&OptionsVideoState::btnDisplayResolutionUpClick);
+	_btnDisplayResolutionDown->onMouseClick((ActionHandler)&OptionsVideoState::btnDisplayResolutionDownClick);
+
+	_txtMode->setText(tr("STR_DISPLAY_MODE"));
+
+	_txtOptions->setText(tr("STR_DISPLAY_OPTIONS"));
+
+	_btnLetterbox->setText(tr("STR_LETTERBOXED"));
+	_btnLetterbox->setPressed(Options::keepAspectRatio);
+	_btnLetterbox->onMouseClick((ActionHandler)&OptionsVideoState::btnLetterboxClick);
+	_btnLetterbox->setTooltip("STR_LETTERBOXED_DESC");
+	_btnLetterbox->onMouseIn((ActionHandler)&OptionsVideoState::txtTooltipIn);
+	_btnLetterbox->onMouseOut((ActionHandler)&OptionsVideoState::txtTooltipOut);
+
+	_btnLockMouse->setText(tr("STR_LOCK_MOUSE"));
+	_btnLockMouse->setPressed(Options::captureMouse == SDL_GRAB_ON);
+	_btnLockMouse->onMouseClick((ActionHandler)&OptionsVideoState::btnLockMouseClick);
+	_btnLockMouse->setTooltip("STR_LOCK_MOUSE_DESC");
+	_btnLockMouse->onMouseIn((ActionHandler)&OptionsVideoState::txtTooltipIn);
+	_btnLockMouse->onMouseOut((ActionHandler)&OptionsVideoState::txtTooltipOut);
+
+	_btnRootWindowedMode->setText(tr("STR_FIXED_WINDOW_POSITION"));
+	_btnRootWindowedMode->setPressed(Options::rootWindowedMode);
+	_btnRootWindowedMode->onMouseClick((ActionHandler)&OptionsVideoState::btnRootWindowedModeClick);
+	_btnRootWindowedMode->setTooltip("STR_FIXED_WINDOW_POSITION_DESC");
+	_btnRootWindowedMode->onMouseIn((ActionHandler)&OptionsVideoState::txtTooltipIn);
+	_btnRootWindowedMode->onMouseOut((ActionHandler)&OptionsVideoState::txtTooltipOut);
+
+	_txtLanguage->setText(tr("STR_DISPLAY_LANGUAGE"));
+
+	std::vector<std::string> names;
+	Language::getList(_langs, names);
+	_cbxLanguage->setOptions(names);
+	for (size_t i = 0; i < names.size(); ++i)
+	{
+		if (_langs[i] == Options::language)
+		{
+			_cbxLanguage->setSelected(i);
+			break;
+		}
+	}
+	_cbxLanguage->onChange((ActionHandler)&OptionsVideoState::cbxLanguageChange);
+	_cbxLanguage->setTooltip("STR_DISPLAY_LANGUAGE_DESC");
+	_cbxLanguage->onMouseIn((ActionHandler)&OptionsVideoState::txtTooltipIn);
+	_cbxLanguage->onMouseOut((ActionHandler)&OptionsVideoState::txtTooltipOut);
+
+#ifdef NINTENDO_3DS
+	std::vector<std::string> filterNames;
+	filterNames.push_back("Sharp");
+	filterNames.push_back("Smooth");
+	_filters.push_back("");
+	_filters.push_back("");
+
+	size_t selFilter =
+	        Options::newScaleFilter ? 1 : 0;
+#else
+	std::vector<std::string> filterNames;
+	filterNames.push_back(tr("STR_DISABLED"));
+	filterNames.push_back("Scale");
+	filterNames.push_back("HQx");
+	filterNames.push_back("xBRZ");
+	_filters.push_back("");
+	_filters.push_back("");
+	_filters.push_back("");
+	_filters.push_back("");
+
+#ifndef __NO_OPENGL
+	std::vector<std::string> filters;
+	for (const auto& f : FileMap::filterFiles(FileMap::getVFolderContents(GL_FOLDER), GL_EXT)) { filters.push_back(f); }
+	std::sort(filters.begin(), filters.end(), Unicode::naturalCompare);
+	for (const auto& file : filters)
+	{
+		std::string path = GL_FOLDER + file;
+		std::string name = file.substr(0, file.length() - GL_EXT.length() - 1) + GL_STRING;
+		filterNames.push_back(ucWords(name));
+		_filters.push_back(path);
+	}
+#endif
+
+	size_t selFilter = 0;
+	if (Screen::useOpenGL())
+	{
+#ifndef __NO_OPENGL
+		std::string path = Options::useOpenGLShader;
+		for (size_t i = 0; i < _filters.size(); ++i)
+		{
+			if (_filters[i] == path)
+			{
+				selFilter = i;
+				break;
+			}
+		}
+#endif
+	}
+	else if (Options::useScaleFilter)
+	{
+		selFilter = 1;
+	}
+	else if (Options::useHQXFilter)
+	{
+		selFilter = 2;
+	}
+	else if (Options::useXBRZFilter)
+	{
+		selFilter = 3;
+	}
+#endif
+
+	_txtFilter->setText(tr("STR_DISPLAY_FILTER"));
+
+	_cbxFilter->setOptions(filterNames);
+	_cbxFilter->setSelected(selFilter);
+	_cbxFilter->onChange((ActionHandler)&OptionsVideoState::cbxFilterChange);
+#ifndef NINTENDO_3DS
+	_cbxFilter->setTooltip("STR_DISPLAY_FILTER_DESC");
+	_cbxFilter->onMouseIn((ActionHandler)&OptionsVideoState::txtTooltipIn);
+	_cbxFilter->onMouseOut((ActionHandler)&OptionsVideoState::txtTooltipOut);
+#endif
+
+
+	std::vector<std::string> displayModes;
+	displayModes.push_back(tr("STR_WINDOWED"));
+	displayModes.push_back(tr("STR_FULLSCREEN"));
+	displayModes.push_back(tr("STR_BORDERLESS"));
+	displayModes.push_back(tr("STR_RESIZABLE"));
+
+	int displayMode = 0;
+	if (Options::fullscreen)
+	{
+		displayMode = 1;
+	}
+	else if (Options::borderless)
+	{
+		displayMode = 2;
+	}
+	else if (Options::allowResize)
+	{
+		displayMode = 3;
+	}
+
+	_cbxDisplayMode->setOptions(displayModes);
+	_cbxDisplayMode->setSelected(displayMode);
+	_cbxDisplayMode->onChange((ActionHandler)&OptionsVideoState::updateDisplayMode);
+	_cbxDisplayMode->setTooltip("STR_DISPLAY_MODE_DESC");
+	_cbxDisplayMode->onMouseIn((ActionHandler)&OptionsVideoState::txtTooltipIn);
+	_cbxDisplayMode->onMouseOut((ActionHandler)&OptionsVideoState::txtTooltipOut);
+
+	_txtGeoScale->setText(tr("STR_GEOSCAPE_SCALE"));
+
+	std::vector<std::string> scales;
+	scales.push_back("1x"); // was 5 -> is 0
+	scales.push_back("2x"); // was 4 -> is 1
+	scales.push_back("3x"); // was 3 -> is 2
+	scales.push_back("4x"); // was 6 -> is 3
+	scales.push_back("5x"); // was 7 -> is 4
+	scales.push_back("6x"); // was 8 -> is 5
+	scales.push_back("320x200"); // was 0 -> is 6
+	scales.push_back("480x300"); // was 1 -> is 7
+	scales.push_back("640x400"); // was 2 -> is 8
+	scales.push_back("8x");  // new 9
+	scales.push_back("10x"); // new 10
+
+	_scales.push_back(6); // 0
+	_scales.push_back(7); // 1
+	_scales.push_back(8); // 2
+	_scales.push_back(2); // 3
+	_scales.push_back(1); // 4
+	_scales.push_back(0); // 5
+	_scales.push_back(3); // 6
+	_scales.push_back(4); // 7
+	_scales.push_back(5); // 8
+	_scales.push_back(9);
+	_scales.push_back(10);
+
+	_reverseScales.push_back(5); // 0
+	_reverseScales.push_back(4); // 1
+	_reverseScales.push_back(3); // 2
+	_reverseScales.push_back(6); // 3
+	_reverseScales.push_back(7); // 4
+	_reverseScales.push_back(8); // 5
+	_reverseScales.push_back(0); // 6
+	_reverseScales.push_back(1); // 7
+	_reverseScales.push_back(2); // 8
+	_reverseScales.push_back(9);
+	_reverseScales.push_back(10);
+
+	if (Options::geoscapeScale < 0 || Options::geoscapeScale > 10) Options::geoscapeScale = 0;
+	if (Options::battlescapeScale < 0 || Options::battlescapeScale > 10) Options::battlescapeScale = 0;
+
+	_cbxGeoScale->setOptions(scales);
+	_cbxGeoScale->setSelected(_scales[Options::geoscapeScale]);
+	_cbxGeoScale->onChange((ActionHandler)&OptionsVideoState::updateGeoscapeScale);
+	_cbxGeoScale->setTooltip("STR_GEOSCAPESCALE_SCALE_DESC");
+	_cbxGeoScale->onMouseIn((ActionHandler)&OptionsVideoState::txtTooltipIn);
+	_cbxGeoScale->onMouseOut((ActionHandler)&OptionsVideoState::txtTooltipOut);
+
+	_txtBattleScale->setText(tr("STR_BATTLESCAPE_SCALE"));
+
+	_cbxBattleScale->setOptions(scales);
+	_cbxBattleScale->setSelected(_scales[Options::battlescapeScale]);
+	_cbxBattleScale->onChange((ActionHandler)&OptionsVideoState::updateBattlescapeScale);
+	_cbxBattleScale->setTooltip("STR_BATTLESCAPE_SCALE_DESC");
+	_cbxBattleScale->onMouseIn((ActionHandler)&OptionsVideoState::txtTooltipIn);
+	_cbxBattleScale->onMouseOut((ActionHandler)&OptionsVideoState::txtTooltipOut);
+
+#ifdef NINTENDO_3DS
+	/* OXCE_3DS_VIDEO_FIXED_DISPLAY */
+    /*
+     * The desktop display defaults may still contain values such as
+     * 640x400, but the physical 3DS top screen is always 400x240.
+     */
+    _txtDisplayWidth->setText("400");
+    _txtDisplayHeight->setText("240");
+	/* Show the fixed resolution as centered information. */
+	_displaySurface->setVisible(true);
+	_txtDisplayResolution->setVisible(true);
+	_txtDisplayWidth->setVisible(true);
+	_txtDisplayX->setVisible(true);
+	_txtDisplayHeight->setVisible(true);
+
+	/* Resolution cannot be changed on the fixed 3DS displays. */
+	_btnDisplayResolutionUp->setVisible(false);
+	_btnDisplayResolutionDown->setVisible(false);
+	_displaySurface->setMenuNavigationEnabled(false);
+	_txtDisplayWidth->setMenuNavigationEnabled(false);
+	_txtDisplayHeight->setMenuNavigationEnabled(false);
+
+	_txtMode->setVisible(false);
+	_cbxDisplayMode->setVisible(false);
+
+	_txtGeoScale->setVisible(false);
+	_cbxGeoScale->setVisible(false);
+	_txtBattleScale->setVisible(false);
+	_cbxBattleScale->setVisible(false);
+
+	_txtOptions->setVisible(false);
+	_btnLetterbox->setVisible(false);
+	_btnLockMouse->setVisible(false);
+	_btnRootWindowedMode->setVisible(false);
+#endif
+}
+
+/**
+ *
+ */
+OptionsVideoState::~OptionsVideoState()
+{
+
+}
+
+/**
+ * Uppercases all the words in a string.
+ * @param str Source string.
+ * @return Destination string.
+ */
+std::string OptionsVideoState::ucWords(std::string str)
+{
+	for (size_t i = 0; i < str.length(); ++i)
+	{
+		if (i == 0)
+			str[0] = toupper(str[0]);
+		else if (str[i] == ' ' || str[i] == '-' || str[i] == '_')
+		{
+			str[i] = ' ';
+			if (str.length() > i + 1)
+				str[i + 1] = toupper(str[i + 1]);
+		}
+	}
+	return str;
+}
+
+/**
+ * Selects a bigger display resolution.
+ * @param action Pointer to an action.
+ */
+void OptionsVideoState::btnDisplayResolutionUpClick(Action *)
+{
+	if (_resAmount == 0)
+		return;
+	if (_resCurrent <= 0)
+	{
+		_resCurrent = _resAmount-1;
+	}
+	else
+	{
+		_resCurrent--;
+	}
+	updateDisplayResolution();
+}
+
+/**
+ * Selects a smaller display resolution.
+ * @param action Pointer to an action.
+ */
+void OptionsVideoState::btnDisplayResolutionDownClick(Action *)
+{
+	if (_resAmount == 0)
+		return;
+	if (_resCurrent >= _resAmount-1)
+	{
+		_resCurrent = 0;
+	}
+	else
+	{
+		_resCurrent++;
+	}
+	updateDisplayResolution();
+}
+
+/**
+ * Updates the display resolution based on the selection.
+ */
+void OptionsVideoState::updateDisplayResolution()
+{
+	std::ostringstream ssW, ssH;
+	ssW << (int)_res[_resCurrent]->w;
+	ssH << (int)_res[_resCurrent]->h;
+	_txtDisplayWidth->setText(ssW.str());
+	_txtDisplayHeight->setText(ssH.str());
+
+	Options::newDisplayWidth = _res[_resCurrent]->w;
+	Options::newDisplayHeight = _res[_resCurrent]->h;
+}
+
+/**
+ * Changes the Display Width option.
+ * @param action Pointer to an action.
+ */
+void OptionsVideoState::txtDisplayWidthChange(Action *)
+{
+	std::stringstream ss;
+	int width = 0;
+	ss << std::dec << _txtDisplayWidth->getText();
+	ss >> std::dec >> width;
+	Options::newDisplayWidth = width;
+	// Update resolution mode
+	if (_res != (SDL_Rect**)-1 && _res != (SDL_Rect**)0)
+	{
+		int i;
+		_resCurrent = -1;
+		for (i = 0; _res[i]; ++i)
+		{
+			if (_resCurrent == -1 &&
+				((_res[i]->w == Options::newDisplayWidth && _res[i]->h <= Options::newDisplayHeight) || _res[i]->w < Options::newDisplayWidth))
+			{
+				_resCurrent = i;
+			}
+		}
+	}
+}
+
+/**
+ * Changes the Display Height option.
+ * @param action Pointer to an action.
+ */
+void OptionsVideoState::txtDisplayHeightChange(Action *)
+{
+	std::stringstream ss;
+	int height = 0;
+	ss << std::dec << _txtDisplayHeight->getText();
+	ss >> std::dec >> height;
+	Options::newDisplayHeight = height;
+	// Update resolution mode
+	if (_res != (SDL_Rect**)-1 && _res != (SDL_Rect**)0)
+	{
+		int i;
+		_resCurrent = -1;
+		for (i = 0; _res[i]; ++i)
+		{
+			if (_resCurrent == -1 &&
+				((_res[i]->w == Options::newDisplayWidth && _res[i]->h <= Options::newDisplayHeight) || _res[i]->w < Options::newDisplayWidth))
+			{
+				_resCurrent = i;
+			}
+		}
+	}
+}
+
+/**
+ * Changes the Language option.
+ * @param action Pointer to an action.
+ */
+void OptionsVideoState::cbxLanguageChange(Action *)
+{
+	Options::language = _langs[_cbxLanguage->getSelected()];
+}
+
+/**
+ * Changes the Filter options.
+ * @param action Pointer to an action.
+ */
+void OptionsVideoState::cbxFilterChange(Action *)
+{
+
+#ifdef NINTENDO_3DS
+        const bool smooth =
+                _cbxFilter->getSelected() == 1;
+
+        Options::newOpenGL = false;
+        Options::newScaleFilter = smooth;
+        Options::newHQXFilter = false;
+        Options::newXBRZFilter = false;
+        return;
+#endif
+
+	switch (_cbxFilter->getSelected())
+	{
+	case 0:
+		Options::newOpenGL = false;
+		Options::newScaleFilter = false;
+		Options::newHQXFilter = false;
+		Options::newXBRZFilter = false;
+		break;
+	case 1:
+		Options::newOpenGL = false;
+		Options::newScaleFilter = true;
+		Options::newHQXFilter = false;
+		Options::newXBRZFilter = false;
+		break;
+	case 2:
+		Options::newOpenGL = false;
+		Options::newScaleFilter = false;
+		Options::newHQXFilter = true;
+		Options::newXBRZFilter = false;
+		break;
+	case 3:
+		Options::newOpenGL = false;
+		Options::newScaleFilter = false;
+		Options::newHQXFilter = false;
+		Options::newXBRZFilter = true;
+		break;
+	default:
+		Options::newOpenGL = true;
+		Options::newScaleFilter = false;
+		Options::newHQXFilter = false;
+		Options::newXBRZFilter = false;
+		Options::newOpenGLShader = _filters[_cbxFilter->getSelected()];
+		break;
+	}
+}
+
+/**
+ * Changes the Display Mode options.
+ * @param action Pointer to an action.
+ */
+void OptionsVideoState::updateDisplayMode(Action *)
+{
+	switch(_cbxDisplayMode->getSelected())
+	{
+	case 0:
+		Options::newFullscreen = false;
+		Options::newBorderless = false;
+		Options::newAllowResize = false;
+		break;
+	case 1:
+		Options::newFullscreen = true;
+		Options::newBorderless = false;
+		Options::newAllowResize = false;
+		break;
+	case 2:
+		Options::newFullscreen = false;
+		Options::newBorderless = true;
+		Options::newAllowResize = false;
+		break;
+	case 3:
+		Options::newFullscreen = false;
+		Options::newBorderless = false;
+		Options::newAllowResize = true;
+		break;
+	default:
+		break;
+	}
+}
+
+/**
+ * Changes the Letterboxing option.
+ * @param action Pointer to an action.
+ */
+void OptionsVideoState::btnLetterboxClick(Action *)
+{
+	Options::keepAspectRatio = _btnLetterbox->getPressed();
+}
+
+/**
+ * Changes the Lock Mouse option.
+ * @param action Pointer to an action.
+ */
+void OptionsVideoState::btnLockMouseClick(Action *)
+{
+	Options::captureMouse = (SDL_GrabMode)_btnLockMouse->getPressed();
+	SDL_WM_GrabInput(Options::captureMouse);
+}
+
+/**
+ * Ask user where he wants to root screen.
+ * @param action Pointer to an action.
+ */
+void OptionsVideoState::btnRootWindowedModeClick(Action *)
+{
+	if (_btnRootWindowedMode->getPressed())
+	{
+		_game->pushState(new SetWindowedRootState(_origin, this));
+	}
+	else
+	{
+		Options::newRootWindowedMode = false;
+	}
+}
+
+/**
+ * Changes the geoscape scale.
+ * @param action Pointer to an action.
+ */
+void OptionsVideoState::updateGeoscapeScale(Action *)
+{
+	Options::newGeoscapeScale = _reverseScales[_cbxGeoScale->getSelected()];
+}
+
+/**
+ * Updates the Battlescape scale.
+ * @param action Pointer to an action.
+ */
+void OptionsVideoState::updateBattlescapeScale(Action *)
+{
+	Options::newBattlescapeScale = _reverseScales[_cbxBattleScale->getSelected()];
+}
+
+/**
+ * Updates the scale.
+ * @param dX delta of X;
+ * @param dY delta of Y;
+ */
+void OptionsVideoState::resize(int &dX, int &dY)
+{
+	OptionsBaseState::resize(dX, dY);
+	std::ostringstream ss;
+	ss << Options::displayWidth;
+	_txtDisplayWidth->setText(ss.str());
+	ss.str("");
+	ss << Options::displayHeight;
+	_txtDisplayHeight->setText(ss.str());
+}
+
+/**
+ * Takes care of any events from the core game engine.
+ * @param action Pointer to an action.
+ */
+void OptionsVideoState::handle(Action *action)
+{
+	State::handle(action);
+	if (action->getDetails()->type == SDL_KEYDOWN && action->getDetails()->key.keysym.sym == SDLK_g && _game->isCtrlPressed())
+	{
+		_btnLockMouse->setPressed(Options::captureMouse == SDL_GRAB_ON);
+	}
+}
+
+/**
+ * Unpresses Fixed Borderless Pos button
+ */
+void OptionsVideoState::unpressRootWindowedMode()
+{
+	_btnRootWindowedMode->setPressed(false);
+}
+
+}

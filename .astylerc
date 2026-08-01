@@ -1,0 +1,7 @@
+style=allman
+indent=tab
+pad-oper
+pad-header
+unpad-paren
+align-pointer=name
+mode=c

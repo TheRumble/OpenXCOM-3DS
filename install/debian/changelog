@@ -1,0 +1,11 @@
+openxcom (1.0-2) unstable; urgency=low
+
+  * Added translations
+
+ -- Krzysztof Knapik <knapsu@gmail.com>  Fri, 27 Jun 2014 22:03:26 +0200
+
+openxcom (1.0-1) unstable; urgency=medium
+
+  * Release of version 1.0
+
+ -- Krzysztof Knapik <knapsu@gmail.com>  Wed, 18 Jun 2014 23:33:18 +0200

@@ -1,0 +1,125 @@
+/*
+ * Copyright 2010-2016 OpenXcom Developers.
+ *
+ * This file is part of OpenXcom.
+ *
+ * OpenXcom is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * OpenXcom is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
+ */
+#include "CraftPatrolState.h"
+#include "../Engine/Game.h"
+#include "../Mod/Mod.h"
+#include "../Engine/LocalizedText.h"
+#include "../Interface/TextButton.h"
+#include "../Interface/Window.h"
+#include "../Interface/Text.h"
+#include "../Savegame/Craft.h"
+#include "../Savegame/Target.h"
+#include "GeoscapeCraftState.h"
+#include "../Engine/Options.h"
+
+namespace OpenXcom
+{
+
+/**
+ * Initializes all the elements in the Craft Patrol window.
+ * @param game Pointer to the core game.
+ * @param craft Pointer to the craft to display.
+ * @param globe Pointer to the Geoscape globe.
+ */
+CraftPatrolState::CraftPatrolState(Craft *craft, Globe *globe) : _craft(craft), _globe(globe)
+{
+	_screen = false;
+
+	// Create objects
+	_window = new Window(this, 224, 168, 16, 16, POPUP_BOTH);
+	_btnOk = new TextButton(140, 12, 58, 144);
+	_btnRedirect = new TextButton(140, 12, 58, 160);
+	_txtDestination = new Text(224, 64, 16, 48);
+	_txtPatrolling = new Text(224, 17, 16, 120);
+
+	// Set palette
+	setInterface("craftPatrol");
+
+	add(_window, "window", "craftPatrol");
+	add(_btnOk, "button", "craftPatrol");
+	add(_btnRedirect, "button", "craftPatrol");
+	add(_txtDestination, "text1", "craftPatrol");
+	add(_txtPatrolling, "text1", "craftPatrol");
+
+	centerAllSurfaces();
+
+#ifdef NINTENDO_3DS
+	// OXCE_3DS_GEOSCAPE_POPUP_CENTER_CRAFTPATROLSTATE
+	/*
+	 * This popup was positioned for the original 256-pixel
+	 * Geoscape area. Center it on the full 320-pixel top screen.
+	 */
+	for (auto *surface : _surfaces)
+	{
+		surface->setX(
+			surface->getX() + 32);
+	}
+#endif
+
+	// Set up objects
+	setWindowBackground(_window, "craftPatrol");
+
+	_btnOk->setText(tr("STR_OK"));
+	_btnOk->onMouseClick((ActionHandler)&CraftPatrolState::btnOkClick);
+	_btnOk->onKeyboardPress((ActionHandler)&CraftPatrolState::btnOkClick, Options::keyCancel);
+
+	_btnRedirect->setText(tr("STR_REDIRECT_CRAFT"));
+	_btnRedirect->onMouseClick((ActionHandler)&CraftPatrolState::btnRedirectClick);
+	_btnRedirect->onKeyboardPress((ActionHandler)&CraftPatrolState::btnRedirectClick, Options::keyOk);
+
+	_txtDestination->setBig();
+	_txtDestination->setAlign(ALIGN_CENTER);
+	_txtDestination->setWordWrap(true);
+	_txtDestination->setText(tr("STR_CRAFT_HAS_REACHED_DESTINATION")
+							 .arg(_craft->getName(_game->getLanguage()))
+							 .arg(_craft->getDestination()->getName(_game->getLanguage())));
+
+	_txtPatrolling->setBig();
+	_txtPatrolling->setAlign(ALIGN_CENTER);
+	_txtPatrolling->setText(tr("STR_NOW_PATROLLING"));
+}
+
+/**
+ *
+ */
+CraftPatrolState::~CraftPatrolState()
+{
+
+}
+
+/**
+ * Closes the window.
+ * @param action Pointer to an action.
+ */
+void CraftPatrolState::btnOkClick(Action *)
+{
+	_game->popState();
+}
+
+/**
+ * Opens up the Craft window.
+ * @param action Pointer to an action.
+ */
+void CraftPatrolState::btnRedirectClick(Action *)
+{
+	_game->popState();
+	_game->pushState(new GeoscapeCraftState(_craft, _globe, 0, false));
+}
+
+}

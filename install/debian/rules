@@ -1,0 +1,13 @@
+#!/usr/bin/make -f
+
+#export DH_VERBOSE=1
+
+%:
+	dh $@ --buildsystem=cmake --parallel
+
+override_dh_auto_configure:
+	dh_auto_configure -- \
+		-DCMAKE_BUILD_TYPE:STRING=Release \
+		-DCMAKE_INSTALL_BINDIR="/usr/games" \
+		-DCMAKE_INSTALL_DATADIR="/usr/share/games" \
+		-DBUILD_PACKAGE=OFF

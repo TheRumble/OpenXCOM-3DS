@@ -1,0 +1,225 @@
+#pragma once
+/*
+ * Copyright 2010-2016 OpenXcom Developers.
+ *
+ * This file is part of OpenXcom.
+ *
+ * OpenXcom is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * OpenXcom is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
+ */
+#include <vector>
+#include <map>
+#include "../Engine/InteractiveSurface.h"
+#include "Text.h"
+
+namespace OpenXcom
+{
+
+enum ArrowOrientation { ARROW_VERTICAL, ARROW_HORIZONTAL };
+
+class ArrowButton;
+class ComboBox;
+class ScrollBar;
+class MenuNavigation3DS;
+
+/**
+ * List of Text's split into columns.
+ * Contains a set of Text's that are automatically lined up by
+ * rows and columns, like a big table, making it easy to manage
+ * them together.
+ */
+class TextList : public InteractiveSurface
+{
+	friend class MenuNavigation3DS;
+
+private:
+	std::vector< std::vector<Text*> > _texts;
+	std::vector<size_t> _columns, _rows;
+	std::vector<bool> _rowSelectable;
+	Font *_big, *_small, *_font;
+	Language *_lang;
+	size_t _scroll, _visibleRows, _selRow;
+	Uint8 _color, _color2;
+	std::map<int, TextHAlign> _align;
+	bool _dot, _selectable, _condensed, _contrast, _wrap, _flooding, _ignoreSeparators;
+	Surface *_bg, *_selector;
+	ArrowButton *_up, *_down;
+	ScrollBar *_scrollbar;
+	int _margin;
+	bool _scrolling;
+	std::vector<ArrowButton*> _arrowLeft, _arrowRight;
+	int _arrowPos, _scrollPos;
+	ArrowOrientation _arrowType;
+	ActionHandler _leftClick, _leftPress, _leftRelease, _rightClick, _rightPress, _rightRelease;
+	int _arrowsLeftEdge, _arrowsRightEdge;
+	int _noScrollLeftEdge, _noScrollRightEdge;
+	ComboBox *_comboBox;
+
+	/// Updates the arrow buttons.
+	void updateArrows();
+	/// Updates the visible rows.
+	void updateVisible();
+public:
+	/// Creates a text list with the specified size and position.
+	TextList(int width, int height, int x = 0, int y = 0);
+	/// Cleans up the text list.
+	~TextList();
+	/// Sets the X position of the surface.
+	void setX(int x) override;
+	/// Sets the Y position of the surface.
+	void setY(int y) override;
+	/// Gets the arrowsLeftEdge.
+	int getArrowsLeftEdge();
+	/// Gets the arrowsRightEdge.
+	int getArrowsRightEdge();
+	/// Unpresses the surface.
+	void unpress(State *state) override;
+	/// Sets the text color of a certain cell.
+	void setCellColor(size_t row, size_t column, Uint8 color);
+	/// Sets the text color of a certain row.
+	void setRowColor(size_t row, Uint8 color);
+	/// Gets the text of a certain cell.
+	std::string getCellText(size_t row, size_t column) const;
+	/// Sets the text of a certain cell.
+	void setCellText(size_t row, size_t column, const std::string &text);
+	/// Gets the X position of a certain column.
+	int getColumnX(size_t column) const;
+	/// Gets the Y position of a certain row.
+	int getRowY(size_t row) const;
+	/// Gets the height of the row text in pixels
+	int getTextHeight(size_t row) const;
+	/// Gets the number of lines in the wrapped text for the specified row
+	int getNumTextLines(size_t row) const;
+	/// Gets the amount of text in the list.
+	size_t getTexts() const;
+	/// Gets the amount of rows in the list.
+	size_t getRowsDoNotUse() const;
+	/// Gets the index of the last row in the list.
+	int getLastRowIndex() const;
+	/// Gets the amount of visible rows in the list.
+	size_t getVisibleRows() const;
+	/// Adds a new row to the text list.
+	void addRow(int cols, ...);
+	/// Removes the last row from the text list.
+	void removeLastRow();
+	/// Sets the columns in the text list.
+	void setColumns(int cols, ...);
+	/// Sets the palette of the text list.
+	void setPalette(const SDL_Color *colors, int firstcolor = 0, int ncolors = 256) override;
+	/// Initializes the resources for the text list.
+	void initText(Font *big, Font *small, Language *lang) override;
+	/// Sets the height of the surface.
+	void setHeight(int height) override;
+	/// Sets the text color of the text list.
+	void setColor(Uint8 color) override;
+	/// Gets the text color of the text list.
+	Uint8 getColor() const;
+	/// Sets the secondary color of the text list.
+	void setSecondaryColor(Uint8 color) override;
+	/// Gets the secondary color of the text list.
+	Uint8 getSecondaryColor() const;
+	/// Sets the text list's wordwrap setting.
+	void setWordWrap(bool wrap);
+	/// Sets the text list's high contrast color setting.
+	void setHighContrast(bool contrast) override;
+	/// Sets the text horizontal alignment of the text list.
+	void setAlign(TextHAlign align, int col = -1);
+	/// Sets whether to separate columns with dots.
+	void setDot(bool dot);
+	/// Sets whether the list is selectable.
+	void setSelectable(bool selectable);
+	/// Gets whether the list is selectable.
+	bool isSelectable() const;
+	/// Sets whether a particular logical row is selectable.
+	void setRowSelectable(size_t row, bool selectable);
+	/// Gets whether a particular logical row is selectable.
+	bool isRowSelectable(size_t row) const;
+	/// Sets the text size to big.
+	void setBig();
+	/// Sets the text size to small.
+	void setSmall();
+	/// Sets whether to condense columns instead of a table like layout.
+	void setCondensed(bool condensed);
+	/// Sets the background for the selector.
+	void setBackground(Surface *bg);
+	/// Gets the selected row in the list.
+	unsigned int getSelectedRow() const;
+	/// Sets the margin of the text list.
+	void setMargin(int margin);
+	/// Gets the margin of the text list.
+	int getMargin() const;
+	/// Sets the no scroll area of the text list.
+	void setNoScrollArea(int left, int right);
+	/// Checks if a given coordinate is inside of the no scroll area of the text list.
+	bool isInsideNoScrollArea(int x);
+	/// Sets the arrow color of the text list.
+	void setArrowColor(Uint8 color);
+	/// Sets the arrow column of the text list.
+	void setArrowColumn(int pos, ArrowOrientation type);
+	/// Hooks an action handler to a mouse click on the left arrows.
+	void onLeftArrowClick(ActionHandler handler);
+	/// Hooks an action handler to a mouse press over the left arrows.
+	void onLeftArrowPress(ActionHandler handler);
+	/// Hooks an action handler to a mouse release over the left arrows.
+	void onLeftArrowRelease(ActionHandler handler);
+	/// Hooks an action handler to a mouse click on the right arrows.
+	void onRightArrowClick(ActionHandler handler);
+	/// Hooks an action handler to a mouse press over the right arrows.
+	void onRightArrowPress(ActionHandler handler);
+	/// Hooks an action handler to a mouse release over the right arrows.
+	void onRightArrowRelease(ActionHandler handler);
+	/// Clears the list.
+	void clearList();
+	/// Scrolls the list up.
+	void scrollUp(bool toMax, bool scrollByWheel = false, size_t howMany = 1);
+	/// Scrolls the list down.
+	void scrollDown(bool toMax, bool scrollByWheel = false, size_t howMany = 1);
+	/// Sets the list scrolling.
+	void setScrolling(bool scrolling, int scrollPos = 4);
+	/// Draws the text onto the text list.
+	void draw() override;
+	/// Blits the text list onto another surface.
+	void blit(SDL_Surface *surface) override;
+	/// Thinks arrow buttons.
+	void think() override;
+	/// Handles arrow buttons.
+	void handle(Action *action, State *state) override;
+	bool isMouseCursorOverMe(State* state) const;
+	/// Special handling for mouse presses.
+	void mousePress(Action *action, State *state) override;
+	/// Special handling for mouse releases.
+	void mouseRelease(Action *action, State *state) override;
+	/// Special handling for mouse clicks.
+	void mouseClick(Action *action, State *state) override;
+	/// Special handling for mouse hovering.
+	void mouseOver(Action *action, State *state) override;
+	/// Special handling for mouse hovering out.
+	void mouseOut(Action *action, State *state) override;
+	/// get the scroll depth
+	size_t getScroll();
+	/// set the scroll depth
+	void scrollTo(size_t scroll);
+	/// Attaches this button to a combobox.
+	void setComboBox(ComboBox *comboBox);
+	/// Check for a combobox.
+	ComboBox *getComboBox() const;
+	void setBorderColor(Uint8 color) override;
+	int getScrollbarColor();
+	bool isScrollbarVisible() const;
+	/// Allows the cell to flood into other columns.
+	void setFlooding(bool flooding);
+	/// Treat separators as spaces (false) or as normal text (true)?
+	void setIgnoreSeparators(bool ignoreSeparators);
+};
+
+}

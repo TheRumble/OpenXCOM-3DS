@@ -1,0 +1,142 @@
+#pragma once
+/*
+ * Copyright 2010-2016 OpenXcom Developers.
+ *
+ * This file is part of OpenXcom.
+ *
+ * OpenXcom is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * OpenXcom is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with OpenXcom.  If not, see <http://www.gnu.org/licenses/>.
+ */
+#include <string>
+#include <vector>
+#include "OptionInfo.h"
+#include "ModInfo.h"
+#include "Language.h"
+
+namespace OpenXcom
+{
+
+/// Battlescape drag scrolling types.
+enum ScrollType { SCROLL_NONE, SCROLL_TRIGGER, SCROLL_AUTO };
+/// Keyboard input modes.
+enum KeyboardType { KEYBOARD_OFF, KEYBOARD_ON, KEYBOARD_VIRTUAL };
+/// Savegame sorting modes.
+enum SaveSort { SORT_NAME_ASC, SORT_NAME_DESC, SORT_DATE_ASC, SORT_DATE_DESC };
+/// Music format preferences.
+enum MusicFormat { MUSIC_AUTO, MUSIC_FLAC, MUSIC_OGG, MUSIC_MP3, MUSIC_MOD, MUSIC_WAV, MUSIC_ADLIB, MUSIC_GM, MUSIC_MIDI };
+/// Sound format preferences.
+enum SoundFormat { SOUND_AUTO, SOUND_14, SOUND_10 };
+/// Video format preferences.
+enum VideoFormat { VIDEO_FMV, VIDEO_SLIDE };
+/// Path preview modes (can be OR'd together).
+enum PathPreview {
+	PATH_NONE         = 0x00, // 0000 (must always be zero)
+	PATH_ARROWS       = 0x01, // 0001
+	PATH_TU_COST      = 0x02, // 0010
+	PATH_ARROW_TU     = 0x03, // 0011
+	PATH_ENERGY_COST  = 0x04, // 0100
+	PATH_ARROW_ENERGY = 0x05, // 0101
+	PATH_TU_ENERGY    = 0x06, // 0110
+	PATH_FULL         = 0x07  // 0111 (must always be all values combined)
+};
+
+enum ScaleType
+{
+	SCALE_ORIGINAL,
+	SCALE_15X,
+	SCALE_2X,
+	SCALE_SCREEN_DIV_3,
+	SCALE_SCREEN_DIV_2,
+	SCALE_SCREEN,
+	SCALE_SCREEN_DIV_4,
+	SCALE_SCREEN_DIV_5,
+	SCALE_SCREEN_DIV_6,
+	SCALE_SCREEN_DIV_8,
+	SCALE_SCREEN_DIV_10
+};
+/**
+ * Container for all the various global game options
+ * and customizable settings.
+ */
+namespace Options
+{
+#define OPT extern
+#include "Options.inc.h"
+#undef OPT
+
+	/// Creates the options info.
+	void create();
+	void createOptionsOXC();
+	void createAdvancedOptionsOXC();
+	void createControlsOXC();
+	void createOptionsOXCE();
+	void createAdvancedOptionsOXCE();
+	void createControlsOXCE();
+	void createOptionsOTHER();
+	void createAdvancedOptionsOTHER();
+	void createControlsOTHER();
+	/// Restores default options.
+	void resetDefault(bool includeMods);
+	/// Initializes the options settings.
+	bool init();
+	/// Loads options from YAML.
+	bool load(const std::string &filename = "options");
+	/// Saves options to YAML.
+	bool save(bool reset = false, const std::string &filename = "options");
+	/// Gets the game's data folder.
+	std::string getDataFolder();
+	/// Sets the game's data folder.
+	void setDataFolder(const std::string &folder);
+	/// Gets the game's data list.
+	const std::vector<std::string> &getDataList();
+	/// Gets the game's user folder.
+	std::string getUserFolder();
+	/// Gets the game's config folder.
+	std::string getConfigFolder();
+	/// Gets the game's master mod user folder.
+	std::string getMasterUserFolder();
+	/// Gets the game's options.
+	const std::vector<OptionInfo> &getOptionInfo();
+	/// Sets the game's data, user and config folders.
+	void setFolders();
+	/// Update game options from config file and command line.
+	void updateOptions();
+	/// Backup display options.
+	void backupDisplay();
+	/// Switches display options.
+	void switchDisplay();
+	/// Is the password correct?
+	bool isPasswordCorrect();
+	/// returns the id of the active master mod
+	std::string getActiveMaster();
+	/// Gets the master mod info.
+	const ModInfo* getActiveMasterInfo();
+	/// Gets the xcom ruleset info.
+	const ModInfo* getXcomRulesetInfo();
+	/// Gets the map of mod ids to mod infos
+	const std::map<std::string, ModInfo> &getModInfos();
+	/// Refreshes the mods.
+	void refreshMods();
+	/// Refreshes the mods and filemaps.
+	void updateMods();
+	/// Gets the list of currently active mods.
+	std::vector<const ModInfo*> getActiveMods();
+	/// If we should skip the main menu and just load the last save
+	bool getLoadLastSave();
+	/// If we should skip the main menu and just load the specified save
+	const std::string& getLoadThisSave();
+	/// And do it only at startup
+	void expendLoadLastSave();
+}
+
+}

@@ -1,0 +1,1256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_XP|Win32">
+      <Configuration>Release_XP</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release_XP|x64">
+      <Configuration>Release_XP</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectName>OpenXcom</ProjectName>
+    <ProjectGuid>{D8F55ED4-1A4E-4111-8E83-153CF91FE25A}</ProjectGuid>
+    <RootNamespace>OpenXcom</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>$(DefaultPlatformToolset)</PlatformToolset>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_XP|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v141_xp</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>$(DefaultPlatformToolset)</PlatformToolset>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release_XP|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v141_xp</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>$(DefaultPlatformToolset)</PlatformToolset>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>$(DefaultPlatformToolset)</PlatformToolset>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_XP|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release_XP|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)..\bin\$(Platform)\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)..\bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectDir)..\obj\$(Platform)\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectDir)..\obj\$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</GenerateManifest>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</GenerateManifest>
+    <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</EmbedManifest>
+    <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</EmbedManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)..\bin\$(Platform)\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release_XP|Win32'">$(ProjectDir)..\bin\$(Platform)\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)..\bin\$(Platform)\$(Configuration)\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release_XP|x64'">$(ProjectDir)..\bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectDir)..\obj\$(Platform)\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release_XP|Win32'">$(ProjectDir)..\obj\$(Platform)\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)..\obj\$(Platform)\$(Configuration)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release_XP|x64'">$(ProjectDir)..\obj\$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release_XP|Win32'">false</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release_XP|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</GenerateManifest>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release_XP|Win32'">false</GenerateManifest>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</GenerateManifest>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release_XP|x64'">false</GenerateManifest>
+    <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</EmbedManifest>
+    <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='Release_XP|Win32'">false</EmbedManifest>
+    <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</EmbedManifest>
+    <EmbedManifest Condition="'$(Configuration)|$(Platform)'=='Release_XP|x64'">false</EmbedManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\deps\include;$(ProjectDir)..\deps\include\SDL;$(ProjectDir)..\libs\rapidyaml\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level1</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MinimalRebuild>false</MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/utf-8 /bigobj %(AdditionalOptions)</AdditionalOptions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>SDL_image.lib;SDL_mixer.lib;SDL_gfx.lib;SDLmain.lib;SDL.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\deps\lib\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+      <GenerateMapFile>false</GenerateMapFile>
+      <MapExports>false</MapExports>
+      <IgnoreSpecificDefaultLibraries>MSVCRT</IgnoreSpecificDefaultLibraries>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy /y "$(ProjectDir)..\deps\lib\$(Platform)\*.dll" "$(ProjectDir)..\bin\$(Platform)\"</Command>
+    </PostBuildEvent>
+    <Manifest>
+      <EnableDpiAwareness>PerMonitorHighDPIAware</EnableDpiAwareness>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\deps\include;$(ProjectDir)..\deps\include\SDL;$(ProjectDir)..\libs\rapidyaml\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/utf-8 /bigobj %(AdditionalOptions)</AdditionalOptions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>SDL_image.lib;SDL_mixer.lib;SDL_gfx.lib;SDLmain.lib;SDL.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\deps\lib\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <GenerateMapFile>false</GenerateMapFile>
+      <MapExports>false</MapExports>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy /y "$(ProjectDir)..\deps\lib\$(Platform)\*.dll" "$(ProjectDir)..\bin\$(Platform)\"</Command>
+    </PostBuildEvent>
+    <Manifest>
+      <EnableDpiAwareness>PerMonitorHighDPIAware</EnableDpiAwareness>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\deps\include;$(ProjectDir)..\deps\include\SDL;$(ProjectDir)..\libs\rapidyaml\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level1</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/utf-8 /bigobj %(AdditionalOptions)</AdditionalOptions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>SDL_image.lib;SDL_mixer.lib;SDL_gfx.lib;SDLmain.lib;SDL.lib;SDL_gfx.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\deps\lib\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+      <Profile>false</Profile>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy /y "$(ProjectDir)..\deps\lib\$(Platform)\*.dll" "$(ProjectDir)..\bin\$(Platform)\"</Command>
+    </PostBuildEvent>
+    <Manifest>
+      <EnableDpiAwareness>PerMonitorHighDPIAware</EnableDpiAwareness>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_XP|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\deps\include;$(ProjectDir)..\deps\include\SDL;$(ProjectDir)..\libs\rapidyaml\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;_WIN32_WINNT=0x0501;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level1</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/utf-8 /bigobj %(AdditionalOptions)</AdditionalOptions>
+      <ConformanceMode>false</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>SDL_image.lib;SDL_mixer.lib;SDL_gfx.lib;SDLmain.lib;SDL.lib;SDL_gfx.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\deps\lib\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+      <Profile>false</Profile>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy /y "$(ProjectDir)..\deps\lib\$(Platform)\*.dll" "$(ProjectDir)..\bin\$(Platform)\"</Command>
+    </PostBuildEvent>
+    <Manifest>
+      <EnableDpiAwareness>PerMonitorHighDPIAware</EnableDpiAwareness>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\deps\include;$(ProjectDir)..\deps\include\SDL;$(ProjectDir)..\libs\rapidyaml\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/utf-8 /bigobj %(AdditionalOptions)</AdditionalOptions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>SDL_image.lib;SDL_mixer.lib;SDL_gfx.lib;SDLmain.lib;SDL.lib;SDL_gfx.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\deps\lib\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <Profile>false</Profile>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy /y "$(ProjectDir)..\deps\lib\$(Platform)\*.dll" "$(ProjectDir)..\bin\$(Platform)\"</Command>
+    </PostBuildEvent>
+    <Manifest>
+      <EnableDpiAwareness>PerMonitorHighDPIAware</EnableDpiAwareness>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release_XP|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir)..\deps\include;$(ProjectDir)..\deps\include\SDL;$(ProjectDir)..\libs\rapidyaml\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_CRT_SECURE_NO_DEPRECATE;_SCL_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/utf-8 /bigobj %(AdditionalOptions)</AdditionalOptions>
+      <ConformanceMode>false</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>SDL_image.lib;SDL_mixer.lib;SDL_gfx.lib;SDLmain.lib;SDL.lib;SDL_gfx.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)..\deps\lib\$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Windows</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <DataExecutionPrevention>
+      </DataExecutionPrevention>
+      <Profile>false</Profile>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy /y "$(ProjectDir)..\deps\lib\$(Platform)\*.dll" "$(ProjectDir)..\bin\$(Platform)\"</Command>
+    </PostBuildEvent>
+    <Manifest>
+      <EnableDpiAwareness>PerMonitorHighDPIAware</EnableDpiAwareness>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\libs\miniz\miniz.c" />
+    <ClCompile Include="..\libs\rapidyaml\c4\base64.cpp" />
+    <ClCompile Include="..\libs\rapidyaml\c4\char_traits.cpp" />
+    <ClCompile Include="..\libs\rapidyaml\c4\error.cpp" />
+    <ClCompile Include="..\libs\rapidyaml\c4\format.cpp" />
+    <ClCompile Include="..\libs\rapidyaml\c4\language.cpp" />
+    <ClCompile Include="..\libs\rapidyaml\c4\memory_resource.cpp" />
+    <ClCompile Include="..\libs\rapidyaml\c4\memory_util.cpp" />
+    <ClCompile Include="..\libs\rapidyaml\c4\utf.cpp" />
+    <ClCompile Include="..\libs\rapidyaml\c4\yml\common.cpp" />
+    <ClCompile Include="..\libs\rapidyaml\c4\yml\node.cpp" />
+    <ClCompile Include="..\libs\rapidyaml\c4\yml\node_type.cpp" />
+    <ClCompile Include="..\libs\rapidyaml\c4\yml\parse.cpp" />
+    <ClCompile Include="..\libs\rapidyaml\c4\yml\preprocess.cpp" />
+    <ClCompile Include="..\libs\rapidyaml\c4\yml\reference_resolver.cpp" />
+    <ClCompile Include="..\libs\rapidyaml\c4\yml\tag.cpp" />
+    <ClCompile Include="..\libs\rapidyaml\c4\yml\tree.cpp" />
+    <ClCompile Include="..\libs\rapidyaml\c4\yml\version.cpp" />
+    <ClCompile Include="Basescape\BaseInfoState.cpp" />
+    <ClCompile Include="Basescape\BasescapeState.cpp" />
+    <ClCompile Include="Basescape\BaseView.cpp" />
+    <ClCompile Include="Basescape\BuildFacilitiesState.cpp" />
+    <ClCompile Include="Basescape\CraftArmorState.cpp" />
+    <ClCompile Include="Basescape\CraftEquipmentLoadState.cpp" />
+    <ClCompile Include="Basescape\CraftEquipmentSaveState.cpp" />
+    <ClCompile Include="Basescape\CraftEquipmentState.cpp" />
+    <ClCompile Include="Basescape\CraftInfoState.cpp" />
+    <ClCompile Include="Basescape\CraftPilotSelectState.cpp" />
+    <ClCompile Include="Basescape\CraftPilotsState.cpp" />
+    <ClCompile Include="Basescape\CraftSoldiersState.cpp" />
+    <ClCompile Include="Basescape\CraftsState.cpp" />
+    <ClCompile Include="Basescape\CraftWeaponsState.cpp" />
+    <ClCompile Include="Basescape\DismantleFacilityState.cpp" />
+    <ClCompile Include="Basescape\GlobalAlienContainmentState.cpp" />
+    <ClCompile Include="Basescape\GlobalManufactureState.cpp" />
+    <ClCompile Include="Basescape\GlobalResearchDiaryState.cpp" />
+    <ClCompile Include="Basescape\GlobalResearchState.cpp" />
+    <ClCompile Include="Basescape\ItemLocationsState.cpp" />
+    <ClCompile Include="Basescape\ManageAlienContainmentState.cpp" />
+    <ClCompile Include="Basescape\ManufactureDependenciesTreeState.cpp" />
+    <ClCompile Include="Basescape\ManufactureState.cpp" />
+    <ClCompile Include="Basescape\NewManufactureListState.cpp" />
+    <ClCompile Include="Basescape\ManufactureInfoState.cpp" />
+    <ClCompile Include="Basescape\MiniBaseView.cpp" />
+    <ClCompile Include="Basescape\MonthlyCostsState.cpp" />
+    <ClCompile Include="Basescape\NewResearchListState.cpp" />
+    <ClCompile Include="Basescape\PlaceFacilityState.cpp" />
+    <ClCompile Include="Basescape\PlaceLiftState.cpp" />
+    <ClCompile Include="Basescape\ManufactureStartState.cpp" />
+    <ClCompile Include="Basescape\PlaceStartFacilityState.cpp" />
+    <ClCompile Include="Basescape\PurchaseState.cpp" />
+    <ClCompile Include="Basescape\ResearchInfoState.cpp" />
+    <ClCompile Include="Basescape\ResearchState.cpp" />
+    <ClCompile Include="Basescape\SelectStartFacilityState.cpp" />
+    <ClCompile Include="Basescape\SackSoldierState.cpp" />
+    <ClCompile Include="Basescape\SellState.cpp" />
+    <ClCompile Include="Basescape\SoldierArmorState.cpp" />
+    <ClCompile Include="Basescape\SoldierBonusState.cpp" />
+    <ClCompile Include="Basescape\SoldierDiaryLightState.cpp" />
+    <ClCompile Include="Basescape\SoldierDiaryMissionState.cpp" />
+    <ClCompile Include="Basescape\SoldierDiaryOverviewState.cpp" />
+    <ClCompile Include="Basescape\SoldierDiaryPerformanceState.cpp" />
+    <ClCompile Include="Basescape\SoldierAvatarState.cpp" />
+    <ClCompile Include="Basescape\SoldierInfoState.cpp" />
+    <ClCompile Include="Basescape\SoldierMemorialState.cpp" />
+    <ClCompile Include="Basescape\SoldierRankState.cpp" />
+    <ClCompile Include="Basescape\SoldierSortUtil.cpp" />
+    <ClCompile Include="Basescape\SoldiersState.cpp" />
+    <ClCompile Include="Basescape\SoldierTransformationListState.cpp" />
+    <ClCompile Include="Basescape\SoldierTransformationState.cpp" />
+    <ClCompile Include="Basescape\SoldierTransformState.cpp" />
+    <ClCompile Include="Basescape\StoresState.cpp" />
+    <ClCompile Include="Basescape\TechTreeSelectState.cpp" />
+    <ClCompile Include="Basescape\TechTreeViewerState.cpp" />
+    <ClCompile Include="Basescape\TransferBaseState.cpp" />
+    <ClCompile Include="Basescape\TransferConfirmState.cpp" />
+    <ClCompile Include="Basescape\TransferItemsState.cpp" />
+    <ClCompile Include="Basescape\TransfersState.cpp" />
+    <ClCompile Include="Battlescape\AbortMissionState.cpp" />
+    <ClCompile Include="Battlescape\ActionMenuItem.cpp" />
+    <ClCompile Include="Battlescape\ActionMenuState.cpp" />
+    <ClCompile Include="Battlescape\AlienInventory.cpp" />
+    <ClCompile Include="Battlescape\AlienInventoryState.cpp" />
+    <ClCompile Include="Battlescape\AliensCrashState.cpp" />
+    <ClCompile Include="Battlescape\AIModule.cpp" />
+    <ClCompile Include="Battlescape\BattlescapeGame.cpp" />
+    <ClCompile Include="Battlescape\BattlescapeGenerator.cpp" />
+    <ClCompile Include="Battlescape\BattlescapeMessage.cpp" />
+    <ClCompile Include="Battlescape\BattlescapeState.cpp" />
+    <ClCompile Include="Battlescape\BattleState.cpp" />
+    <ClCompile Include="Battlescape\BriefingLightState.cpp" />
+    <ClCompile Include="Battlescape\BriefingState.cpp" />
+    <ClCompile Include="Battlescape\Camera.cpp" />
+    <ClCompile Include="Battlescape\CannotReequipState.cpp" />
+    <ClCompile Include="Battlescape\CommendationLateState.cpp" />
+    <ClCompile Include="Battlescape\CommendationState.cpp" />
+    <ClCompile Include="Battlescape\ConfirmEndMissionState.cpp" />
+    <ClCompile Include="Battlescape\DebriefingState.cpp" />
+    <ClCompile Include="Battlescape\ExperienceOverviewState.cpp" />
+    <ClCompile Include="Battlescape\Explosion.cpp" />
+    <ClCompile Include="Battlescape\ExplosionBState.cpp" />
+    <ClCompile Include="Battlescape\ExtendedBattlescapeLinksState.cpp" />
+    <ClCompile Include="Battlescape\ExtendedInventoryLinksState.cpp" />
+    <ClCompile Include="Battlescape\InfoboxOKState.cpp" />
+    <ClCompile Include="Battlescape\InfoboxState.cpp" />
+    <ClCompile Include="Battlescape\Inventory.cpp" />
+    <ClCompile Include="Battlescape\InventoryLoadState.cpp" />
+    <ClCompile Include="Battlescape\InventoryPersonalState.cpp" />
+    <ClCompile Include="Battlescape\InventorySaveState.cpp" />
+    <ClCompile Include="Battlescape\InventoryState.cpp" />
+    <ClCompile Include="Battlescape\ItemSprite.cpp" />
+    <ClCompile Include="Battlescape\Map.cpp" />
+    <ClCompile Include="Battlescape\MedikitState.cpp" />
+    <ClCompile Include="Battlescape\MedikitView.cpp" />
+    <ClCompile Include="Battlescape\MeleeAttackBState.cpp" />
+    <ClCompile Include="Battlescape\MiniMapState.cpp" />
+    <ClCompile Include="Battlescape\MiniMapView.cpp" />
+    <ClCompile Include="Battlescape\NextTurnState.cpp" />
+    <ClCompile Include="Battlescape\NoExperienceState.cpp" />
+    <ClCompile Include="Battlescape\Pathfinding.cpp" />
+    <ClCompile Include="Battlescape\PathfindingNode.cpp" />
+    <ClCompile Include="Battlescape\PathfindingOpenSet.cpp" />
+    <ClCompile Include="Battlescape\Position.cpp" />
+    <ClCompile Include="Battlescape\PrimeGrenadeState.cpp" />
+    <ClCompile Include="Battlescape\Projectile.cpp" />
+    <ClCompile Include="Battlescape\ProjectileFlyBState.cpp" />
+    <ClCompile Include="Battlescape\PromotionsState.cpp" />
+    <ClCompile Include="Battlescape\PsiAttackBState.cpp" />
+    <ClCompile Include="Battlescape\ScannerState.cpp" />
+    <ClCompile Include="Battlescape\ScannerView.cpp" />
+    <ClCompile Include="Battlescape\SkillMenuState.cpp" />
+    <ClCompile Include="Battlescape\TurnDiaryState.cpp" />
+    <ClCompile Include="Battlescape\UnitFallBState.cpp" />
+    <ClCompile Include="Battlescape\UnitInfoState.cpp" />
+    <ClCompile Include="Battlescape\TileEngine.cpp" />
+    <ClCompile Include="Battlescape\UnitDieBState.cpp" />
+    <ClCompile Include="Battlescape\UnitPanicBState.cpp" />
+    <ClCompile Include="Battlescape\UnitSprite.cpp" />
+    <ClCompile Include="Battlescape\UnitTurnBState.cpp" />
+    <ClCompile Include="Battlescape\UnitWalkBState.cpp" />
+    <ClCompile Include="Battlescape\Particle.cpp" />
+    <ClCompile Include="Battlescape\WarningMessage.cpp" />
+    <ClCompile Include="Engine\Action.cpp" />
+    <ClCompile Include="Engine\AdlibMusic.cpp" />
+    <ClCompile Include="Engine\Adlib\adlplayer.cpp" />
+    <ClCompile Include="Engine\Adlib\fmopl.cpp" />
+    <ClCompile Include="Engine\CatFile.cpp" />
+    <ClCompile Include="Engine\CrossPlatform.cpp" />
+    <ClCompile Include="Engine\FastLineClip.cpp" />
+    <ClCompile Include="Engine\FileMap.cpp" />
+    <ClCompile Include="Engine\FlcPlayer.cpp" />
+    <ClCompile Include="Engine\Font.cpp" />
+    <ClCompile Include="Engine\Game.cpp" />
+    <ClCompile Include="Engine\GMCat.cpp" />
+    <ClCompile Include="Engine\InteractiveSurface.cpp" />
+    <ClCompile Include="Engine\Language.cpp">
+      <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="Engine\LanguagePlurality.cpp" />
+    <ClCompile Include="Engine\LocalizedText.cpp" />
+    <ClCompile Include="Engine\ModInfo.cpp" />
+    <ClCompile Include="Engine\Music.cpp" />
+    <ClCompile Include="Engine\OpenGL.cpp" />
+    <ClCompile Include="Engine\OptionInfo.cpp" />
+    <ClCompile Include="Engine\Options.cpp" />
+    <ClCompile Include="Engine\Palette.cpp" />
+    <ClCompile Include="Engine\RNG.cpp" />
+    <ClCompile Include="Engine\Scalers\hq2x.cpp" />
+    <ClCompile Include="Engine\Scalers\hq3x.cpp" />
+    <ClCompile Include="Engine\Scalers\hq4x.cpp" />
+    <ClCompile Include="Engine\Scalers\init.cpp" />
+    <ClCompile Include="Engine\Scalers\scale2x.cpp" />
+    <ClCompile Include="Engine\Scalers\scale3x.cpp" />
+    <ClCompile Include="Engine\Scalers\scalebit.cpp" />
+    <ClCompile Include="Engine\Scalers\xbrz.cpp" />
+    <ClCompile Include="Engine\Screen.cpp" />
+    <ClCompile Include="Engine\Script.cpp" />
+    <ClCompile Include="Engine\Sound.cpp" />
+    <ClCompile Include="Engine\SoundSet.cpp" />
+    <ClCompile Include="Engine\State.cpp" />
+    <ClCompile Include="Engine\Surface.cpp" />
+    <ClCompile Include="Engine\SurfaceSet.cpp" />
+    <ClCompile Include="Engine\Timer.cpp" />
+    <ClCompile Include="Engine\TouchState.cpp" />
+    <ClCompile Include="Engine\Unicode.cpp" />
+    <ClCompile Include="Engine\Yaml.cpp" />
+    <ClCompile Include="Engine\Zoom.cpp" />
+    <ClCompile Include="Geoscape\AlienBaseState.cpp" />
+    <ClCompile Include="Geoscape\AllocateTrainingState.cpp" />
+    <ClCompile Include="Geoscape\CraftNotEnoughPilotsState.cpp" />
+    <ClCompile Include="Geoscape\DogfightErrorState.cpp" />
+    <ClCompile Include="Geoscape\DogfightExperienceState.cpp" />
+    <ClCompile Include="Geoscape\ExtendedGeoscapeLinksState.cpp" />
+    <ClCompile Include="Geoscape\GeoscapeEventState.cpp" />
+    <ClCompile Include="Geoscape\MissionDetectedState.cpp" />
+    <ClCompile Include="Geoscape\AllocatePsiTrainingState.cpp" />
+    <ClCompile Include="Geoscape\BaseDefenseState.cpp" />
+    <ClCompile Include="Geoscape\BaseDestroyedState.cpp" />
+    <ClCompile Include="Geoscape\BaseNameState.cpp" />
+    <ClCompile Include="Geoscape\BuildNewBaseState.cpp" />
+    <ClCompile Include="Geoscape\ConfirmCydoniaState.cpp" />
+    <ClCompile Include="Geoscape\CraftErrorState.cpp" />
+    <ClCompile Include="Geoscape\ConfirmDestinationState.cpp" />
+    <ClCompile Include="Geoscape\ConfirmLandingState.cpp" />
+    <ClCompile Include="Geoscape\ConfirmNewBaseState.cpp" />
+    <ClCompile Include="Geoscape\CraftPatrolState.cpp" />
+    <ClCompile Include="Geoscape\DogfightState.cpp" />
+    <ClCompile Include="Geoscape\NewPossibleCraftState.cpp" />
+    <ClCompile Include="Geoscape\NewPossibleFacilityState.cpp" />
+    <ClCompile Include="Geoscape\NewPossiblePurchaseState.cpp" />
+    <ClCompile Include="Geoscape\ResearchRequiredState.cpp" />
+    <ClCompile Include="Geoscape\NewPossibleManufactureState.cpp" />
+    <ClCompile Include="Geoscape\PsiTrainingState.cpp" />
+    <ClCompile Include="Geoscape\ResearchCompleteState.cpp" />
+    <ClCompile Include="Geoscape\FundingState.cpp" />
+    <ClCompile Include="Geoscape\GeoscapeCraftState.cpp" />
+    <ClCompile Include="Geoscape\NewPossibleResearchState.cpp" />
+    <ClCompile Include="Geoscape\ProductionCompleteState.cpp" />
+    <ClCompile Include="Geoscape\GeoscapeState.cpp" />
+    <ClCompile Include="Geoscape\Globe.cpp" />
+    <ClCompile Include="Geoscape\GraphsState.cpp" />
+    <ClCompile Include="Geoscape\InterceptState.cpp" />
+    <ClCompile Include="Geoscape\ItemsArrivingState.cpp" />
+    <ClCompile Include="Geoscape\LowFuelState.cpp" />
+    <ClCompile Include="Geoscape\MonthlyReportState.cpp" />
+    <ClCompile Include="Geoscape\MultipleTargetsState.cpp" />
+    <ClCompile Include="Geoscape\SelectDestinationState.cpp" />
+    <ClCompile Include="Geoscape\SelectMusicTrackState.cpp" />
+    <ClCompile Include="Geoscape\TargetInfoState.cpp" />
+    <ClCompile Include="Geoscape\TrainingFinishedState.cpp" />
+    <ClCompile Include="Geoscape\TrainingState.cpp" />
+    <ClCompile Include="Geoscape\UfoDetectedState.cpp" />
+    <ClCompile Include="Geoscape\UfoLostState.cpp" />
+    <ClCompile Include="Geoscape\UfoTrackerState.cpp" />
+    <ClCompile Include="Interface\ArrowButton.cpp" />
+    <ClCompile Include="Interface\Bar.cpp" />
+    <ClCompile Include="Interface\BattlescapeButton.cpp" />
+    <ClCompile Include="Interface\ComboBox.cpp" />
+    <ClCompile Include="Interface\Cursor.cpp" />
+    <ClCompile Include="Interface\FpsCounter.cpp" />
+    <ClCompile Include="Interface\Frame.cpp" />
+    <ClCompile Include="Interface\ImageButton.cpp" />
+    <ClCompile Include="Interface\NumberText.cpp" />
+    <ClCompile Include="Interface\ProgressBar.cpp" />
+    <ClCompile Include="Interface\ScrollBar.cpp" />
+    <ClCompile Include="Interface\Slider.cpp" />
+    <ClCompile Include="Interface\Text.cpp" />
+    <ClCompile Include="Interface\TextButton.cpp" />
+    <ClCompile Include="Interface\TextEdit.cpp" />
+    <ClCompile Include="Interface\TextList.cpp" />
+    <ClCompile Include="Interface\ToggleTextButton.cpp" />
+    <ClCompile Include="Interface\Window.cpp" />
+    <ClCompile Include="lodepng.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="md5.cpp" />
+    <ClCompile Include="Menu\AbandonGameState.cpp" />
+    <ClCompile Include="Menu\ConfirmLoadState.cpp" />
+    <ClCompile Include="Menu\CutsceneState.cpp" />
+    <ClCompile Include="Menu\ListGamesState.cpp" />
+    <ClCompile Include="Menu\ListLoadOriginalState.cpp" />
+    <ClCompile Include="Menu\ListLoadState.cpp" />
+    <ClCompile Include="Menu\ListSaveState.cpp" />
+    <ClCompile Include="Menu\LoadGameState.cpp" />
+    <ClCompile Include="Menu\ModConfirmExtendedState.cpp" />
+    <ClCompile Include="Menu\NotesState.cpp" />
+    <ClCompile Include="Menu\OptionsAdvancedState.cpp" />
+    <ClCompile Include="Menu\DeleteGameState.cpp" />
+    <ClCompile Include="Menu\ErrorMessageState.cpp" />
+    <ClCompile Include="Menu\OptionsAudioState.cpp" />
+    <ClCompile Include="Menu\OptionsConfirmState.cpp" />
+    <ClCompile Include="Menu\OptionsDefaultsState.cpp" />
+    <ClCompile Include="Menu\OptionsFoldersState.cpp" />
+    <ClCompile Include="Menu\OptionsGeoscapeState.cpp" />
+    <ClCompile Include="Menu\MainMenuState.cpp" />
+    <ClCompile Include="Menu\NewBattleState.cpp" />
+    <ClCompile Include="Menu\NewGameState.cpp" />
+    <ClCompile Include="Menu\OptionsBaseState.cpp" />
+    <ClCompile Include="Menu\OptionsBattlescapeState.cpp" />
+    <ClCompile Include="Menu\OptionsControlsState.cpp" />
+    <ClCompile Include="Menu\ModListState.cpp" />
+    <ClCompile Include="Menu\OptionsNoAudioState.cpp" />
+    <ClCompile Include="Menu\OptionsVideoState.cpp" />
+    <ClCompile Include="Menu\PauseState.cpp" />
+    <ClCompile Include="Menu\SaveGameState.cpp" />
+    <ClCompile Include="Menu\SetWindowedRootState.cpp" />
+    <ClCompile Include="Menu\SlideshowState.cpp" />
+    <ClCompile Include="Menu\StartState.cpp" />
+    <ClCompile Include="Menu\StatisticsState.cpp" />
+    <ClCompile Include="Menu\TestPaletteState.cpp" />
+    <ClCompile Include="Menu\TestState.cpp" />
+    <ClCompile Include="Menu\VideoState.cpp" />
+    <ClCompile Include="Mod\CustomPalettes.cpp" />
+    <ClCompile Include="Mod\RuleArcScript.cpp" />
+    <ClCompile Include="Mod\RuleDamageType.cpp" />
+    <ClCompile Include="Mod\RuleEnviroEffects.cpp" />
+    <ClCompile Include="Mod\RuleEvent.cpp" />
+    <ClCompile Include="Mod\RuleEventScript.cpp" />
+    <ClCompile Include="Mod\RuleItemCategory.cpp" />
+    <ClCompile Include="Mod\RuleManufactureShortcut.cpp" />
+    <ClCompile Include="Mod\RuleSkill.cpp" />
+    <ClCompile Include="Mod\RuleSoldierBonus.cpp" />
+    <ClCompile Include="Mod\RuleSoldierTransformation.cpp" />
+    <ClCompile Include="Mod\RuleStartingCondition.cpp" />
+    <ClCompile Include="Mod\RuleStatBonus.cpp" />
+    <ClCompile Include="Mod\RuleCommendations.cpp" />
+    <ClCompile Include="Mod\RuleConverter.cpp" />
+    <ClCompile Include="Mod\ExtraSounds.cpp" />
+    <ClCompile Include="Mod\ExtraSprites.cpp" />
+    <ClCompile Include="Mod\ExtraStrings.cpp" />
+    <ClCompile Include="Mod\RuleMissionScript.cpp" />
+    <ClCompile Include="Mod\RuleWeaponSet.cpp" />
+    <ClCompile Include="Mod\Texture.cpp" />
+    <ClCompile Include="Mod\MapScript.cpp" />
+    <ClCompile Include="Mod\MCDPatch.cpp" />
+    <ClCompile Include="Mod\Polygon.cpp" />
+    <ClCompile Include="Mod\Polyline.cpp" />
+    <ClCompile Include="Mod\RuleAlienMission.cpp" />
+    <ClCompile Include="Mod\ArticleDefinition.cpp" />
+    <ClCompile Include="Mod\City.cpp" />
+    <ClCompile Include="Mod\MapBlock.cpp" />
+    <ClCompile Include="Mod\MapDataSet.cpp" />
+    <ClCompile Include="Mod\MapData.cpp" />
+    <ClCompile Include="Mod\AlienDeployment.cpp" />
+    <ClCompile Include="Mod\AlienRace.cpp" />
+    <ClCompile Include="Mod\RuleGlobe.cpp" />
+    <ClCompile Include="Mod\RuleMusic.cpp" />
+    <ClCompile Include="Mod\RuleVideo.cpp" />
+    <ClCompile Include="Mod\SoundDefinition.cpp" />
+    <ClCompile Include="Mod\StatString.cpp" />
+    <ClCompile Include="Mod\StatStringCondition.cpp" />
+    <ClCompile Include="Mod\RuleInterface.cpp" />
+    <ClCompile Include="Mod\Unit.cpp" />
+    <ClCompile Include="Mod\Armor.cpp" />
+    <ClCompile Include="Mod\RuleBaseFacility.cpp" />
+    <ClCompile Include="Mod\RuleCountry.cpp" />
+    <ClCompile Include="Mod\RuleCraft.cpp" />
+    <ClCompile Include="Mod\RuleCraftWeapon.cpp" />
+    <ClCompile Include="Mod\RuleInventory.cpp" />
+    <ClCompile Include="Mod\RuleItem.cpp" />
+    <ClCompile Include="Mod\RuleManufacture.cpp" />
+    <ClCompile Include="Mod\RuleRegion.cpp" />
+    <ClCompile Include="Mod\RuleResearch.cpp" />
+    <ClCompile Include="Mod\Mod.cpp" />
+    <ClCompile Include="Mod\RuleSoldier.cpp" />
+    <ClCompile Include="Mod\RuleUfo.cpp" />
+    <ClCompile Include="Mod\RuleTerrain.cpp" />
+    <ClCompile Include="Mod\SoldierNamePool.cpp" />
+    <ClCompile Include="Mod\UfoTrajectory.cpp" />
+    <ClCompile Include="Savegame\AlienBase.cpp" />
+    <ClCompile Include="Savegame\AlienStrategy.cpp" />
+    <ClCompile Include="Savegame\AlienMission.cpp" />
+    <ClCompile Include="Savegame\Base.cpp" />
+    <ClCompile Include="Savegame\BaseFacility.cpp" />
+    <ClCompile Include="Savegame\BattleItem.cpp" />
+    <ClCompile Include="Savegame\BattleUnit.cpp" />
+    <ClCompile Include="Savegame\Country.cpp" />
+    <ClCompile Include="Savegame\Craft.cpp" />
+    <ClCompile Include="Savegame\CraftWeapon.cpp" />
+    <ClCompile Include="Savegame\CraftWeaponProjectile.cpp" />
+    <ClCompile Include="Savegame\EquipmentLayoutItem.cpp" />
+    <ClCompile Include="Savegame\GameTime.cpp" />
+    <ClCompile Include="Savegame\GeoscapeEvent.cpp" />
+    <ClCompile Include="Savegame\HitLog.cpp" />
+    <ClCompile Include="Savegame\ItemContainer.cpp" />
+    <ClCompile Include="Savegame\MovingTarget.cpp" />
+    <ClCompile Include="Savegame\Production.cpp" />
+    <ClCompile Include="Savegame\RankCount.cpp" />
+    <ClCompile Include="Savegame\Region.cpp" />
+    <ClCompile Include="Savegame\ResearchProject.cpp" />
+    <ClCompile Include="Savegame\SaveConverter.cpp" />
+    <ClCompile Include="Savegame\SavedBattleGame.cpp" />
+    <ClCompile Include="Savegame\SavedGame.cpp" />
+    <ClCompile Include="Savegame\SerializationHelper.cpp" />
+    <ClCompile Include="Savegame\Soldier.cpp" />
+    <ClCompile Include="Savegame\Node.cpp">
+      <ObjectFileName>$(IntDir)%(RelativeDir)</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="Savegame\SoldierAvatar.cpp" />
+    <ClCompile Include="Savegame\SoldierDeath.cpp" />
+    <ClCompile Include="Savegame\SoldierDiary.cpp" />
+    <ClCompile Include="Savegame\Target.cpp" />
+    <ClCompile Include="Savegame\MissionSite.cpp" />
+    <ClCompile Include="Savegame\Tile.cpp" />
+    <ClCompile Include="Savegame\Transfer.cpp" />
+    <ClCompile Include="Savegame\Ufo.cpp" />
+    <ClCompile Include="Savegame\Vehicle.cpp" />
+    <ClCompile Include="Savegame\Waypoint.cpp" />
+    <ClCompile Include="Savegame\WeightedOptions.cpp" />
+    <ClCompile Include="Ufopaedia\ArticleState.cpp" />
+    <ClCompile Include="Ufopaedia\ArticleStateArmor.cpp" />
+    <ClCompile Include="Ufopaedia\ArticleStateBaseFacility.cpp" />
+    <ClCompile Include="Ufopaedia\ArticleStateCraft.cpp" />
+    <ClCompile Include="Ufopaedia\ArticleStateCraftWeapon.cpp" />
+    <ClCompile Include="Ufopaedia\ArticleStateItem.cpp" />
+    <ClCompile Include="Ufopaedia\ArticleStateSoldier.cpp" />
+    <ClCompile Include="Ufopaedia\ArticleStateText.cpp" />
+    <ClCompile Include="Ufopaedia\ArticleStateTextImage.cpp" />
+    <ClCompile Include="Ufopaedia\ArticleStateTFTD.cpp" />
+    <ClCompile Include="Ufopaedia\ArticleStateTFTDArmor.cpp" />
+    <ClCompile Include="Ufopaedia\ArticleStateTFTDCraft.cpp" />
+    <ClCompile Include="Ufopaedia\ArticleStateTFTDCraftWeapon.cpp" />
+    <ClCompile Include="Ufopaedia\ArticleStateTFTDFacility.cpp" />
+    <ClCompile Include="Ufopaedia\ArticleStateTFTDItem.cpp" />
+    <ClCompile Include="Ufopaedia\ArticleStateTFTDUso.cpp" />
+    <ClCompile Include="Ufopaedia\ArticleStateTFTDVehicle.cpp" />
+    <ClCompile Include="Ufopaedia\ArticleStateUfo.cpp" />
+    <ClCompile Include="Ufopaedia\ArticleStateUnit.cpp" />
+    <ClCompile Include="Ufopaedia\ArticleStateVehicle.cpp" />
+    <ClCompile Include="Ufopaedia\StatsForNerdsState.cpp" />
+    <ClCompile Include="Ufopaedia\Ufopaedia.cpp" />
+    <ClCompile Include="Ufopaedia\UfopaediaSelectState.cpp" />
+    <ClCompile Include="Ufopaedia\UfopaediaStartState.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\libs\miniz\miniz.h" />
+    <ClInclude Include="..\libs\rapidyaml\c4\allocator.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\base64.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\bitmask.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\blob.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\c4_pop.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\c4_push.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\charconv.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\char_traits.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\common.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\compiler.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\config.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\cpu.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\ctor_dtor.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\dump.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\enum.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\error.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\export.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\ext\fast_float.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\ext\fast_float_all.h" />
+    <ClInclude Include="..\libs\rapidyaml\c4\ext\rng\rng.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\ext\sg14\inplace_function.h" />
+    <ClInclude Include="..\libs\rapidyaml\c4\format.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\gcc-4.8.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\hash.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\language.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\memory_resource.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\memory_util.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\platform.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\preprocessor.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\restrict.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\span.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\std\std.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\std\std_fwd.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\std\string.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\std\string_fwd.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\std\string_view.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\std\tuple.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\std\vector.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\std\vector_fwd.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\substr.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\substr_fwd.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\szconv.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\types.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\type_name.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\unrestrict.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\utf.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\windows.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\windows_pop.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\windows_push.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\yml\common.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\yml\detail\checks.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\yml\detail\parser_dbg.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\yml\detail\print.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\yml\detail\stack.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\yml\emit.def.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\yml\emit.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\yml\event_handler_stack.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\yml\event_handler_tree.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\yml\export.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\yml\filter_processor.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\yml\fwd.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\yml\node.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\yml\node_type.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\yml\parse.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\yml\parser_state.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\yml\parse_engine.def.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\yml\parse_engine.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\yml\preprocess.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\yml\reference_resolver.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\yml\std\map.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\yml\std\std.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\yml\std\string.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\yml\std\vector.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\yml\tag.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\yml\tree.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\yml\version.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\yml\writer.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\c4\yml\yml.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\ryml.hpp" />
+    <ClInclude Include="..\libs\rapidyaml\ryml_std.hpp" />
+    <ClInclude Include="Basescape\BaseInfoState.h" />
+    <ClInclude Include="Basescape\BasescapeState.h" />
+    <ClInclude Include="Basescape\BaseView.h" />
+    <ClInclude Include="Basescape\BuildFacilitiesState.h" />
+    <ClInclude Include="Basescape\CraftArmorState.h" />
+    <ClInclude Include="Basescape\CraftEquipmentLoadState.h" />
+    <ClInclude Include="Basescape\CraftEquipmentSaveState.h" />
+    <ClInclude Include="Basescape\CraftEquipmentState.h" />
+    <ClInclude Include="Basescape\CraftInfoState.h" />
+    <ClInclude Include="Basescape\CraftPilotSelectState.h" />
+    <ClInclude Include="Basescape\CraftPilotsState.h" />
+    <ClInclude Include="Basescape\CraftSoldiersState.h" />
+    <ClInclude Include="Basescape\CraftsState.h" />
+    <ClInclude Include="Basescape\CraftWeaponsState.h" />
+    <ClInclude Include="Basescape\DismantleFacilityState.h" />
+    <ClInclude Include="Basescape\GlobalAlienContainmentState.h" />
+    <ClInclude Include="Basescape\GlobalManufactureState.h" />
+    <ClInclude Include="Basescape\GlobalResearchDiaryState.h" />
+    <ClInclude Include="Basescape\GlobalResearchState.h" />
+    <ClInclude Include="Basescape\ItemLocationsState.h" />
+    <ClInclude Include="Basescape\ManufactureDependenciesTreeState.h" />
+    <ClInclude Include="Basescape\NewManufactureListState.h" />
+    <ClInclude Include="Basescape\ManageAlienContainmentState.h" />
+    <ClInclude Include="Basescape\ManufactureInfoState.h" />
+    <ClInclude Include="Basescape\ManufactureState.h" />
+    <ClInclude Include="Basescape\MiniBaseView.h" />
+    <ClInclude Include="Basescape\MonthlyCostsState.h" />
+    <ClInclude Include="Basescape\NewResearchListState.h" />
+    <ClInclude Include="Basescape\PlaceFacilityState.h" />
+    <ClInclude Include="Basescape\PlaceLiftState.h" />
+    <ClInclude Include="Basescape\ManufactureStartState.h" />
+    <ClInclude Include="Basescape\PlaceStartFacilityState.h" />
+    <ClInclude Include="Basescape\PurchaseState.h" />
+    <ClInclude Include="Basescape\ResearchInfoState.h" />
+    <ClInclude Include="Basescape\ResearchState.h" />
+    <ClInclude Include="Basescape\SelectStartFacilityState.h" />
+    <ClInclude Include="Basescape\SackSoldierState.h" />
+    <ClInclude Include="Basescape\SellState.h" />
+    <ClInclude Include="Basescape\SoldierArmorState.h" />
+    <ClInclude Include="Basescape\SoldierBonusState.h" />
+    <ClInclude Include="Basescape\SoldierDiaryLightState.h" />
+    <ClInclude Include="Basescape\SoldierDiaryMissionState.h" />
+    <ClInclude Include="Basescape\SoldierDiaryOverviewState.h" />
+    <ClInclude Include="Basescape\SoldierDiaryPerformanceState.h" />
+    <ClInclude Include="Basescape\SoldierAvatarState.h" />
+    <ClInclude Include="Basescape\SoldierInfoState.h" />
+    <ClInclude Include="Basescape\SoldierMemorialState.h" />
+    <ClInclude Include="Basescape\SoldierRankState.h" />
+    <ClInclude Include="Basescape\SoldierSortUtil.h" />
+    <ClInclude Include="Basescape\SoldiersState.h" />
+    <ClInclude Include="Basescape\SoldierTransformationListState.h" />
+    <ClInclude Include="Basescape\SoldierTransformationState.h" />
+    <ClInclude Include="Basescape\SoldierTransformState.h" />
+    <ClInclude Include="Basescape\StoresState.h" />
+    <ClInclude Include="Basescape\TechTreeSelectState.h" />
+    <ClInclude Include="Basescape\TechTreeViewerState.h" />
+    <ClInclude Include="Basescape\TransferBaseState.h" />
+    <ClInclude Include="Basescape\TransferConfirmState.h" />
+    <ClInclude Include="Basescape\TransferItemsState.h" />
+    <ClInclude Include="Basescape\TransfersState.h" />
+    <ClInclude Include="Battlescape\AbortMissionState.h" />
+    <ClInclude Include="Battlescape\ActionMenuItem.h" />
+    <ClInclude Include="Battlescape\ActionMenuState.h" />
+    <ClInclude Include="Battlescape\AlienInventory.h" />
+    <ClInclude Include="Battlescape\AlienInventoryState.h" />
+    <ClInclude Include="Battlescape\AliensCrashState.h" />
+    <ClInclude Include="Battlescape\AIModule.h" />
+    <ClInclude Include="Battlescape\BattlescapeGame.h" />
+    <ClInclude Include="Battlescape\BattlescapeGenerator.h" />
+    <ClInclude Include="Battlescape\BattlescapeMessage.h" />
+    <ClInclude Include="Battlescape\BattlescapeState.h" />
+    <ClInclude Include="Battlescape\BattleState.h" />
+    <ClInclude Include="Battlescape\BriefingLightState.h" />
+    <ClInclude Include="Battlescape\BriefingState.h" />
+    <ClInclude Include="Battlescape\Camera.h" />
+    <ClInclude Include="Battlescape\CannotReequipState.h" />
+    <ClInclude Include="Battlescape\CommendationLateState.h" />
+    <ClInclude Include="Battlescape\CommendationState.h" />
+    <ClInclude Include="Battlescape\ConfirmEndMissionState.h" />
+    <ClInclude Include="Battlescape\DebriefingState.h" />
+    <ClInclude Include="Battlescape\ExperienceOverviewState.h" />
+    <ClInclude Include="Battlescape\Explosion.h" />
+    <ClInclude Include="Battlescape\ExplosionBState.h" />
+    <ClInclude Include="Battlescape\ExtendedBattlescapeLinksState.h" />
+    <ClInclude Include="Battlescape\ExtendedInventoryLinksState.h" />
+    <ClInclude Include="Battlescape\InfoboxOKState.h" />
+    <ClInclude Include="Battlescape\InfoboxState.h" />
+    <ClInclude Include="Battlescape\Inventory.h" />
+    <ClInclude Include="Battlescape\InventoryLoadState.h" />
+    <ClInclude Include="Battlescape\InventoryPersonalState.h" />
+    <ClInclude Include="Battlescape\InventorySaveState.h" />
+    <ClInclude Include="Battlescape\InventoryState.h" />
+    <ClInclude Include="Battlescape\ItemSprite.h" />
+    <ClInclude Include="Battlescape\Map.h" />
+    <ClInclude Include="Battlescape\MedikitState.h" />
+    <ClInclude Include="Battlescape\MedikitView.h" />
+    <ClInclude Include="Battlescape\MeleeAttackBState.h" />
+    <ClInclude Include="Battlescape\MiniMapState.h" />
+    <ClInclude Include="Battlescape\MiniMapView.h" />
+    <ClInclude Include="Battlescape\NextTurnState.h" />
+    <ClInclude Include="Battlescape\NoExperienceState.h" />
+    <ClInclude Include="Battlescape\Pathfinding.h" />
+    <ClInclude Include="Battlescape\PathfindingNode.h" />
+    <ClInclude Include="Battlescape\PathfindingOpenSet.h" />
+    <ClInclude Include="Battlescape\Position.h" />
+    <ClInclude Include="Battlescape\PrimeGrenadeState.h" />
+    <ClInclude Include="Battlescape\Projectile.h" />
+    <ClInclude Include="Battlescape\ProjectileFlyBState.h" />
+    <ClInclude Include="Battlescape\PromotionsState.h" />
+    <ClInclude Include="Battlescape\PsiAttackBState.h" />
+    <ClInclude Include="Battlescape\ScannerState.h" />
+    <ClInclude Include="Battlescape\ScannerView.h" />
+    <ClInclude Include="Battlescape\SkillMenuState.h" />
+    <ClInclude Include="Battlescape\TurnDiaryState.h" />
+    <ClInclude Include="Battlescape\UnitFallBState.h" />
+    <ClInclude Include="Battlescape\UnitInfoState.h" />
+    <ClInclude Include="Battlescape\TileEngine.h" />
+    <ClInclude Include="Battlescape\UnitDieBState.h" />
+    <ClInclude Include="Battlescape\UnitPanicBState.h" />
+    <ClInclude Include="Battlescape\UnitSprite.h" />
+    <ClInclude Include="Battlescape\UnitTurnBState.h" />
+    <ClInclude Include="Battlescape\UnitWalkBState.h" />
+    <ClInclude Include="Battlescape\Particle.h" />
+    <ClInclude Include="Battlescape\WarningMessage.h" />
+    <ClInclude Include="Engine\Action.h" />
+    <ClInclude Include="Engine\AdlibMusic.h" />
+    <ClInclude Include="Engine\Adlib\adlplayer.h" />
+    <ClInclude Include="Engine\Adlib\fmopl.h" />
+    <ClInclude Include="Engine\CatFile.h" />
+    <ClInclude Include="Engine\Collections.h" />
+    <ClInclude Include="Engine\CrossPlatform.h" />
+    <ClInclude Include="Engine\DosFont.h" />
+    <ClInclude Include="Engine\Exception.h" />
+    <ClInclude Include="Engine\FastLineClip.h" />
+    <ClInclude Include="Engine\FileMap.h" />
+    <ClInclude Include="Engine\FlcPlayer.h" />
+    <ClInclude Include="Engine\Font.h" />
+    <ClInclude Include="Engine\Functions.h" />
+    <ClInclude Include="Engine\Game.h" />
+    <ClInclude Include="Engine\GMCat.h" />
+    <ClInclude Include="Engine\GraphSubset.h" />
+    <ClInclude Include="Engine\HelperMeta.h" />
+    <ClInclude Include="Engine\InteractiveSurface.h" />
+    <ClInclude Include="Engine\Language.h" />
+    <ClInclude Include="Engine\LanguagePlurality.h" />
+    <ClInclude Include="Engine\LocalizedText.h" />
+    <ClInclude Include="Engine\Logger.h" />
+    <ClInclude Include="Engine\ModInfo.h" />
+    <ClInclude Include="Engine\Music.h" />
+    <ClInclude Include="Engine\NullableValue.h" />
+    <ClInclude Include="Engine\OpenGL.h" />
+    <ClInclude Include="Engine\OptionInfo.h" />
+    <ClInclude Include="Engine\Options.h" />
+    <ClInclude Include="Engine\Options.inc.h" />
+    <ClInclude Include="Engine\Palette.h" />
+    <ClInclude Include="Engine\RNG.h" />
+    <ClInclude Include="Engine\Scalers\common.h" />
+    <ClInclude Include="Engine\Scalers\config.h" />
+    <ClInclude Include="Engine\Scalers\hqx.h" />
+    <ClInclude Include="Engine\Scalers\scale2x.h" />
+    <ClInclude Include="Engine\Scalers\scale3x.h" />
+    <ClInclude Include="Engine\Scalers\scalebit.h" />
+    <ClInclude Include="Engine\Scalers\xbrz.h" />
+    <ClInclude Include="Engine\Screen.h" />
+    <ClInclude Include="Engine\Script.h" />
+    <ClInclude Include="Engine\ScriptBind.h" />
+    <ClInclude Include="Engine\SDL2Helpers.h" />
+    <ClInclude Include="Engine\ShaderDraw.h" />
+    <ClInclude Include="Engine\ShaderDrawHelper.h" />
+    <ClInclude Include="Engine\ShaderMove.h" />
+    <ClInclude Include="Engine\ShaderRepeat.h" />
+    <ClInclude Include="Engine\Sound.h" />
+    <ClInclude Include="Engine\SoundSet.h" />
+    <ClInclude Include="Engine\State.h" />
+    <ClInclude Include="Engine\Surface.h" />
+    <ClInclude Include="Engine\SurfaceSet.h" />
+    <ClInclude Include="Engine\Timer.h" />
+    <ClInclude Include="Engine\TouchState.h" />
+    <ClInclude Include="Engine\Unicode.h" />
+    <ClInclude Include="Engine\Yaml.h" />
+    <ClInclude Include="Engine\Zoom.h" />
+    <ClInclude Include="fallthrough.h" />
+    <ClInclude Include="fmath.h" />
+    <ClInclude Include="Geoscape\AlienBaseState.h" />
+    <ClInclude Include="Geoscape\AllocateTrainingState.h" />
+    <ClInclude Include="Geoscape\Cord.h" />
+    <ClInclude Include="Geoscape\CraftNotEnoughPilotsState.h" />
+    <ClInclude Include="Geoscape\DogfightErrorState.h" />
+    <ClInclude Include="Geoscape\DogfightExperienceState.h" />
+    <ClInclude Include="Geoscape\ExtendedGeoscapeLinksState.h" />
+    <ClInclude Include="Geoscape\GeoscapeEventState.h" />
+    <ClInclude Include="Geoscape\MissionDetectedState.h" />
+    <ClInclude Include="Geoscape\AllocatePsiTrainingState.h" />
+    <ClInclude Include="Geoscape\BaseDefenseState.h" />
+    <ClInclude Include="Geoscape\BaseDestroyedState.h" />
+    <ClInclude Include="Geoscape\BaseNameState.h" />
+    <ClInclude Include="Geoscape\BuildNewBaseState.h" />
+    <ClInclude Include="Geoscape\ConfirmCydoniaState.h" />
+    <ClInclude Include="Geoscape\CraftErrorState.h" />
+    <ClInclude Include="Geoscape\ConfirmDestinationState.h" />
+    <ClInclude Include="Geoscape\ConfirmLandingState.h" />
+    <ClInclude Include="Geoscape\ConfirmNewBaseState.h" />
+    <ClInclude Include="Geoscape\CraftPatrolState.h" />
+    <ClInclude Include="Geoscape\DogfightState.h" />
+    <ClInclude Include="Geoscape\FundingState.h" />
+    <ClInclude Include="Geoscape\NewPossibleCraftState.h" />
+    <ClInclude Include="Geoscape\NewPossibleFacilityState.h" />
+    <ClInclude Include="Geoscape\NewPossiblePurchaseState.h" />
+    <ClInclude Include="Geoscape\ResearchRequiredState.h" />
+    <ClInclude Include="Geoscape\GeoscapeCraftState.h" />
+    <ClInclude Include="Geoscape\NewPossibleManufactureState.h" />
+    <ClInclude Include="Geoscape\NewPossibleResearchState.h" />
+    <ClInclude Include="Geoscape\ProductionCompleteState.h" />
+    <ClInclude Include="Geoscape\GeoscapeState.h" />
+    <ClInclude Include="Geoscape\Globe.h" />
+    <ClInclude Include="Geoscape\GraphsState.h" />
+    <ClInclude Include="Geoscape\InterceptState.h" />
+    <ClInclude Include="Geoscape\ItemsArrivingState.h" />
+    <ClInclude Include="Geoscape\LowFuelState.h" />
+    <ClInclude Include="Geoscape\MonthlyReportState.h" />
+    <ClInclude Include="Geoscape\MultipleTargetsState.h" />
+    <ClInclude Include="Geoscape\PsiTrainingState.h" />
+    <ClInclude Include="Geoscape\ResearchCompleteState.h" />
+    <ClInclude Include="Geoscape\SelectDestinationState.h" />
+    <ClInclude Include="Geoscape\SelectMusicTrackState.h" />
+    <ClInclude Include="Geoscape\TargetInfoState.h" />
+    <ClInclude Include="Geoscape\TrainingFinishedState.h" />
+    <ClInclude Include="Geoscape\TrainingState.h" />
+    <ClInclude Include="Geoscape\UfoDetectedState.h" />
+    <ClInclude Include="Geoscape\UfoLostState.h" />
+    <ClInclude Include="Geoscape\UfoTrackerState.h" />
+    <ClInclude Include="Interface\ArrowButton.h" />
+    <ClInclude Include="Interface\Bar.h" />
+    <ClInclude Include="Interface\BattlescapeButton.h" />
+    <ClInclude Include="Interface\ComboBox.h" />
+    <ClInclude Include="Interface\Cursor.h" />
+    <ClInclude Include="Interface\FpsCounter.h" />
+    <ClInclude Include="Interface\Frame.h" />
+    <ClInclude Include="Interface\ImageButton.h" />
+    <ClInclude Include="Interface\NumberText.h" />
+    <ClInclude Include="Interface\ProgressBar.h" />
+    <ClInclude Include="Interface\ScrollBar.h" />
+    <ClInclude Include="Interface\Slider.h" />
+    <ClInclude Include="Interface\Text.h" />
+    <ClInclude Include="Interface\TextButton.h" />
+    <ClInclude Include="Interface\TextEdit.h" />
+    <ClInclude Include="Interface\TextList.h" />
+    <ClInclude Include="Interface\ToggleTextButton.h" />
+    <ClInclude Include="Interface\Window.h" />
+    <ClInclude Include="lodepng.h" />
+    <ClInclude Include="md5.h" />
+    <ClInclude Include="Menu\AbandonGameState.h" />
+    <ClInclude Include="Menu\ConfirmLoadState.h" />
+    <ClInclude Include="Menu\CutsceneState.h" />
+    <ClInclude Include="Menu\ListGamesState.h" />
+    <ClInclude Include="Menu\ListLoadOriginalState.h" />
+    <ClInclude Include="Menu\ListLoadState.h" />
+    <ClInclude Include="Menu\ListSaveState.h" />
+    <ClInclude Include="Menu\LoadGameState.h" />
+    <ClInclude Include="Menu\ModConfirmExtendedState.h" />
+    <ClInclude Include="Menu\NotesState.h" />
+    <ClInclude Include="Menu\OptionsAdvancedState.h" />
+    <ClInclude Include="Menu\DeleteGameState.h" />
+    <ClInclude Include="Menu\ErrorMessageState.h" />
+    <ClInclude Include="Menu\OptionsAudioState.h" />
+    <ClInclude Include="Menu\OptionsConfirmState.h" />
+    <ClInclude Include="Menu\OptionsDefaultsState.h" />
+    <ClInclude Include="Menu\OptionsFoldersState.h" />
+    <ClInclude Include="Menu\OptionsGeoscapeState.h" />
+    <ClInclude Include="Menu\MainMenuState.h" />
+    <ClInclude Include="Menu\NewBattleState.h" />
+    <ClInclude Include="Menu\NewGameState.h" />
+    <ClInclude Include="Menu\OptionsBaseState.h" />
+    <ClInclude Include="Menu\OptionsBattlescapeState.h" />
+    <ClInclude Include="Menu\OptionsControlsState.h" />
+    <ClInclude Include="Menu\ModListState.h" />
+    <ClInclude Include="Menu\OptionsNoAudioState.h" />
+    <ClInclude Include="Menu\OptionsVideoState.h" />
+    <ClInclude Include="Menu\PauseState.h" />
+    <ClInclude Include="Menu\SaveGameState.h" />
+    <ClInclude Include="Menu\SetWindowedRootState.h" />
+    <ClInclude Include="Menu\SlideshowState.h" />
+    <ClInclude Include="Menu\StartState.h" />
+    <ClInclude Include="Menu\StatisticsState.h" />
+    <ClInclude Include="Menu\TestPaletteState.h" />
+    <ClInclude Include="Menu\TestState.h" />
+    <ClInclude Include="Menu\VideoState.h" />
+    <ClInclude Include="Mod\CustomPalettes.h" />
+    <ClInclude Include="Mod\ModScript.h" />
+    <ClInclude Include="Mod\RuleArcScript.h" />
+    <ClInclude Include="Mod\RuleBaseFacilityFunctions.h" />
+    <ClInclude Include="Mod\RuleDamageType.h" />
+    <ClInclude Include="Mod\RuleEnviroEffects.h" />
+    <ClInclude Include="Mod\RuleEvent.h" />
+    <ClInclude Include="Mod\RuleEventScript.h" />
+    <ClInclude Include="Mod\RuleItemCategory.h" />
+    <ClInclude Include="Mod\RuleManufactureShortcut.h" />
+    <ClInclude Include="Mod\RuleSkill.h" />
+    <ClInclude Include="Mod\RuleSoldierBonus.h" />
+    <ClInclude Include="Mod\RuleSoldierTransformation.h" />
+    <ClInclude Include="Mod\RuleStartingCondition.h" />
+    <ClInclude Include="Mod\RuleStatBonus.h" />
+    <ClInclude Include="Mod\RuleCommendations.h" />
+    <ClInclude Include="Mod\RuleConverter.h" />
+    <ClInclude Include="Mod\RuleWeaponSet.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Mod\ArticleDefinition.h" />
+    <ClInclude Include="Mod\City.h" />
+    <ClInclude Include="Mod\ExtraSounds.h" />
+    <ClInclude Include="Mod\ExtraSprites.h" />
+    <ClInclude Include="Mod\ExtraStrings.h" />
+    <ClInclude Include="Mod\RuleMissionScript.h" />
+    <ClInclude Include="Mod\Texture.h" />
+    <ClInclude Include="Mod\LoadYaml.h" />
+    <ClInclude Include="Mod\MapBlock.h" />
+    <ClInclude Include="Mod\MapDataSet.h" />
+    <ClInclude Include="Mod\MapData.h" />
+    <ClInclude Include="Mod\AlienDeployment.h" />
+    <ClInclude Include="Mod\AlienRace.h" />
+    <ClInclude Include="Mod\MapScript.h" />
+    <ClInclude Include="Mod\MCDPatch.h" />
+    <ClInclude Include="Mod\Polygon.h" />
+    <ClInclude Include="Mod\Polyline.h" />
+    <ClInclude Include="Mod\RuleGlobe.h" />
+    <ClInclude Include="Mod\RuleMusic.h" />
+    <ClInclude Include="Mod\RuleVideo.h" />
+    <ClInclude Include="Mod\SoundDefinition.h" />
+    <ClInclude Include="Mod\StatString.h" />
+    <ClInclude Include="Mod\StatStringCondition.h" />
+    <ClInclude Include="Mod\RuleInterface.h" />
+    <ClInclude Include="Mod\Unit.h" />
+    <ClInclude Include="Mod\Armor.h" />
+    <ClInclude Include="Mod\RuleAlienMission.h" />
+    <ClInclude Include="Mod\RuleBaseFacility.h" />
+    <ClInclude Include="Mod\RuleCountry.h" />
+    <ClInclude Include="Mod\RuleCraft.h" />
+    <ClInclude Include="Mod\RuleCraftWeapon.h" />
+    <ClInclude Include="Mod\RuleInventory.h" />
+    <ClInclude Include="Mod\RuleItem.h" />
+    <ClInclude Include="Mod\RuleManufacture.h" />
+    <ClInclude Include="Mod\RuleRegion.h" />
+    <ClInclude Include="Mod\RuleResearch.h" />
+    <ClInclude Include="Mod\Mod.h" />
+    <ClInclude Include="Mod\RuleSoldier.h" />
+    <ClInclude Include="Mod\RuleUfo.h" />
+    <ClInclude Include="Mod\RuleTerrain.h" />
+    <ClInclude Include="Mod\SoldierNamePool.h" />
+    <ClInclude Include="Mod\UfoTrajectory.h" />
+    <ClInclude Include="Savegame\AlienBase.h" />
+    <ClInclude Include="Savegame\AlienStrategy.h" />
+    <ClInclude Include="Savegame\AlienMission.h" />
+    <ClInclude Include="Savegame\Base.h" />
+    <ClInclude Include="Savegame\BaseFacility.h" />
+    <ClInclude Include="Savegame\BattleItem.h" />
+    <ClInclude Include="Savegame\BattleUnit.h" />
+    <ClInclude Include="Savegame\BattleUnitStatistics.h" />
+    <ClInclude Include="Savegame\Country.h" />
+    <ClInclude Include="Savegame\Craft.h" />
+    <ClInclude Include="Savegame\CraftWeapon.h" />
+    <ClInclude Include="Savegame\CraftWeaponProjectile.h" />
+    <ClInclude Include="Savegame\EquipmentLayoutItem.h" />
+    <ClInclude Include="Savegame\GameTime.h" />
+    <ClInclude Include="Savegame\GeoscapeEvent.h" />
+    <ClInclude Include="Savegame\HitLog.h" />
+    <ClInclude Include="Savegame\ItemContainer.h" />
+    <ClInclude Include="Savegame\MissionStatistics.h" />
+    <ClInclude Include="Savegame\MovingTarget.h" />
+    <ClInclude Include="Savegame\Production.h" />
+    <ClInclude Include="Savegame\RankCount.h" />
+    <ClInclude Include="Savegame\Region.h" />
+    <ClInclude Include="Savegame\ResearchDiary.h" />
+    <ClInclude Include="Savegame\ResearchProject.h" />
+    <ClInclude Include="Savegame\SaveConverter.h" />
+    <ClInclude Include="Savegame\SavedBattleGame.h" />
+    <ClInclude Include="Savegame\SavedGame.h" />
+    <ClInclude Include="Savegame\SerializationHelper.h" />
+    <ClInclude Include="Savegame\Soldier.h" />
+    <ClInclude Include="Savegame\Node.h" />
+    <ClInclude Include="Savegame\SoldierAvatar.h" />
+    <ClInclude Include="Savegame\SoldierDeath.h" />
+    <ClInclude Include="Savegame\SoldierDiary.h" />
+    <ClInclude Include="Savegame\Target.h" />
+    <ClInclude Include="Savegame\MissionSite.h" />
+    <ClInclude Include="Savegame\Tile.h" />
+    <ClInclude Include="Savegame\Transfer.h" />
+    <ClInclude Include="Savegame\Ufo.h" />
+    <ClInclude Include="Savegame\Vehicle.h" />
+    <ClInclude Include="Savegame\Waypoint.h" />
+    <ClInclude Include="Savegame\WeightedOptions.h" />
+    <ClInclude Include="Ufopaedia\ArticleState.h" />
+    <ClInclude Include="Ufopaedia\ArticleStateArmor.h" />
+    <ClInclude Include="Ufopaedia\ArticleStateBaseFacility.h" />
+    <ClInclude Include="Ufopaedia\ArticleStateCraft.h" />
+    <ClInclude Include="Ufopaedia\ArticleStateCraftWeapon.h" />
+    <ClInclude Include="Ufopaedia\ArticleStateItem.h" />
+    <ClInclude Include="Ufopaedia\ArticleStateSoldier.h" />
+    <ClInclude Include="Ufopaedia\ArticleStateText.h" />
+    <ClInclude Include="Ufopaedia\ArticleStateTextImage.h" />
+    <ClInclude Include="Ufopaedia\ArticleStateTFTD.h" />
+    <ClInclude Include="Ufopaedia\ArticleStateTFTDArmor.h" />
+    <ClInclude Include="Ufopaedia\ArticleStateTFTDCraft.h" />
+    <ClInclude Include="Ufopaedia\ArticleStateTFTDCraftWeapon.h" />
+    <ClInclude Include="Ufopaedia\ArticleStateTFTDFacility.h" />
+    <ClInclude Include="Ufopaedia\ArticleStateTFTDItem.h" />
+    <ClInclude Include="Ufopaedia\ArticleStateTFTDUso.h" />
+    <ClInclude Include="Ufopaedia\ArticleStateTFTDVehicle.h" />
+    <ClInclude Include="Ufopaedia\ArticleStateUfo.h" />
+    <ClInclude Include="Ufopaedia\ArticleStateUnit.h" />
+    <ClInclude Include="Ufopaedia\ArticleStateVehicle.h" />
+    <ClInclude Include="Ufopaedia\StatsForNerdsState.h" />
+    <ClInclude Include="Ufopaedia\Ufopaedia.h" />
+    <ClInclude Include="Ufopaedia\UfopaediaSelectState.h" />
+    <ClInclude Include="Ufopaedia\UfopaediaStartState.h" />
+    <ClInclude Include="version.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\res\windows\openxcom.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="OpenXcom.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="..\libs\rapidyaml\c4\c4core.natvis" />
+    <Natvis Include="..\libs\rapidyaml\ryml.natvis" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
