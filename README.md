@@ -1,11 +1,7 @@
 # OpenXCOM-3DS
 
-OpenXCOM-3DS is a native port of OpenXcom Extended for the New Nintendo 3DS
+OpenXCOM-3DS is a native port of OpenXcom Extended 8.6.1 for the New Nintendo 3DS
 family.
-
-The port uses both screens, the Circle Pad, C-stick, touchscreen, D-pad, and
-the additional New 3DS shoulder buttons. It has been tested on a New Nintendo
-3DS XL.
 
 ## Read This First
 
@@ -22,7 +18,7 @@ Note: The original Nintendo 3DS, Nintendo 3DS XL, and Nintendo 2DS are not suppo
 The original commercial X-COM data is not included in this repository or in
 release downloads.
 
-Third-party OXCE mods are not directly supported at this time, but you are welcome to test them out.
+Third-party OXCE mods should theoretically work but are not directly supported at this time. You are welcome to test them out.
 
 ## Installation
 
@@ -63,7 +59,7 @@ generated files.
 
 ### 3. Install UFO Defense Data
 
-Locate the original `XCOM` folder from your legally owned installation.
+Locate the original `XCOM` folder from your installation.
 
 A Steam installation normally stores it under:
 
@@ -101,7 +97,7 @@ sdmc:/3ds/OXCE/UFO/XCOM/GEODATA/
 
 Do not leave an extra `XCOM` directory level.
 
-### 4. Install Terror From the Deep Data
+### 4. Install TFTD Data (optional)
 
 Locate the original `TFD` folder from your legally owned installation.
 
@@ -155,23 +151,6 @@ Only the `UFO` or `TFTD` folder for a game you own is required.
 
 Open the Homebrew Launcher and start OpenXCOM-3DS.
 
-## First Startup
-
-The DOS-style startup screen is normal.
-
-During startup, the screen displays:
-
-- The current loading stage
-- A percentage
-- A progress bar
-
-These represent real loading progress. Initial loading can take some time, usually a minute or two
-especially when the game is scanning original resources for the first time.
-
-OpenXCOM-3DS release builds contain OXCE's 8.6.1 own `common` and `standard` support
-resources inside the `.3dsx`. You do not need to download or install those
-folders separately.
-
 ## Selecting UFO Defense or Terror From the Deep
 
 When both games are installed, open:
@@ -180,16 +159,10 @@ When both games are installed, open:
 Options -> Mods
 ```
 
-Select one of the master games:
+From here you can select your active game (or mod). If you've installed both games, it should show:
 
 - `UFO: Enemy Unknown / X-Com: UFO Defense`
 - `X-Com: Terror From the Deep`
-
-Only one master game can be active at a time.
-
-After changing the master, OXCE reloads its resources. The DOS-style startup
-screen may display `Restarting.` during this process. Wait for the progress
-display to finish.
 
 ## Universal Controls
 
@@ -315,47 +288,10 @@ sdmc:/3ds/OXCE/user/
 
 ## Troubleshooting
 
-### The Game Cannot Find UFO Defense
-
-Check that this exists:
-
-```text
-sdmc:/3ds/OXCE/UFO/GEODATA/
-```
-
-If the path instead contains:
-
-```text
-sdmc:/3ds/OXCE/UFO/XCOM/GEODATA/
-```
-
-move the contents of `XCOM` up one level.
-
-### The Game Cannot Find Terror From the Deep
-
-Check that the original TFTD data directories are located directly inside:
-
-```text
-sdmc:/3ds/OXCE/TFTD/
-```
-
-Do not place another `TFD` folder inside it.
-
 ### The Game Appears to Pause During Startup
 
 Wait for the current stage to finish. Resource loading is not instantaneous,
 and some stages take longer than others.
-
-### The Wrong Game Starts
-
-Open:
-
-```text
-Options -> Mods
-```
-
-Select the correct UFO Defense or Terror From the Deep master and allow OXCE to
-restart.
 
 ### A Menu Is Difficult to Control
 
@@ -367,14 +303,13 @@ cursor focus.
 
 When opening an issue, include:
 
-1. Whether you were using UFO Defense or Terror From the Deep
+1. Whether you were playing UFO Defense or Terror From the Deep
 2. The menu, Geoscape screen, Battlescape, or inventory screen involved
 3. The exact physical or touchscreen control you used
-4. What you expected to happen
+4. What you expected to happen (if applicable)
 5. What actually happened
 6. Whether the problem happens every time
-7. Whether you were loading an old save or starting a new game
-8. A photograph, video, or crash information when available
+7. A photograph, video, or crash information when available
 
 Do not report problems involving third-party mods unless the same problem also
 occurs with the unmodified UFO Defense or Terror From the Deep master.
