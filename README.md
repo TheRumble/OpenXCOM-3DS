@@ -3,7 +3,7 @@
 OpenXCOM-3DS is a native port of OpenXcom Extended 8.6.1 for the New Nintendo 3DS
 family.
 
-## Read This First
+## Instructions
 
 You need:
 
@@ -18,7 +18,7 @@ Note: The original Nintendo 3DS, Nintendo 3DS XL, and Nintendo 2DS are not suppo
 The original commercial X-COM data is not included in this repository or in
 release downloads.
 
-Third-party OXCE mods should theoretically work but are not directly supported at this time. You are welcome to test them out.
+OXCE mods should theoretically work but are not directly supported at this time. You are welcome to test them out.
 
 ## Installation
 
@@ -173,18 +173,18 @@ From here you can select your active game (or mod). If you've installed both gam
 - **Start:** Enter or confirm
 - **Select:** Switch cursor focus between the top and bottom screens where
   available
-- **Touchscreen:** Activate lower-screen controls or use the trackpad area
-- **ZL + L + R + ZR:** Toggle the complete on-screen keyboard
+- **Touchscreen:** Activate lower-screen controls or use the trackpad
+- **ZL + L + R + ZR:** Toggle the on-screen keyboard
 
-During supported intro and cutscene playback, **A** skips the current video.
+During intro and cutscenes, **A** skips the current video.
 
 ## Menu Controls
 
-- Use the **D-pad** to move between menu controls.
-- Press **A** to activate the selected control.
+- Use the **D-pad** to snap between menu buttons.
+- Press **A** to activate the selected button.
 - Press **B** to go back.
 - Use the **Circle Pad** for free cursor movement.
-- Touch visible lower-screen controls directly.
+- If applicable, you can tap visible lower-screen buttons directly.
 - Sliders and lists can be adjusted with their normal cursor actions or
   physical navigation.
 
@@ -197,7 +197,7 @@ During supported intro and cutscene playback, **A** skips the current video.
 - **Select:** Switch between top-screen and bottom-screen cursor focus
 - **A:** Left click or activate
 - **Y:** Right click
-- **Touchscreen:** Use lower-screen commands or the context-sensitive trackpad
+- **Touchscreen:** Use lower-screen buttons or the trackpad
 
 The lower screen contains Geoscape information and commonly used commands.
 
@@ -286,25 +286,12 @@ sdmc:/3ds/OXCE/user/
 
 - This release is distributed as a Homebrew Launcher `.3dsx` application.
 
-## Troubleshooting
-
-### The Game Appears to Pause During Startup
-
-Wait for the current stage to finish. Resource loading is not instantaneous,
-and some stages take longer than others.
-
-### A Menu Is Difficult to Control
-
-Use the D-pad to snap between controls or use the Circle Pad for free cursor
-movement. Press Select where supported to change which screen currently owns
-cursor focus.
-
 ## Reporting Problems
 
 When opening an issue, include:
 
 1. Whether you were playing UFO Defense or Terror From the Deep
-2. The menu, Geoscape screen, Battlescape, or inventory screen involved
+2. The menu, Geoscape screen, Battlescape, or other screen involved
 3. The exact physical or touchscreen control you used
 4. What you expected to happen (if applicable)
 5. What actually happened
