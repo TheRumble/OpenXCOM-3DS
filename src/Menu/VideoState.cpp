@@ -405,7 +405,9 @@ void VideoState::init()
 	int prevSoundVol = Options::soundVolume;
 	if (_useUfoAudioSequence)
 	{
-		const auto& soundDir = FileMap::getVFolderContents("SOUND");
+		const std::string soundFolderName = "SOUND";
+		const auto& soundDir =
+			FileMap::getVFolderContents(soundFolderName);
 		ufoIntroSoundFileDosExists = soundDir.end() != soundDir.find("intro.cat");
 		ufoIntroSoundFileWinExists = soundDir.end() != soundDir.find("sample3.cat");
 

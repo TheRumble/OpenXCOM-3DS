@@ -131,13 +131,11 @@ void NotesState::updateList()
 {
 	_lstNotes->clearList();
 
-	int row = 0;
 	int color = _lstNotes->getSecondaryColor();
 
 	for (const auto& note : _game->getSavedGame()->getUserNotes())
 	{
 		_lstNotes->addRow(1, note.c_str());
-		row++;
 	}
 
 	_lstNotes->addRow(1, tr("STR_NEW_NOTE").c_str());

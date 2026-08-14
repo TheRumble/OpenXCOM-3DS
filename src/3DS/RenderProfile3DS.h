@@ -66,15 +66,25 @@ inline void recordEmptyRawShader(bool)
 class ScopedRawBlit
 {
 public:
-    ScopedRawBlit() = default;
-    ~ScopedRawBlit() = default;
+    ScopedRawBlit()
+    {
+    }
+
+    ~ScopedRawBlit()
+    {
+    }
 };
 
 class ScopedUnitDraw
 {
 public:
-    ScopedUnitDraw() = default;
-    ~ScopedUnitDraw() = default;
+    ScopedUnitDraw()
+    {
+    }
+
+    ~ScopedUnitDraw()
+    {
+    }
 };
 
 }

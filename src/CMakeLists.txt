@@ -630,6 +630,14 @@ add_executable ( openxcom  ${application_type} ${openxcom_src} ${openxcom_icon} 
 
 if (CMAKE_SYSTEM_NAME STREQUAL "Nintendo3DS")
   target_compile_definitions(openxcom PRIVATE NINTENDO_3DS)
+
+  # GCC emits large numbers of historical ABI-change notes for
+  # standard-library iterator types. These are informational only.
+  target_compile_options(openxcom PRIVATE
+    $<$<COMPILE_LANGUAGE:C>:-Wno-psabi>
+    $<$<COMPILE_LANGUAGE:CXX>:-Wno-psabi>
+  )
+
   ctr_create_3dsx(openxcom)
 endif ()
 

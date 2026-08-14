@@ -1556,9 +1556,6 @@ bool MenuNavigation3DS::findTarget(
 
                 bool cursorOnCandidate = false;
 
-                const InventoryCandidate
-                        *originCandidate = nullptr;
-
                 for (const InventoryCandidate &candidate :
                         candidates)
                 {
@@ -1574,7 +1571,6 @@ bool MenuNavigation3DS::findTarget(
                                 originX = candidate.targetX;
                                 originY = candidate.targetY;
                                 cursorOnCandidate = true;
-                                originCandidate = &candidate;
                                 break;
                         }
                 }

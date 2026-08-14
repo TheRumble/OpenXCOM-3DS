@@ -1,4 +1,4 @@
-cmake_minimum_required ( VERSION 3.5 )
+cmake_minimum_required ( VERSION 3.10 )
 
 project ( OpenXcom )
 
@@ -14,6 +14,7 @@ set (CMAKE_CXX_STANDARD 17)
 option ( DEV_BUILD "Development Build. Disable this for release builds" ON )
 option ( DUMP_CORE "Disables exception and segfault handling." OFF )
 option ( BUILD_PACKAGE "Prepares build for creation of a package with CPack" ON )
+option ( BUILD_DOCUMENTATION "Enable Doxygen API documentation target" ON )
 set ( TARGET_PLATFORM CACHE STRING "Target platform to include in the package name (win32, etc)" )
 option ( EMBED_ASSETS "Embed common and standard into the executable" OFF )
 option ( FATAL_WARNING "Treat warnings as errors" OFF )
@@ -70,15 +71,20 @@ endif()
 
 set ( DEPS_DIR "${default_deps_dir}" CACHE STRING "Dependencies directory" )
 
-# Find OpenGL
-set (OpenGL_GL_PREFERENCE LEGACY)
-find_package ( OpenGL )
-if ( NOT OPENGL_FOUND )
-  message ( WARNING "Can't find OpenGL - continuing building without OpenGL support." )
+# Find OpenGL only on targets that can use the desktop renderer.
+if ( CMAKE_SYSTEM_NAME STREQUAL "Nintendo3DS" )
+  message ( STATUS "Nintendo 3DS target: desktop OpenGL support disabled." )
   add_definitions(-D__NO_OPENGL)
 else ()
-  include_directories ( ${OPENGL_INCLUDE_DIR} )
-  message ( STATUS "OpenGL libraries: ${OPENGL_LIBRARIES}" )
+  set (OpenGL_GL_PREFERENCE LEGACY)
+  find_package ( OpenGL )
+  if ( NOT OPENGL_FOUND )
+    message ( WARNING "Can't find OpenGL - continuing building without OpenGL support." )
+    add_definitions(-D__NO_OPENGL)
+  else ()
+    include_directories ( ${OPENGL_INCLUDE_DIR} )
+    message ( STATUS "OpenGL libraries: ${OPENGL_LIBRARIES}" )
+  endif ()
 endif ()
 
 # Include rapidyaml lib
@@ -266,5 +272,7 @@ if ( NOT WIN32 OR NOT CPACK_GENERATOR STREQUAL "7Z" ) # FIXME: that's to exclude
     DESTINATION "${CMAKE_INSTALL_FULL_DATAROOTDIR}/icons/hicolor/scalable/apps")
 endif ()
 
-add_subdirectory ( docs )
+if ( BUILD_DOCUMENTATION )
+  add_subdirectory ( docs )
+endif ()
 add_subdirectory ( src )

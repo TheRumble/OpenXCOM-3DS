@@ -630,10 +630,10 @@ __________
 			|| screenPos.x >= _screenWidth + sizex
 			|| screenPos.y < 0 - sizey
 			|| screenPos.y >= _screenHeight + sizey ) return false; //totally outside
-		int side = ( _screenWidth - _map->getIconWidth() ) / 2;
 #ifdef NINTENDO_3DS
 		if (screenPos.y < _screenHeight + sizey) return true;
 #else
+		int side = ( _screenWidth - _map->getIconWidth() ) / 2;
 		if ( (screenPos.y < (_screenHeight - _map->getIconHeight()) + sizey) ) return true; //above icons
 		if ( (side > 1) && ( (screenPos.x < side + sizex) || (screenPos.x >= (_screenWidth - side - sizex)) ) ) return true; //at sides (if there are any)
 #endif

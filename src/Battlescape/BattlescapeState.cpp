@@ -208,7 +208,9 @@ BattlescapeState::BattlescapeState() :
 	_numTwoHandedIndicatorLeft = new NumberText(10, 5, x + 36, y + 46);
 	_numTwoHandedIndicatorRight = new NumberText(10, 5, x + 308, y + 46);
 	const int visibleUnitX = _game->getMod()->getInterface("battlescape")->getElement("visibleUnits")->x;
+#ifndef NINTENDO_3DS
 	const int visibleUnitY = _game->getMod()->getInterface("battlescape")->getElement("visibleUnits")->y;
+#endif
 	for (int i = 0; i < VISIBLE_MAX; ++i)
 	{
 #ifdef NINTENDO_3DS

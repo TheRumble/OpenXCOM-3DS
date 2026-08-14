@@ -3987,7 +3987,9 @@ SavedGame *Mod::newSave(GameDifficulty diff) const
 	}
 
 	// Correct soldier IDs
-	for (auto* soldier : *base->getSoldiers())
+	for (std::size_t i = 0;
+		i < base->getSoldiers()->size();
+		++i)
 	{
 		save->getId("STR_SOLDIER");
 	}
@@ -5605,7 +5607,9 @@ void Mod::loadVanillaResources()
 		_surfaces[s2]->loadScr(s1);
 	}
 
-	const auto& geographFiles = FileMap::getVFolderContents("GEOGRAPH");
+	const std::string geographFolderName = "GEOGRAPH";
+	const auto& geographFiles =
+		FileMap::getVFolderContents(geographFolderName);
 	auto scrs = FileMap::filterFiles(geographFiles, "SCR");
 	for (const auto& name : scrs)
 	{
@@ -5674,7 +5678,9 @@ void Mod::loadVanillaResources()
 	if (!Options::mute) // TBD: ain't it wrong? can Options::mute be reset without a reload?
 	{
 		// Load sounds
-		const auto& contents = FileMap::getVFolderContents("SOUND");
+		const std::string soundFolderName = "SOUND";
+		const auto& contents =
+			FileMap::getVFolderContents(soundFolderName);
 		auto soundFiles = FileMap::filterFiles(contents, "CAT");
 		if (_soundDefs.empty())
 		{
@@ -5867,7 +5873,9 @@ void Mod::loadBattlescapeResources()
 	_sets["BLANKS.PCK"]->loadPck("TERRAIN/BLANKS.PCK", "TERRAIN/BLANKS.TAB");
 
 	// Load Battlescape units
-	const auto& unitsContents = FileMap::getVFolderContents("UNITS");
+	const std::string unitsFolderName = "UNITS";
+	const auto& unitsContents =
+		FileMap::getVFolderContents(unitsFolderName);
 	auto usets = FileMap::filterFiles(unitsContents, "PCK");
 	for (const auto& name : usets)
 	{
@@ -5886,7 +5894,9 @@ void Mod::loadBattlescapeResources()
 		throw Exception("Invalid CHRYS.PCK, please patch your X-COM data to the latest version");
 	}
 	// TFTD uses the loftemps dat from the terrain folder, but still has enemy unknown's version in the geodata folder, which is short by 2 entries.
-	const auto& terrainContents = FileMap::getVFolderContents("TERRAIN");
+	const std::string terrainFolderName = "TERRAIN";
+	const auto& terrainContents =
+		FileMap::getVFolderContents(terrainFolderName);
 	if (terrainContents.find("loftemps.dat") != terrainContents.end())
 	{
 		MapDataSet::loadLOFTEMPS("TERRAIN/LOFTEMPS.DAT", &_voxelData);
@@ -5919,7 +5929,9 @@ void Mod::loadBattlescapeResources()
 	{ 2, 9, 24, 255 },
 	{ 2, 0, 24, 255 } };
 
-	const auto& ufographContents = FileMap::getVFolderContents("UFOGRAPH");
+	const std::string ufographFolderName = "UFOGRAPH";
+	const auto& ufographContents =
+		FileMap::getVFolderContents(ufographFolderName);
 	for (size_t i = 0; i < ARRAYLEN(lbms); ++i)
 	{
 		if (ufographContents.find(lbms[i]) == ufographContents.end())
@@ -6149,7 +6161,9 @@ void Mod::loadExtraResources()
 	// Load musics
 	if (!Options::mute)
 	{
-		const auto& soundFiles = FileMap::getVFolderContents("SOUND");
+		const std::string soundFolderName = "SOUND";
+		const auto& soundFiles =
+			FileMap::getVFolderContents(soundFolderName);
 
 		// Check which music version is available
 		CatFile *adlibcat = 0, *aintrocat = 0;
@@ -6478,7 +6492,9 @@ Music* Mod::loadMusic(MusicFormat fmt, RuleMusic* rule, CatFile* adlibcat, CatFi
 	/* MUSIC_AUTO, MUSIC_FLAC, MUSIC_OGG, MUSIC_MP3, MUSIC_MOD, MUSIC_WAV, MUSIC_ADLIB, MUSIC_GM, MUSIC_MIDI */
 	static const std::string exts[] = { "", ".flac", ".ogg", ".mp3", ".mod", ".wav", "", "", ".mid" };
 	Music *music = 0;
-	const auto& soundContents = FileMap::getVFolderContents("SOUND");
+	const std::string soundFolderName = "SOUND";
+	const auto& soundContents =
+		FileMap::getVFolderContents(soundFolderName);
 	size_t track = rule->getCatPos();
 	try
 	{

@@ -91,7 +91,6 @@ TransferBaseState::TransferBaseState(Base *base, DebriefingState *debriefingStat
 	_lstBases->setMargin(2);
 	_lstBases->onMouseClick((ActionHandler)&TransferBaseState::lstBasesClick);
 
-	int row = 0;
 	for (auto* xbase : *_game->getSavedGame()->getBases())
 	{
 		if (xbase != _base)
@@ -110,7 +109,6 @@ TransferBaseState::TransferBaseState(Base *base, DebriefingState *debriefingStat
 			ss << Unicode::TOK_COLOR_FLIP << area;
 			_lstBases->addRow(2, xbase->getName().c_str(), ss.str().c_str());
 			_bases.push_back(xbase);
-			row++;
 		}
 	}
 }

@@ -178,8 +178,24 @@ struct ScopedErrorSettings
 struct srcloc;
 
 // watchout: for VS the [[noreturn]] needs to come before other annotations like C4CORE_EXPORT
-[[noreturn]] C4CORE_EXPORT void handle_error(srcloc s, const char *fmt, ...);
-C4CORE_EXPORT void handle_warning(srcloc s, const char *fmt, ...);
+#if defined(__GNUC__) || defined(__clang__)
+#   define C4_PRINTF_LIKE(format_index, first_argument) \
+        __attribute__((format(printf, format_index, first_argument)))
+#else
+#   define C4_PRINTF_LIKE(format_index, first_argument)
+#endif
+
+[[noreturn]] C4CORE_EXPORT void handle_error(
+    srcloc s,
+    const char *fmt,
+    ...) C4_PRINTF_LIKE(2, 3);
+
+C4CORE_EXPORT void handle_warning(
+    srcloc s,
+    const char *fmt,
+    ...) C4_PRINTF_LIKE(2, 3);
+
+#undef C4_PRINTF_LIKE
 
 
 #   define C4_ERROR(msg, ...)                               \

@@ -238,7 +238,10 @@ void ReferenceResolver::resolve(Tree *t_)
                     _RYML_CB_CHECK(m_tree->m_callbacks, !m_tree->is_container(refdata.target));
                     _RYML_CB_CHECK(m_tree->m_callbacks, m_tree->has_val(refdata.target));
                     const type_bits existing_style_flags = VAL_STYLE & m_tree->_p(refdata.target)->m_type.type;
-                    static_assert((VAL_STYLE >> 1u) == (KEY_STYLE), "bad flags");
+                    static_assert(
+                        (static_cast<type_bits>(VAL_STYLE) >> 1u) ==
+                            static_cast<type_bits>(KEY_STYLE),
+                        "bad flags");
                     m_tree->_p(refdata.node)->m_key.scalar = m_tree->val(refdata.target);
                     m_tree->_add_flags(refdata.node, KEY | (existing_style_flags >> 1u));
                 }
@@ -261,7 +264,10 @@ void ReferenceResolver::resolve(Tree *t_)
                     _RYML_CB_CHECK(m_tree->m_callbacks, m_tree->has_val(refdata.target));
                     // keys cannot be containers, so don't inherit container flags
                     const type_bits existing_style_flags = (KEY_STYLE) & m_tree->_p(refdata.target)->m_type.type;
-                    static_assert((KEY_STYLE << 1u) == (VAL_STYLE), "bad flags");
+                    static_assert(
+                        (static_cast<type_bits>(KEY_STYLE) << 1u) ==
+                            static_cast<type_bits>(VAL_STYLE),
+                        "bad flags");
                     m_tree->_p(refdata.node)->m_val.scalar = m_tree->key(refdata.target);
                     m_tree->_add_flags(refdata.node, VAL | (existing_style_flags << 1u));
                 }

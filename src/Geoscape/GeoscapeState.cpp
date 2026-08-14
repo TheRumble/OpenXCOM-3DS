@@ -5079,8 +5079,8 @@ void GeoscapeState::determineAlienMissions(bool isNewMonth, const RuleEvent* eve
 				}
 				if (!possibleSeqEvents.empty())
 				{
-					auto* eventRules = mod->getEvent(possibleSeqEvents.front(), true); // take first
-					toBeGenerated.push_back(eventRules);
+					auto* generatedEvent = mod->getEvent(possibleSeqEvents.front(), true); // take first
+					toBeGenerated.push_back(generatedEvent);
 				}
 			}
 
@@ -5096,24 +5096,24 @@ void GeoscapeState::determineAlienMissions(bool isNewMonth, const RuleEvent* eve
 				}
 				if (!possibleRngEvents.empty())
 				{
-					auto* eventRules = mod->getEvent(possibleRngEvents.choose(), true); // take random
-					toBeGenerated.push_back(eventRules);
+					auto* generatedEvent = mod->getEvent(possibleRngEvents.choose(), true); // take random
+					toBeGenerated.push_back(generatedEvent);
 				}
 			}
 
 			// 3. randomly generated repeatable events
 			{
-				auto* eventRules = mod->getEvent(eventCommand->generate(save->getMonthsPassed()), false);
-				if (eventRules)
+				auto* generatedEvent = mod->getEvent(eventCommand->generate(save->getMonthsPassed()), false);
+				if (generatedEvent)
 				{
-					toBeGenerated.push_back(eventRules);
+					toBeGenerated.push_back(generatedEvent);
 				}
 			}
 
 			// 4. generate
-			for (auto* eventRules : toBeGenerated)
+			for (auto* generatedEvent : toBeGenerated)
 			{
-				save->spawnEvent(eventRules);
+				save->spawnEvent(generatedEvent);
 			}
 		}
 	}
@@ -5196,7 +5196,8 @@ bool GeoscapeState::attemptAlienRaceEvolution(int month, AlienBase* ab) const
 {
 	for (const auto& tuple : ab->getDeployment()->getAlienRaceEvolution())
 	{
-		if (std::get<0>(tuple) <= month && std::get<1>(tuple) == ab->getAlienRace())
+		if (static_cast<int>(std::get<0>(tuple)) <= month &&
+			std::get<1>(tuple) == ab->getAlienRace())
 		{
 			auto* newRace = _game->getMod()->getAlienRace(std::get<2>(tuple), false);
 			if (newRace)

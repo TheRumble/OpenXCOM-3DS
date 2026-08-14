@@ -764,7 +764,9 @@ RYML_EXPORT C4_NO_INLINE size_t _find_last_newline_and_larger_indentation(csubst
  * resulting number of nodes, notably if the YAML uses implicit
  * maps as flow seq members as in `[these: are, individual:
  * maps]`. */
+#ifndef _C4_YML_PARSE_HPP_
 RYML_EXPORT id_type estimate_tree_capacity(csubstr src);
+#endif
 
 /** @} */
 
