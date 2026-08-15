@@ -641,16 +641,44 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Nintendo3DS")
     $<$<COMPILE_LANGUAGE:CXX>:-Wno-psabi>
   )
 
-  ctr_create_3dsx(openxcom)
+  find_program ( OXCE_3DS_BANNERTOOL NAMES bannertool )
+
+  if ( NOT OXCE_3DS_BANNERTOOL )
+    message ( FATAL_ERROR
+      "Nintendo 3DS metadata generation requires bannertool." )
+  endif ()
+
+  set ( OXCE_3DS_ASSET_DIR
+    "${PROJECT_SOURCE_DIR}/res/3ds" )
+  set ( OXCE_3DS_PACKAGE_DIR
+    "${CMAKE_BINARY_DIR}/package/3ds" )
+  set ( OXCE_3DS_SMDH
+    "${OXCE_3DS_PACKAGE_DIR}/openxcom.smdh" )
+
+  add_custom_command (
+    OUTPUT "${OXCE_3DS_SMDH}"
+    COMMAND "${CMAKE_COMMAND}" -E make_directory
+            "${OXCE_3DS_PACKAGE_DIR}"
+    COMMAND "${OXCE_3DS_BANNERTOOL}" makesmdh
+            -i "${PROJECT_SOURCE_DIR}/res/linux/icons/openxcom_48x48.png"
+            -s "OpenXCOM-3DS"
+            -l "OpenXcom Extended for New Nintendo 3DS"
+            -p "OpenXcom Extended"
+            -r regionfree
+            -f visible,recordusage,new3ds
+            -o "${OXCE_3DS_SMDH}"
+    DEPENDS
+      "${PROJECT_SOURCE_DIR}/res/linux/icons/openxcom_48x48.png"
+    VERBATIM
+  )
+
+  ctr_create_3dsx(
+    openxcom
+    SMDH "${OXCE_3DS_SMDH}"
+  )
 
   if ( BUILD_3DS_CIA )
-    find_program ( OXCE_3DS_BANNERTOOL NAMES bannertool )
     find_program ( OXCE_3DS_MAKEROM NAMES makerom )
-
-    if ( NOT OXCE_3DS_BANNERTOOL )
-      message ( FATAL_ERROR
-        "BUILD_3DS_CIA requires bannertool." )
-    endif ()
 
     if ( NOT OXCE_3DS_MAKEROM )
       message ( FATAL_ERROR
@@ -667,36 +695,12 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Nintendo3DS")
       endif ()
     endif ()
 
-    set ( OXCE_3DS_ASSET_DIR
-      "${PROJECT_SOURCE_DIR}/res/3ds" )
-    set ( OXCE_3DS_PACKAGE_DIR
-      "${CMAKE_BINARY_DIR}/package/3ds" )
-
-    set ( OXCE_3DS_SMDH
-      "${OXCE_3DS_PACKAGE_DIR}/openxcom.smdh" )
     set ( OXCE_3DS_BANNER
       "${OXCE_3DS_PACKAGE_DIR}/openxcom-banner.bnr" )
     set ( OXCE_3DS_STRIPPED_ELF
       "${OXCE_3DS_PACKAGE_DIR}/openxcom-stripped.elf" )
     set ( OXCE_3DS_CIA
       "${OXCE_3DS_PACKAGE_DIR}/OpenXCOM-3DS.cia" )
-
-    add_custom_command (
-      OUTPUT "${OXCE_3DS_SMDH}"
-      COMMAND "${CMAKE_COMMAND}" -E make_directory
-              "${OXCE_3DS_PACKAGE_DIR}"
-      COMMAND "${OXCE_3DS_BANNERTOOL}" makesmdh
-              -i "${PROJECT_SOURCE_DIR}/res/linux/icons/openxcom_48x48.png"
-              -s "OpenXCOM-3DS"
-              -l "OpenXcom Extended for New Nintendo 3DS"
-              -p "OpenXcom Extended"
-              -r regionfree
-              -f visible,recordusage,new3ds
-              -o "${OXCE_3DS_SMDH}"
-      DEPENDS
-        "${PROJECT_SOURCE_DIR}/res/linux/icons/openxcom_48x48.png"
-      VERBATIM
-    )
 
     add_custom_command (
       OUTPUT "${OXCE_3DS_BANNER}"
