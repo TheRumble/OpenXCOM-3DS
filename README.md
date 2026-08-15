@@ -306,8 +306,8 @@ occurs with the unmodified UFO Defense or Terror From the Deep master.
 OpenXCOM-3DS can be built from source using the
 [devkitPro](https://devkitpro.org/) Nintendo 3DS development toolchain.
 
-This section is written as a complete step-by-step guide. You do not need
-previous experience building Nintendo 3DS homebrew.
+This guide is intended to be usable even if you have never built Nintendo 3DS
+homebrew before.
 
 The build system can produce both release formats:
 
@@ -315,14 +315,16 @@ The build system can produce both release formats:
 - an installable `.cia` application for the Nintendo 3DS HOME Menu
 
 The CIA build also generates the HOME Menu icon, banner, and banner audio from
-the assets included in this repository.
+assets included in this repository.
+
+---
 
 ### 1. Install devkitPro
 
-OpenXCOM-3DS is built using the
-[devkitPro](https://devkitpro.org/) Nintendo 3DS development toolchain.
+OpenXCOM-3DS is built using
+[devkitPro](https://devkitpro.org/).
 
-Start with the official:
+Useful links:
 
 - [devkitPro Getting Started Guide](https://devkitpro.org/wiki/Getting_Started)
 - [devkitPro Installer](https://github.com/devkitPro/installer)
@@ -330,10 +332,12 @@ Start with the official:
 
 On Windows, install devkitPro using the official installer.
 
+---
+
 ### 2. Use the Correct Terminal on Windows
 
-Windows users should run all build commands from the **devkitPro MinGW64**
-terminal installed with devkitPro.
+Windows users should run all commands in this guide from the
+**devkitPro MinGW64** terminal installed with devkitPro.
 
 Do **not** use:
 
@@ -342,7 +346,7 @@ Do **not** use:
 - Git Bash
 - Cygwin
 - a separate standalone MSYS2 installation
-- another MinGW64 terminal that was not installed/configured by devkitPro
+- another MinGW64 terminal that was not installed or configured by devkitPro
 
 The correct terminal should normally show `MINGW64` in the prompt.
 
@@ -353,9 +357,9 @@ username@COMPUTER MINGW64 ~
 ```
 
 The important part is that this is the **devkitPro MinGW64 environment**, not
-just any terminal that happens to say `MINGW64`.
+just any terminal that happens to display `MINGW64`.
 
-You can verify that the terminal can see the devkitPro installation with:
+Check that the terminal can see your devkitPro installation:
 
 ```bash
 echo "$DEVKITPRO"
@@ -375,16 +379,10 @@ ls /opt/devkitpro
 
 You should see several devkitPro directories and tools.
 
-You can also verify that the Nintendo 3DS compiler is available:
-
-```bash
-command -v arm-none-eabi-g++
-```
-
-A working installation should return a path rather than nothing.
-
 > **Windows users:** Unless this guide specifically says otherwise, run every
 > command below from the **devkitPro MinGW64** terminal.
+
+---
 
 ### 3. Install the Required Packages
 
@@ -422,78 +420,14 @@ The main tools used by the build are:
 - [makerom / Project_CTR](https://github.com/3DSGuy/Project_CTR) - creates the
   installable `.cia`
 
+`bannertool` and `makerom` are used during CIA packaging.
+
+---
+
 ### 4. Verify the Build Tools
 
-Before continuing, check that the required programs can be found:
-
-```bash
-command -v git
-command -v cmake
-command -v ninja
-command -v arm-none-eabi-g++
-command -v bannertool
-command -v makerom
-```
-
-Each command should print a path.
-
-You can also check the Nintendo 3DS compiler directly:
-
-```bash
-arm-none-eabi-g++ --version
-```
-
-If `arm-none-eabi-g++`, `bannertool`, or `makerom` cannot be found, first make
-sure you opened the **devkitPro MinGW64** terminal rather than another terminal.
-
-If you are in the correct terminal and the tools are still missing, rerun:
-
-```bash
-pacman -S --needed 3ds-dev
-```
-
-before continuing.
-
-### 2. Install the Required Packages
-
-First update the devkitPro package database:
-
-```bash
-pacman -Syu
-```
-
-If `pacman` asks you to close or restart the terminal during an update, do so,
-open devkitPro MSYS2 again, and rerun:
-
-```bash
-pacman -Syu
-```
-
-Then install the tools and Nintendo 3DS development packages used by
-OpenXCOM-3DS:
-
-```bash
-pacman -S --needed git cmake ninja zip 3ds-dev
-```
-
-The main tools used by the build are:
-
-- [Git](https://git-scm.com/) - downloads and manages the source code
-- [CMake](https://cmake.org/) - configures the project
-- [Ninja](https://ninja-build.org/) - performs the actual compilation
-- [devkitPro](https://devkitpro.org/) / devkitARM - provides the Nintendo 3DS
-  compiler and libraries
-- [bannertool](https://github.com/diasurgical/bannertool) - creates Nintendo
-  3DS icon and banner metadata
-- [makerom / Project_CTR](https://github.com/3DSGuy/Project_CTR) - creates the
-  installable CIA
-
-`bannertool` and `makerom` are used only for the CIA packaging process.
-
-### 3. Check That the Tools Are Available
-
-Before downloading the source, it is a good idea to make sure the important
-programs can be found.
+Before downloading the source code, make sure the required programs can be
+found.
 
 Run:
 
@@ -506,29 +440,39 @@ command -v bannertool
 command -v makerom
 ```
 
-Each command should print a path instead of returning nothing.
+Each command should print a path rather than returning nothing.
 
-For example, devkitPro tools will normally be somewhere under:
+devkitPro tools will normally be located somewhere under:
 
 ```text
 /opt/devkitpro/
 ```
 
-You can also check the compiler with:
+You can also check the Nintendo 3DS compiler directly:
 
 ```bash
 arm-none-eabi-g++ --version
 ```
 
-If `arm-none-eabi-g++`, `bannertool`, or `makerom` cannot be found, make sure
-you are using the devkitPro MSYS2 terminal and that the devkitPro installation
-completed successfully.
+If `arm-none-eabi-g++`, `bannertool`, or `makerom` cannot be found:
 
-### 4. Clone OpenXCOM-3DS
+1. Make sure you opened the **devkitPro MinGW64** terminal.
+2. Make sure devkitPro was installed successfully.
+3. Rerun:
+
+```bash
+pacman -S --needed 3ds-dev
+```
+
+Do not continue until the required tools can be found.
+
+---
+
+### 5. Clone OpenXCOM-3DS
 
 Choose a directory where you want to keep the source code.
 
-Then clone the repository:
+Clone the repository:
 
 ```bash
 git clone https://github.com/TheRumble/OpenXCOM-3DS.git
@@ -542,13 +486,13 @@ cd OpenXCOM-3DS
 
 You should now be in the root of the OpenXCOM-3DS source tree.
 
-You can confirm this with:
+You can check your current directory with:
 
 ```bash
 pwd
 ```
 
-and:
+and list the repository contents with:
 
 ```bash
 ls
@@ -566,9 +510,12 @@ res/
 src/
 ```
 
-### 5. Configure the Nintendo 3DS Release Build
+---
 
-CMake first needs to create a Nintendo 3DS build directory.
+### 6. Configure the Nintendo 3DS Release Build
+
+Before compiling the game, CMake needs to configure a Nintendo 3DS build
+directory.
 
 Run this command exactly as shown:
 
@@ -583,18 +530,19 @@ cmake -S . -B build/3ds -G Ninja \
     -DBUILD_3DS_CIA=ON
 ```
 
-This does not compile the game yet. It configures the project and creates the
-Ninja build files inside:
+This does **not** compile the game yet.
+
+It configures the project and creates the Ninja build files inside:
 
 ```text
 build/3ds/
 ```
 
-The options used above mean:
+The options mean:
 
 - `-S .` - use the current directory as the source directory
 - `-B build/3ds` - place generated build files in `build/3ds`
-- `-G Ninja` - use the Ninja build system
+- `-G Ninja` - use Ninja as the build system
 - `CMAKE_TOOLCHAIN_FILE` - use the devkitPro Nintendo 3DS toolchain
 - `CMAKE_BUILD_TYPE=Release` - create an optimized release build
 - `EMBED_ASSETS=ON` - embed the OpenXcom/OXCE support assets required by the
@@ -621,7 +569,9 @@ Nintendo 3DS CIA package target enabled: openxcom_cia
 The Nintendo 3DS port uses its software rendering path and does not require the
 desktop OpenGL renderer.
 
-### 6. Build the `.3dsx`
+---
+
+### 7. Build the `.3dsx`
 
 Compile OpenXCOM-3DS with:
 
@@ -640,15 +590,17 @@ After a successful build, the Homebrew Launcher executable will be:
 build/3ds/src/openxcom.3dsx
 ```
 
-You can verify that it exists with:
+Verify that it exists:
 
 ```bash
 ls -lh build/3ds/src/openxcom.3dsx
 ```
 
-### 7. Build the `.cia`
+---
 
-The CIA build is a separate packaging target.
+### 8. Build the `.cia`
+
+The CIA is created using a separate packaging target.
 
 After the normal build succeeds, run:
 
@@ -656,10 +608,7 @@ After the normal build succeeds, run:
 cmake --build build/3ds --target openxcom_cia -j4
 ```
 
-This performs the additional steps required to create a Nintendo 3DS HOME Menu
-application.
-
-The process automatically:
+This automatically:
 
 1. creates the OpenXCOM-3DS SMDH application metadata and icon
 2. creates the HOME Menu banner
@@ -668,7 +617,7 @@ The process automatically:
 5. packages the application using
    [makerom](https://github.com/3DSGuy/Project_CTR)
 
-The generated files are placed in:
+The generated CIA files are placed in:
 
 ```text
 build/3ds/package/3ds/
@@ -684,21 +633,23 @@ build/3ds/package/3ds/
 └── openxcom.smdh
 ```
 
-The main CIA file is:
+The installable CIA is:
 
 ```text
 build/3ds/package/3ds/OpenXCOM-3DS.cia
 ```
 
-You can verify it with:
+Verify that it exists:
 
 ```bash
 ls -lh build/3ds/package/3ds/OpenXCOM-3DS.cia
 ```
 
-### 8. Build Both Release Formats
+---
 
-For convenience, the complete configure-and-build process is:
+### 9. Quick Reference: Build Both Formats
+
+Once the required tools are installed, the complete release build process is:
 
 ```bash
 cmake -S . -B build/3ds -G Ninja \
@@ -715,7 +666,7 @@ cmake --build build/3ds -j4
 cmake --build build/3ds --target openxcom_cia -j4
 ```
 
-After all three commands finish successfully, the two main outputs are:
+The main outputs are:
 
 ```text
 build/3ds/src/openxcom.3dsx
@@ -728,7 +679,9 @@ The generated SMDH is:
 build/3ds/package/3ds/openxcom.smdh
 ```
 
-### 9. Preparing the `.3dsx` for the Homebrew Launcher
+---
+
+### 10. Prepare the `.3dsx` for the Homebrew Launcher
 
 For a normal Homebrew Launcher installation, create a folder named:
 
@@ -736,7 +689,7 @@ For a normal Homebrew Launcher installation, create a folder named:
 OpenXCOM-3DS
 ```
 
-Place the `.3dsx` and SMDH inside it:
+Place these two files inside it:
 
 ```text
 OpenXCOM-3DS/
@@ -744,14 +697,15 @@ OpenXCOM-3DS/
 └── openxcom.smdh
 ```
 
-The files can be copied from:
+Copy them from:
 
 ```text
 build/3ds/src/openxcom.3dsx
 build/3ds/package/3ds/openxcom.smdh
 ```
 
-Then place the `OpenXCOM-3DS` folder inside the `3ds` directory on the SD card:
+Then place the entire `OpenXCOM-3DS` folder inside the `3ds` directory on your
+SD card:
 
 ```text
 sdmc:/3ds/OpenXCOM-3DS/
@@ -759,12 +713,21 @@ sdmc:/3ds/OpenXCOM-3DS/
 └── openxcom.smdh
 ```
 
-The `.3dsx` contains the actual application.
+The files serve different purposes:
 
-The `.smdh` contains Homebrew Launcher metadata such as the application name
-and icon.
+- `openxcom.3dsx` - the actual executable
+- `openxcom.smdh` - Homebrew Launcher metadata such as the application name
+  and icon
 
-### 10. Installing a Locally Built CIA
+The commercial X-COM data is stored separately under:
+
+```text
+sdmc:/3ds/OXCE/
+```
+
+---
+
+### 11. Install a Locally Built CIA
 
 The generated CIA is:
 
@@ -793,24 +756,26 @@ sdmc:/3ds/OXCE/
 
 for game data.
 
-Configuration and save files are stored under:
+Configuration files and saved games are stored under:
 
 ```text
 sdmc:/3ds/OXCE/user/
 ```
 
-### 11. Testing the `.3dsx` With 3dslink
+---
 
-During development, rebuilding and manually copying the `.3dsx` to the SD card
-every time can be inconvenient.
+### 12. Test the `.3dsx` With 3dslink
+
+During development, repeatedly copying the `.3dsx` to the SD card can be
+inconvenient.
 
 [3dslink](https://github.com/devkitPro/3dslink) can send a `.3dsx` directly
-from the computer to a Nintendo 3DS over the local network.
+from your computer to a Nintendo 3DS over the local network.
 
-First, start the network loader/receiver from the Homebrew Launcher on the
+First, start the network loader or receiver from the Homebrew Launcher on your
 Nintendo 3DS.
 
-Find the IP address of your 3DS.
+Find the IP address of the 3DS.
 
 Then, from the OpenXCOM-3DS source directory, run:
 
@@ -830,10 +795,13 @@ For example:
 
 Replace `192.168.1.100` with the actual IP address of your Nintendo 3DS.
 
-`3dslink` sends and launches the `.3dsx`. It does **not** install or launch a
-CIA.
+`3dslink` sends and launches the `.3dsx`.
 
-### 12. Rebuilding After Making Changes
+It does **not** install or launch a CIA.
+
+---
+
+### 13. Rebuild After Making Changes
 
 You do not normally need to rerun the full CMake configuration every time you
 edit the source code.
@@ -850,7 +818,7 @@ Then regenerate the CIA with:
 cmake --build build/3ds --target openxcom_cia -j4
 ```
 
-Ninja will determine which files need to be rebuilt.
+Ninja will determine which files actually need to be rebuilt.
 
 Rerun the full CMake configuration command if you:
 
@@ -859,16 +827,21 @@ Rerun the full CMake configuration command if you:
 - change toolchain settings
 - update the project in a way that requires CMake to regenerate the build
 
-### 13. Creating a Completely Fresh Build
+---
 
-If a build begins behaving strangely, or you want to make sure no old build
-files are being reused, delete the entire build directory:
+### 14. Create a Completely Fresh Build
+
+If the build begins behaving strangely, or you want to guarantee that no old
+build files are being reused, delete the entire build directory:
 
 ```bash
 rm -rf build/3ds
 ```
 
-Then configure it again:
+> **Warning:** Make sure you are in the OpenXCOM-3DS source directory before
+> running this command. It deletes only the generated `build/3ds` directory.
+
+Configure the project again:
 
 ```bash
 cmake -S . -B build/3ds -G Ninja \
@@ -891,6 +864,14 @@ Then build the CIA:
 
 ```bash
 cmake --build build/3ds --target openxcom_cia -j4
+```
+
+After both commands succeed, verify the outputs:
+
+```bash
+ls -lh \
+    build/3ds/src/openxcom.3dsx \
+    build/3ds/package/3ds/OpenXCOM-3DS.cia
 ```
 
 ### Troubleshooting
