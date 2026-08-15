@@ -319,26 +319,63 @@ the assets included in this repository.
 
 ### 1. Install devkitPro
 
-OpenXCOM-3DS is built using
-[devkitPro](https://devkitpro.org/).
+OpenXCOM-3DS is built using the
+[devkitPro](https://devkitpro.org/) Nintendo 3DS development toolchain.
 
 Start with the official:
 
 [devkitPro Getting Started Guide](https://devkitpro.org/wiki/Getting_Started)
 
-Windows users can also find the devkitPro installer here:
+Windows users can download the installer here:
 
 [devkitPro Installer](https://github.com/devkitPro/installer)
 
 [devkitPro Installer Releases](https://github.com/devkitPro/installer/releases)
 
-On Windows, this guide assumes you are using the **devkitPro MSYS2** terminal
-installed by devkitPro.
+### Which Terminal Should I Use on Windows?
 
-> **Important:** Run the commands in this section from the devkitPro MSYS2
-> terminal, not Windows Command Prompt or PowerShell.
+After installing devkitPro, use the **MSYS2 environment configured by
+devkitPro** for all commands in this guide.
 
-After installing devkitPro, open the devkitPro MSYS2 terminal.
+Do **not** run the build commands from:
+
+- Windows Command Prompt
+- PowerShell
+- Git Bash
+- Cygwin
+- a separate, unconfigured MSYS2 installation
+
+If you installed devkitPro using its Windows installer, launch the
+**devkitPro MSYS/MSYS2 terminal** from the Windows Start menu.
+
+Depending on the installed version and shortcut, the terminal may identify
+itself as `MSYS` or `MINGW64`. What matters is that it is the environment
+configured for devkitPro and has access to `/opt/devkitpro`.
+
+You can check this immediately after opening the terminal:
+
+```bash
+echo "$DEVKITPRO"
+ls /opt/devkitpro
+```
+
+`DEVKITPRO` should normally be:
+
+```text
+/opt/devkitpro
+```
+
+and the second command should display the contents of your devkitPro
+installation.
+
+You can also verify that the devkitPro package repositories are available:
+
+```bash
+pacman -Syu
+```
+
+> **Important:** All commands below are intended to be entered in this
+> devkitPro-configured MSYS2 terminal.
 
 ### 2. Install the Required Packages
 
