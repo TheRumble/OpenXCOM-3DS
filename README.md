@@ -3,6 +3,36 @@
 OpenXCOM-3DS is a native port of OpenXcom Extended 8.6.1 for the New Nintendo 3DS
 family.
 
+## Features
+
+- Supports both **X-COM: UFO Defense** and **X-COM: Terror From the Deep**
+- Runs using an optimized **software rendering** path
+- Uses the **top screen for gameplay** and the **bottom touchscreen for 3DS-specific controls**
+- Touchscreen interface designed around the original OpenXcom/OXCE UI
+- Support for the **Circle Pad**, **C-Stick**, **D-Pad**, face buttons, and all four shoulder buttons
+- **C-Stick camera panning on the Geoscape and the Battlescape**
+- **D-Pad navigation** for bottom-screen controls
+- Quick-access controls for:
+  - inventory
+  - left and right hand items
+  - elevation levels
+  - right-click actions
+  - middle-click actions
+  - confirmation and back/cancel
+- On-screen keyboard support when text entry is required
+- Native OXCE save and load support
+- Native OXCE options and configuration support
+- Optimized Geoscape and Battlescape rendering for 3DS hardware
+- Available as:
+  - `.3dsx` for the **Homebrew Launcher**
+  - `.cia` for installation directly to the **Nintendo 3DS HOME Menu**
+- CIA version includes a nifty banner and audio stinger.
+- Both versions use the same game-data and save locations, making it easy to switch between them
+
+> **Note:** OpenXCOM-3DS does not include the original commercial X-COM game
+> files. You must provide your own legally obtained UFO Defense and/or Terror
+> From the Deep data.
+
 ## Instructions
 
 You need:
@@ -13,10 +43,8 @@ You need:
 - Your legal asset files from X-COM: UFO Defense, Terror From the
   Deep, or both
 
-Note: The original Nintendo 3DS, Nintendo 3DS XL, and Nintendo 2DS are not supported.
-
-The original commercial X-COM data is not included in this repository or in
-release downloads.
+Note: The original Nintendo 3DS, Nintendo 3DS XL, and Nintendo 2DS are not supported. They simply don't have the power to run the game as it stands, since it
+currently runs entirely off of the CPU.
 
 OXCE mods should theoretically work but are not directly supported at this time. You are welcome to test them out.
 
@@ -24,7 +52,7 @@ OXCE mods should theoretically work but are not directly supported at this time.
 
 ### 1. Install OpenXCOM-3DS
 
-Download the latest release archive from the GitHub Releases page.
+Download the latest release archive from the Releases page.
 
 Copy the included `OpenXCOM-3DS` application folder into the `3ds` directory
 on your SD card.
@@ -210,11 +238,11 @@ The lower screen contains Geoscape information and commonly used commands.
 - **ZR:** Use the item in the unit's right hand
 - **A:** Left click or confirm
 - **Y:** Right click
-- **X:** Middle mouse in supported Battlescape contexts
+- **X:** Middle mouse in supported Battlescape screens
 - **D-pad:** Move between lower-screen Battlescape controls while bottom focus
   is active
 - **Select:** Switch between top-screen and bottom-screen cursor focus
-- **Touchscreen:** Activate lower-screen Battlescape controls
+- **Touchscreen:** Activate Battlescape buttons, and use the trackpad
 
 The lower screen displays the Battlescape command interface, unit information,
 hand items, and other context-sensitive controls.
@@ -226,7 +254,7 @@ hand items, and other context-sensitive controls.
 - **Y:** Right click
 - **X:** Quick-move the item under the cursor
 - **D-pad:** Move between lower-screen inventory controls
-- **Touchscreen:** Select items and controls directly
+- **Touchscreen:** Select items with the trackpad, and tap the buttons directly
 
 ## Keyboard Controls
 
@@ -253,7 +281,7 @@ Separate cursor-speed settings are available for:
 
 ### Camera
 
-Settings include:
+Settings for the C-Stick camera include:
 
 - Geoscape camera speed
 - Battlescape camera speed
@@ -270,21 +298,13 @@ Settings include:
 - Drag threshold
 - Hold delay
 
-## Important Notes
+## User Files
 
-- This port supports only the New Nintendo 3DS hardware family.
-- Use unmodified original game files.
-- Third-party mods are unsupported.
-- Do not install separate OXCE `common` or `standard` folders when using an
-  official embedded-assets release.
-- Changing the selected master game causes a full resource reload.
 - Configuration and saves are stored under:
 
 ```text
 sdmc:/3ds/OXCE/user/
 ```
-
-- This release is distributed as a Homebrew Launcher `.3dsx` application.
 
 ## Reporting Problems
 
@@ -306,7 +326,7 @@ occurs with the unmodified UFO Defense or Terror From the Deep master.
 OpenXCOM-3DS can be built from source using the
 [devkitPro](https://devkitpro.org/) Nintendo 3DS development toolchain.
 
-This guide is intended to be usable even if you have never built Nintendo 3DS
+This is a WINDOWS guide is intended to be usable even if you have never built Nintendo 3DS
 homebrew before.
 
 The build system can produce both release formats:
@@ -330,23 +350,14 @@ Useful links:
 - [devkitPro Installer](https://github.com/devkitPro/installer)
 - [devkitPro Installer Releases](https://github.com/devkitPro/installer/releases)
 
-On Windows, install devkitPro using the official installer.
+On Windows, install devkitPro using the official installer. Make sure you select the option for the 3DS toolkit stuff. Should be auto selected.
 
 ---
 
 ### 2. Use the Correct Terminal on Windows
 
-Windows users should run all commands in this guide from the
+Please run all commands in this guide from the
 **devkitPro MinGW64** terminal installed with devkitPro.
-
-Do **not** use:
-
-- Windows Command Prompt
-- PowerShell
-- Git Bash
-- Cygwin
-- a separate standalone MSYS2 installation
-- another MinGW64 terminal that was not installed or configured by devkitPro
 
 The correct terminal should normally show `MINGW64` in the prompt.
 
@@ -355,9 +366,6 @@ For example:
 ```text
 username@COMPUTER MINGW64 ~
 ```
-
-The important part is that this is the **devkitPro MinGW64 environment**, not
-just any terminal that happens to display `MINGW64`.
 
 Check that the terminal can see your devkitPro installation:
 
@@ -376,11 +384,6 @@ You can also confirm that the installation directory exists:
 ```bash
 ls /opt/devkitpro
 ```
-
-You should see several devkitPro directories and tools.
-
-> **Windows users:** Unless this guide specifically says otherwise, run every
-> command below from the **devkitPro MinGW64** terminal.
 
 ---
 
@@ -438,22 +441,8 @@ command -v makerom
 
 Each command should print a path.
 
-Also confirm that the devkitPro environment is available:
-
-```bash
-echo "$DEVKITPRO"
-```
-
-This should normally print:
-
-```text
-/opt/devkitpro
-```
-
-If one of the required tools is missing, first make sure you are using the
-**devkitPro MinGW64** terminal.
-
-Then rerun:
+If one of these commands does not print a path, make sure you are using the
+**devkitPro MinGW64** terminal and rerun:
 
 ```bash
 pacman -S --needed git cmake ninja zip 3ds-dev
@@ -508,7 +497,7 @@ src/
 
 ---
 
-### 6. Configure the Nintendo 3DS Release Build
+### 6. Configure the build
 
 Before compiling the game, CMake needs to configure a Nintendo 3DS build
 directory.
@@ -548,8 +537,6 @@ The options mean:
 - `BUILD_DOCUMENTATION=OFF` - do not build the upstream API documentation
 - `BUILD_3DS_CIA=ON` - enable the additional CIA packaging target
 
-The original commercial X-COM files are **not** embedded by this process.
-
 A successful configuration should include:
 
 ```text
@@ -562,14 +549,14 @@ Because CIA building is enabled, it should also include:
 Nintendo 3DS CIA package target enabled: openxcom_cia
 ```
 
-The Nintendo 3DS port uses its software rendering path and does not require the
+Note: this port uses its own software rendering path and does not require the
 desktop OpenGL renderer.
 
 ---
 
 ### 7. Build the `.3dsx`
 
-Compile OpenXCOM-3DS with:
+Compile the .3dsx with:
 
 ```bash
 cmake --build build/3ds -j4
@@ -597,7 +584,7 @@ ls -lh build/3ds/src/openxcom.3dsx
 Current OpenXCOM-3DS source serializes embedded asset ZIP generation to avoid
 an intermittent parallel-build failure observed with devkitPro/MSYS2.
 
-If you are building an older revision and encounter an error similar to:
+If you encounter an error similar to:
 
 ```text
 zip I/O error: No such file or directory
@@ -670,41 +657,7 @@ ls -lh build/3ds/package/3ds/OpenXCOM-3DS.cia
 
 ---
 
-### 9. Quick Reference: Build Both Formats
-
-Once the required tools are installed, the complete release build process is:
-
-```bash
-cmake -S . -B build/3ds -G Ninja \
-    -DCMAKE_TOOLCHAIN_FILE=/opt/devkitpro/cmake/3DS.cmake \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DEMBED_ASSETS=ON \
-    -DDEV_BUILD=OFF \
-    -DBUILD_PACKAGE=OFF \
-    -DBUILD_DOCUMENTATION=OFF \
-    -DBUILD_3DS_CIA=ON
-
-cmake --build build/3ds -j4
-
-cmake --build build/3ds --target openxcom_cia -j4
-```
-
-The main outputs are:
-
-```text
-build/3ds/src/openxcom.3dsx
-build/3ds/package/3ds/OpenXCOM-3DS.cia
-```
-
-The generated SMDH is:
-
-```text
-build/3ds/package/3ds/openxcom.smdh
-```
-
----
-
-### 10. Prepare the `.3dsx` for the Homebrew Launcher
+### 9. Install the Built .3dsx
 
 For a normal Homebrew Launcher installation, create a folder named:
 
@@ -750,7 +703,7 @@ sdmc:/3ds/OXCE/
 
 ---
 
-### 11. Install a Locally Built CIA
+### 10. Install the Built CIA
 
 The generated CIA is:
 
@@ -765,11 +718,6 @@ It can then be installed using a compatible title installer such as
 
 After installation, OpenXCOM-3DS appears directly on the Nintendo 3DS HOME
 Menu with its icon, banner, and banner audio.
-
-The CIA does **not** contain UFO Defense or Terror From the Deep.
-
-The commercial game data must still be installed separately as described in
-the main installation section of this README.
 
 Both the `.3dsx` and `.cia` versions use:
 
@@ -787,10 +735,9 @@ sdmc:/3ds/OXCE/user/
 
 ---
 
-### 12. Test the `.3dsx` With 3dslink
+### 11. Test the `.3dsx` With 3dslink
 
-During development, repeatedly copying the `.3dsx` to the SD card can be
-inconvenient.
+During development, repeatedly copying the `.3dsx` to the SD card was pretty inconvenient.
 
 [3dslink](https://github.com/devkitPro/3dslink) can send a `.3dsx` directly
 from your computer to a Nintendo 3DS over the local network.
@@ -822,7 +769,7 @@ It does **not** install or launch a CIA.
 
 ---
 
-### 13. Rebuild After Making Changes
+### 12. Rebuild After Making Changes
 
 You do not normally need to rerun the full CMake configuration every time you
 edit the source code.
@@ -850,7 +797,7 @@ Rerun the full CMake configuration command if you:
 
 ---
 
-### 14. Create a Completely Fresh Build
+### 13. Create a Completely Fresh Build
 
 If the build begins behaving strangely, or you want to guarantee that no old
 build files are being reused, delete the entire build directory:
@@ -957,23 +904,6 @@ See:
 - [Project_CTR / makerom](https://github.com/3DSGuy/Project_CTR)
 - [Project_CTR Releases](https://github.com/3DSGuy/Project_CTR/releases)
 
-#### The `.3dsx` built successfully but there is no CIA
-
-The normal build command creates the `.3dsx`, but the CIA uses a separate
-target.
-
-Make sure the project was configured with:
-
-```text
--DBUILD_3DS_CIA=ON
-```
-
-Then run:
-
-```bash
-cmake --build build/3ds --target openxcom_cia -j4
-```
-
 #### Ninja says `no work to do`
 
 This is normally not an error.
@@ -988,41 +918,6 @@ rm -rf build/3ds
 ```
 
 Then repeat the configuration and build steps above.
-
-#### My CIA has a different SHA-256 hash after rebuilding it
-
-This does not necessarily mean the application changed.
-
-`makerom` generates some CIA container metadata during packaging, so two CIA
-files created from otherwise identical build inputs can still have different
-binary hashes.
-
----
-
-### Additional Development Resources
-
-Useful references for Nintendo 3DS development:
-
-- [devkitPro](https://devkitpro.org/)
-- [devkitPro Getting Started](https://devkitpro.org/wiki/Getting_Started)
-- [devkitPro Installer](https://github.com/devkitPro/installer)
-- [devkitPro 3DS Examples](https://github.com/devkitPro/3ds-examples)
-- [devkitPro 3dslink](https://github.com/devkitPro/3dslink)
-- [CMake](https://cmake.org/)
-- [Ninja](https://ninja-build.org/)
-- [Git](https://git-scm.com/)
-- [bannertool](https://github.com/diasurgical/bannertool)
-- [makerom / Project_CTR](https://github.com/3DSGuy/Project_CTR)
-
-### Testing With 3dslink
-
-Open the Homebrew Launcher receiver on the 3DS, then run:
-
-```bash
-3dslink --retries 10 \
-    -a YOUR_3DS_IP_ADDRESS \
-    build/3ds/src/openxcom.3dsx
-```
 
 ## Credits and License
 
