@@ -54,6 +54,10 @@ OXCE mods should theoretically work but are not directly supported at this time.
 
 Download the latest release archive from the Releases page.
 
+OpenXCOM-3DS is provided in two formats.
+
+#### Homebrew Launcher (`.3dsx`)
+
 Copy the included `OpenXCOM-3DS` application folder into the `3ds` directory
 on your SD card.
 
@@ -61,6 +65,20 @@ The resulting application path should resemble:
 
 ```text
 sdmc:/3ds/OpenXCOM-3DS/openxcom.3dsx
+```
+
+#### HOME Menu (`.cia`)
+
+Copy `OpenXCOM-3DS.cia` to your SD card and install it using a compatible title
+installer such as [FBI](https://github.com/Steveice10/FBI).
+
+After installation, OpenXCOM-3DS will appear directly on the Nintendo 3DS HOME
+Menu.
+
+Both versions use the same game-data directory:
+
+```text
+sdmc:/3ds/OXCE/
 ```
 
 Do not launch the game until data for UFO Defense, Terror From the Deep, or
