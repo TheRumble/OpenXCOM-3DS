@@ -558,8 +558,11 @@ if ( EMBED_ASSETS )
   set_property ( SOURCE Engine/Options.cpp APPEND PROPERTY COMPILE_DEFINITIONS EMBED_ASSETS )
   add_custom_command ( OUTPUT "${CMAKE_BINARY_DIR}/common.zip" COMMAND zip -r -FS "${CMAKE_BINARY_DIR}/common.zip" .
                         WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}/bin/common" )
+  # Keep the two embedded-asset ZIP operations serial. Running both
+  # Info-ZIP commands concurrently can intermittently fail on devkitPro/MSYS2.
   add_custom_command ( OUTPUT "${CMAKE_BINARY_DIR}/standard.zip" COMMAND zip -r -FS "${CMAKE_BINARY_DIR}/standard.zip" .
-                        WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}/bin/standard" )
+                        WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}/bin/standard"
+                        DEPENDS "${CMAKE_BINARY_DIR}/common.zip" )
   add_custom_target ( zips DEPENDS "${CMAKE_BINARY_DIR}/common.zip" "${CMAKE_BINARY_DIR}/standard.zip" )
 endif ()
 
