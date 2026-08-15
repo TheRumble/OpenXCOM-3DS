@@ -371,7 +371,7 @@ This should normally print:
 /opt/devkitpro
 ```
 
-You can also check that the installation directory exists:
+You can also confirm that the installation directory exists:
 
 ```bash
 ls /opt/devkitpro
@@ -592,6 +592,33 @@ Verify that it exists:
 ls -lh build/3ds/src/openxcom.3dsx
 ```
 
+#### Build fails while generating `common.zip` or `standard.zip`
+
+Current OpenXCOM-3DS source serializes embedded asset ZIP generation to avoid
+an intermittent parallel-build failure observed with devkitPro/MSYS2.
+
+If you are building an older revision and encounter an error similar to:
+
+```text
+zip I/O error: No such file or directory
+zip error: Could not create output file (was replacing the original zip file)
+ninja: build stopped: subcommand failed.
+```
+
+generate the asset ZIPs serially:
+
+```bash
+cmake --build build/3ds --target zips -j1
+```
+
+Then resume the normal parallel build:
+
+```bash
+cmake --build build/3ds -j4
+```
+
+You do not need to delete the build directory or reconfigure the project.
+
 ---
 
 ### 8. Build the `.cia`
@@ -769,9 +796,7 @@ inconvenient.
 from your computer to a Nintendo 3DS over the local network.
 
 First, start the network loader or receiver from the Homebrew Launcher on your
-Nintendo 3DS.
-
-Find the IP address of the 3DS.
+Nintendo 3DS and find the IP address of the system.
 
 Then, from the OpenXCOM-3DS source directory, run:
 
