@@ -324,58 +324,135 @@ OpenXCOM-3DS is built using the
 
 Start with the official:
 
-[devkitPro Getting Started Guide](https://devkitpro.org/wiki/Getting_Started)
+- [devkitPro Getting Started Guide](https://devkitpro.org/wiki/Getting_Started)
+- [devkitPro Installer](https://github.com/devkitPro/installer)
+- [devkitPro Installer Releases](https://github.com/devkitPro/installer/releases)
 
-Windows users can download the installer here:
+On Windows, install devkitPro using the official installer.
 
-[devkitPro Installer](https://github.com/devkitPro/installer)
+### 2. Use the Correct Terminal on Windows
 
-[devkitPro Installer Releases](https://github.com/devkitPro/installer/releases)
+Windows users should run all build commands from the **devkitPro MinGW64**
+terminal installed with devkitPro.
 
-### Which Terminal Should I Use on Windows?
-
-After installing devkitPro, use the **MSYS2 environment configured by
-devkitPro** for all commands in this guide.
-
-Do **not** run the build commands from:
+Do **not** use:
 
 - Windows Command Prompt
 - PowerShell
 - Git Bash
 - Cygwin
-- a separate, unconfigured MSYS2 installation
+- a separate standalone MSYS2 installation
+- another MinGW64 terminal that was not installed/configured by devkitPro
 
-If you installed devkitPro using its Windows installer, launch the
-**devkitPro MSYS/MSYS2 terminal** from the Windows Start menu.
+The correct terminal should normally show `MINGW64` in the prompt.
 
-Depending on the installed version and shortcut, the terminal may identify
-itself as `MSYS` or `MINGW64`. What matters is that it is the environment
-configured for devkitPro and has access to `/opt/devkitpro`.
+For example:
 
-You can check this immediately after opening the terminal:
+```text
+username@COMPUTER MINGW64 ~
+```
+
+The important part is that this is the **devkitPro MinGW64 environment**, not
+just any terminal that happens to say `MINGW64`.
+
+You can verify that the terminal can see the devkitPro installation with:
 
 ```bash
 echo "$DEVKITPRO"
-ls /opt/devkitpro
 ```
 
-`DEVKITPRO` should normally be:
+This should normally print:
 
 ```text
 /opt/devkitpro
 ```
 
-and the second command should display the contents of your devkitPro
-installation.
+Then check that the installation directory exists:
 
-You can also verify that the devkitPro package repositories are available:
+```bash
+ls /opt/devkitpro
+```
+
+You should see several devkitPro directories and tools.
+
+You can also verify that the Nintendo 3DS compiler is available:
+
+```bash
+command -v arm-none-eabi-g++
+```
+
+A working installation should return a path rather than nothing.
+
+> **Windows users:** Unless this guide specifically says otherwise, run every
+> command below from the **devkitPro MinGW64** terminal.
+
+### 3. Install the Required Packages
+
+First update the devkitPro package database:
 
 ```bash
 pacman -Syu
 ```
 
-> **Important:** All commands below are intended to be entered in this
-> devkitPro-configured MSYS2 terminal.
+If `pacman` asks you to close or restart the terminal during the update, close
+it, reopen the **devkitPro MinGW64** terminal, and run:
+
+```bash
+pacman -Syu
+```
+
+again.
+
+Then install the tools and Nintendo 3DS development packages required by
+OpenXCOM-3DS:
+
+```bash
+pacman -S --needed git cmake ninja zip 3ds-dev
+```
+
+The main tools used by the build are:
+
+- [Git](https://git-scm.com/) - downloads and manages the source code
+- [CMake](https://cmake.org/) - configures the project
+- [Ninja](https://ninja-build.org/) - compiles the project
+- [devkitPro](https://devkitpro.org/) / devkitARM - provides the Nintendo 3DS
+  compiler and libraries
+- [bannertool](https://github.com/diasurgical/bannertool) - creates Nintendo
+  3DS application metadata, icons, and banners
+- [makerom / Project_CTR](https://github.com/3DSGuy/Project_CTR) - creates the
+  installable `.cia`
+
+### 4. Verify the Build Tools
+
+Before continuing, check that the required programs can be found:
+
+```bash
+command -v git
+command -v cmake
+command -v ninja
+command -v arm-none-eabi-g++
+command -v bannertool
+command -v makerom
+```
+
+Each command should print a path.
+
+You can also check the Nintendo 3DS compiler directly:
+
+```bash
+arm-none-eabi-g++ --version
+```
+
+If `arm-none-eabi-g++`, `bannertool`, or `makerom` cannot be found, first make
+sure you opened the **devkitPro MinGW64** terminal rather than another terminal.
+
+If you are in the correct terminal and the tools are still missing, rerun:
+
+```bash
+pacman -S --needed 3ds-dev
+```
+
+before continuing.
 
 ### 2. Install the Required Packages
 
