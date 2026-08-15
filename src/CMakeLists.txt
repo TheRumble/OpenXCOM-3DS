@@ -639,6 +639,108 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Nintendo3DS")
   )
 
   ctr_create_3dsx(openxcom)
+
+  if ( BUILD_3DS_CIA )
+    find_program ( OXCE_3DS_BANNERTOOL NAMES bannertool )
+    find_program ( OXCE_3DS_MAKEROM NAMES makerom )
+
+    if ( NOT OXCE_3DS_BANNERTOOL )
+      message ( FATAL_ERROR
+        "BUILD_3DS_CIA requires bannertool." )
+    endif ()
+
+    if ( NOT OXCE_3DS_MAKEROM )
+      message ( FATAL_ERROR
+        "BUILD_3DS_CIA requires makerom." )
+    endif ()
+
+    if ( CMAKE_STRIP )
+      set ( OXCE_3DS_STRIP "${CMAKE_STRIP}" )
+    else ()
+      find_program ( OXCE_3DS_STRIP NAMES arm-none-eabi-strip )
+      if ( NOT OXCE_3DS_STRIP )
+        message ( FATAL_ERROR
+          "BUILD_3DS_CIA requires arm-none-eabi-strip." )
+      endif ()
+    endif ()
+
+    set ( OXCE_3DS_ASSET_DIR
+      "${PROJECT_SOURCE_DIR}/res/3ds" )
+    set ( OXCE_3DS_PACKAGE_DIR
+      "${CMAKE_BINARY_DIR}/package/3ds" )
+
+    set ( OXCE_3DS_SMDH
+      "${OXCE_3DS_PACKAGE_DIR}/openxcom.smdh" )
+    set ( OXCE_3DS_BANNER
+      "${OXCE_3DS_PACKAGE_DIR}/openxcom-banner.bnr" )
+    set ( OXCE_3DS_STRIPPED_ELF
+      "${OXCE_3DS_PACKAGE_DIR}/openxcom-stripped.elf" )
+    set ( OXCE_3DS_CIA
+      "${OXCE_3DS_PACKAGE_DIR}/OpenXCOM-3DS.cia" )
+
+    add_custom_command (
+      OUTPUT "${OXCE_3DS_SMDH}"
+      COMMAND "${CMAKE_COMMAND}" -E make_directory
+              "${OXCE_3DS_PACKAGE_DIR}"
+      COMMAND "${OXCE_3DS_BANNERTOOL}" makesmdh
+              -i "${PROJECT_SOURCE_DIR}/res/linux/icons/openxcom_48x48.png"
+              -s "OpenXCOM-3DS"
+              -l "OpenXcom Extended for New Nintendo 3DS"
+              -p "OpenXcom Extended"
+              -r regionfree
+              -f visible,recordusage,new3ds
+              -o "${OXCE_3DS_SMDH}"
+      DEPENDS
+        "${PROJECT_SOURCE_DIR}/res/linux/icons/openxcom_48x48.png"
+      VERBATIM
+    )
+
+    add_custom_command (
+      OUTPUT "${OXCE_3DS_BANNER}"
+      COMMAND "${CMAKE_COMMAND}" -E make_directory
+              "${OXCE_3DS_PACKAGE_DIR}"
+      COMMAND "${OXCE_3DS_BANNERTOOL}" makebanner
+              -i "${OXCE_3DS_ASSET_DIR}/banner.png"
+              -a "${OXCE_3DS_ASSET_DIR}/banner.wav"
+              -o "${OXCE_3DS_BANNER}"
+      DEPENDS
+        "${OXCE_3DS_ASSET_DIR}/banner.png"
+        "${OXCE_3DS_ASSET_DIR}/banner.wav"
+      VERBATIM
+    )
+
+    add_custom_command (
+      OUTPUT "${OXCE_3DS_CIA}"
+      COMMAND "${CMAKE_COMMAND}" -E make_directory
+              "${OXCE_3DS_PACKAGE_DIR}"
+      COMMAND "${OXCE_3DS_STRIP}"
+              -o "${OXCE_3DS_STRIPPED_ELF}"
+              "$<TARGET_FILE:openxcom>"
+      COMMAND "${OXCE_3DS_MAKEROM}"
+              -f cia
+              -target t
+              -exefslogo
+              -o "${OXCE_3DS_CIA}"
+              -elf "${OXCE_3DS_STRIPPED_ELF}"
+              -rsf "${OXCE_3DS_ASSET_DIR}/app.rsf"
+              -icon "${OXCE_3DS_SMDH}"
+              -banner "${OXCE_3DS_BANNER}"
+      DEPENDS
+        openxcom
+        "${OXCE_3DS_SMDH}"
+        "${OXCE_3DS_BANNER}"
+        "${OXCE_3DS_ASSET_DIR}/app.rsf"
+      VERBATIM
+    )
+
+    add_custom_target (
+      openxcom_cia
+      DEPENDS "${OXCE_3DS_CIA}"
+    )
+
+    message ( STATUS
+      "Nintendo 3DS CIA package target enabled: openxcom_cia" )
+  endif ()
 endif ()
 
 if ( EMBED_ASSETS )
