@@ -349,13 +349,15 @@ When opening an issue, include:
 Do not report problems involving third-party mods unless the same problem also
 occurs with the unmodified UFO Defense or Terror From the Deep master.
 
+The game should be pretty stable, however there might be Luma crashes if you exit to the 3DS menu at an inopportune time, but I haven't seen any thing
+like 'shooting this specific muton with the laser rifle causes the game to crash' or whatever. If it does happen, send the dump and a report.
+
 ## Building From Source
+
+Note: this is a guide for Windows only, currently.
 
 OpenXCOM-3DS can be built from source using the
 [devkitPro](https://devkitpro.org/) Nintendo 3DS development toolchain.
-
-This is a WINDOWS guide is intended to be usable even if you have never built Nintendo 3DS
-homebrew before.
 
 The build system can produce both release formats:
 
@@ -378,11 +380,11 @@ Useful links:
 - [devkitPro Installer](https://github.com/devkitPro/installer)
 - [devkitPro Installer Releases](https://github.com/devkitPro/installer/releases)
 
-On Windows, install devkitPro using the official installer. Make sure you select the option for the 3DS toolkit stuff. Should be auto selected.
+Install devkitPro using the official installer. Make sure you select the option for the 3DS toolkit stuff. Should be auto selected.
 
 ---
 
-### 2. Use the Correct Terminal on Windows
+### 2. MinGW64
 
 Please run all commands in this guide from the
 **devkitPro MinGW64** terminal installed with devkitPro.
@@ -483,29 +485,37 @@ itself is installed and usable.
 
 ### 5. Clone OpenXCOM-3DS
 
-Choose a directory where you want to keep the source code.
-
-Clone the repository:
+In the **devkitPro MinGW64** terminal, run:
 
 ```bash
 git clone https://github.com/TheRumble/OpenXCOM-3DS.git
 ```
 
-Enter the new directory:
+This downloads the OpenXCOM-3DS source code into a new folder named:
 
-```bash
-cd OpenXCOM-3DS
+```text
+OpenXCOM-3DS
 ```
 
-You should now be in the root of the OpenXCOM-3DS source tree.
+By default, this folder will be created inside your devkitPro MinGW64 home
+directory.
 
-You can check your current directory with:
+You can see the exact location of that directory by running:
 
 ```bash
 pwd
 ```
 
-and list the repository contents with:
+Then enter the project folder:
+
+```bash
+cd OpenXCOM-3DS
+```
+
+You are now inside the OpenXCOM-3DS source directory and are ready to configure
+the build.
+
+You can list the repository contents with:
 
 ```bash
 ls
@@ -791,11 +801,11 @@ Replace `192.168.1.100` with the actual IP address of your Nintendo 3DS.
 
 `3dslink` sends and launches the `.3dsx`.
 
-It does **not** install or launch a CIA.
+It cannot install or launch a CIA.
 
 ---
 
-### 12. Rebuild After Making Changes
+### 12. Rebuilding After Making Changes
 
 You do not normally need to rerun the full CMake configuration every time you
 edit the source code.
@@ -823,7 +833,7 @@ Rerun the full CMake configuration command if you:
 
 ---
 
-### 13. Create a Completely Fresh Build
+### 13. Creating a Fresh Build
 
 If the build begins behaving strangely, or you want to guarantee that no old
 build files are being reused, delete the entire build directory:
@@ -870,80 +880,11 @@ ls -lh \
 
 ---
 
-### Troubleshooting
+## AI Disclosure
 
-#### `cmake: command not found`
+I created this port using OpenAI's ChatGPT. I'm not a coder, I mean I probably know more about it than somebody who's never done it before, but not a whole lot. I'm just a guy who wanted to play X-COM on my new 3DS. Everything I've done I've tested or had some test extensively, I 'built' this so I and others could have something to enjoy, I'm not interested in shoveling out broken slop for the sake of it. If you don't want to play this because of the AI use, I get it, no hard feelings, just please don't scream in my face about it. 
 
-Make sure you are using the **devkitPro MinGW64** terminal and install the
-required packages:
-
-```bash
-pacman -S --needed cmake ninja
-```
-
-#### CMake cannot find `/opt/devkitpro/cmake/3DS.cmake`
-
-Check that the file exists:
-
-```bash
-ls -l /opt/devkitpro/cmake/3DS.cmake
-```
-
-If it is missing, make sure the Nintendo 3DS development packages are
-installed:
-
-```bash
-pacman -S --needed 3ds-dev
-```
-
-See the
-[devkitPro Getting Started Guide](https://devkitpro.org/wiki/Getting_Started)
-for installation help.
-
-#### `bannertool` cannot be found
-
-Check:
-
-```bash
-command -v bannertool
-```
-
-The CIA target requires `bannertool` to create its Nintendo 3DS application
-metadata and banner.
-
-See:
-
-[bannertool on GitHub](https://github.com/diasurgical/bannertool)
-
-#### `makerom` cannot be found
-
-Check:
-
-```bash
-command -v makerom
-```
-
-The CIA target requires `makerom`.
-
-See:
-
-- [Project_CTR / makerom](https://github.com/3DSGuy/Project_CTR)
-- [Project_CTR Releases](https://github.com/3DSGuy/Project_CTR/releases)
-
-#### Ninja says `no work to do`
-
-This is normally not an error.
-
-It means Ninja does not believe any files used by that target have changed
-since the previous build.
-
-For a completely fresh rebuild, delete the build directory:
-
-```bash
-rm -rf build/3ds
-```
-
-Then repeat the configuration and build steps above.
+---
 
 ## Credits and License
 
