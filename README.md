@@ -1,17 +1,16 @@
 # OpenXCOM-3DS
 
-OpenXCOM-3DS is a native port of OpenXcom Extended 8.6.1 for the New Nintendo 3DS
-family.
+OpenXCOM-3DS is a native port of OpenXcom Extended 8.6.1 for the New Nintendo 3DS family.
 
 ## Features
 
-- Supports both **X-COM: UFO Defense** and **X-COM: Terror From the Deep**
-- Runs using an optimized **software rendering** path
-- Uses the **top screen for gameplay** and the **bottom touchscreen for 3DS-specific controls**
+- Supports both X-COM: UFO Defense and X-COM: Terror From the Deep
+- Runs using an optimized software rendering path
+- Uses the top screen for gameplay and the bottom touchscreen for 3DS-specific controls
 - Touchscreen interface designed around the original OpenXcom/OXCE UI
-- Support for the **Circle Pad**, **C-Stick**, **D-Pad**, face buttons, and all four shoulder buttons
-- **C-Stick camera panning on the Geoscape and the Battlescape**
-- **D-Pad navigation** for bottom-screen controls
+- Support for the Circle Pad, C-Stick, D-Pad, face buttons, and all four shoulder buttons
+- C-Stick camera panning on the Geoscape and the Battlescape
+- D-Pad navigation for bottom-screen controls
 - Quick-access controls for:
   - inventory
   - left and right hand items
@@ -24,9 +23,9 @@ family.
 - Native OXCE options and configuration support
 - Optimized Geoscape and Battlescape rendering for 3DS hardware
 - Available as:
-  - `.3dsx` for the **Homebrew Launcher**
-  - `.cia` for installation directly to the **Nintendo 3DS HOME Menu**
-- CIA version includes a nifty banner and audio stinger.
+  - `.3dsx` for the Homebrew Launcher**
+  - `.cia` for installation directly to the HOME Menu
+- CIA version includes a nifty banner and audio stinger
 - Both versions use the same game-data and save locations, making it easy to switch between them
 
 > **Note:** OpenXCOM-3DS does not include the original commercial X-COM game
@@ -39,7 +38,7 @@ You need:
 
 - A New Nintendo 3DS, New Nintendo 3DS XL, or New Nintendo 2DS XL
 - A homebrewed system. If you haven't done it yet, this is a good guide: https://3ds.hacks.guide/get-started.html
-- The release package
+- The release package (or the files you built yourself)
 - Your legal asset files from X-COM: UFO Defense, Terror From the
   Deep, or both
 
@@ -72,8 +71,7 @@ sdmc:/3ds/OpenXCOM-3DS/openxcom.3dsx
 Copy `OpenXCOM-3DS.cia` to your SD card and install it using a compatible title
 installer such as [FBI](https://github.com/Steveice10/FBI).
 
-After installation, OpenXCOM-3DS will appear directly on the Nintendo 3DS HOME
-Menu.
+After installation, OpenXCOM-3DS will appear directly on the HOME Menu.
 
 Both versions use the same game-data directory:
 
