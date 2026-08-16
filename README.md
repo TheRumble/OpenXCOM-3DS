@@ -464,7 +464,9 @@ The main tools used by the build are:
 - [makerom / Project_CTR](https://github.com/3DSGuy/Project_CTR) - creates the
   installable `.cia`
 
-`bannertool` and `makerom` are used during CIA packaging.
+`bannertool` is used to generate the application metadata used by both the
+`.3dsx` and `.cia` builds. `makerom` is used when packaging the installable
+`.cia`.
 
 ### 4. Verify Build Tools
 
@@ -659,7 +661,7 @@ cmake --build build/3ds --target openxcom_cia -j4
 
 This automatically:
 
-1. creates the OpenXCOM-3DS SMDH application metadata and icon
+1. generates or reuses the OpenXCOM-3DS SMDH application metadata and icon
 2. creates the HOME Menu banner
 3. includes the banner audio
 4. creates a stripped copy of the OpenXCOM-3DS ELF
@@ -875,7 +877,7 @@ ls -lh \
 
 ## AI Disclosure
 
-I created this port using OpenAI's ChatGPT. I'm not a coder, I mean I probably know more about it than somebody who's never done it before, but not a whole lot. I'm just a guy who wanted to play X-COM on my new 3DS. Everything I've done I've tested or had some test extensively, I 'built' this so I and others could have something to enjoy, I'm not interested in shoveling out broken slop for the sake of it. If you don't want to play this because of the AI use, I get it, no hard feelings, just please don't scream in my face about it. 
+I created this port using OpenAI's ChatGPT. I'm not a coder, I mean I probably know more about it than somebody who's never done it before, but not a whole lot. I'm just a guy who wanted to play X-COM on my new 3DS. Everything I've done I've tested or had someone test extensively, I 'built' this so I and others could have something to enjoy, I'm not interested in shoveling out broken slop for the sake of it. If you don't want to play this because of the AI use, I get it, no hard feelings, just please don't scream in my face about it. 
 
 ---
 
