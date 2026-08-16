@@ -2,6 +2,8 @@
 
 OpenXCOM-3DS is a native port of OpenXcom Extended 8.6.1 for the New Nintendo 3DS family.
 
+---
+
 ## Features
 
 - Supports both X-COM: UFO Defense and X-COM: Terror From the Deep
@@ -46,6 +48,8 @@ Note: The original Nintendo 3DS, Nintendo 3DS XL, and Nintendo 2DS are not suppo
 currently runs entirely off of the CPU.
 
 OXCE mods should theoretically work but are not directly supported at this time. You are welcome to test them out.
+
+---
 
 ## Installation
 
@@ -207,6 +211,8 @@ Only the `UFO` or `TFTD` folder for a game you own is required.
 - **Homebrew Launcher:** Open the Homebrew Launcher and start OpenXCOM-3DS.
 - **CIA:** Start OpenXCOM-3DS directly from the Nintendo 3DS HOME Menu.
 
+---
+
 ## Selecting UFO Defense or Terror From the Deep
 
 When both games are installed, open:
@@ -220,7 +226,9 @@ From here you can select your active game (or mod). If you've installed both gam
 - `UFO: Enemy Unknown / X-Com: UFO Defense`
 - `X-Com: Terror From the Deep`
 
-## Universal Controls
+---
+
+## Basic Controls
 
 - **Circle Pad:** Move the mouse cursor
 - **A:** Left click or confirm
@@ -233,6 +241,8 @@ From here you can select your active game (or mod). If you've installed both gam
 - **ZL + L + R + ZR:** Toggle the on-screen keyboard
 
 During intro and cutscenes, **A** skips the current video.
+
+---
 
 ## Menu Controls
 
@@ -294,6 +304,8 @@ The text-entry keyboard opens automatically when a text field is selected.
 - The complete keyboard can be used for controls that do not fit on the
   physical 3DS buttons.
 
+---
+
 ## 3DS Options
 
 Open the dedicated **3DS** category in the normal Options menu.
@@ -326,6 +338,8 @@ Settings include:
 - Drag threshold
 - Hold delay
 
+---
+
 ## User Files
 
 - Configuration and saves are stored under:
@@ -333,6 +347,7 @@ Settings include:
 ```text
 sdmc:/3ds/OXCE/user/
 ```
+---
 
 ## Reporting Problems
 
@@ -352,6 +367,8 @@ occurs with the unmodified UFO Defense or Terror From the Deep master.
 The game should be pretty stable, however there might be Luma crashes if you exit to the 3DS menu at an inopportune time, but I haven't seen any thing
 like 'shooting this specific muton with the laser rifle causes the game to crash' or whatever. If it does happen, send the dump and a report.
 
+---
+
 ## Building From Source
 
 Note: this is a guide for Windows only, currently.
@@ -367,8 +384,6 @@ The build system can produce both release formats:
 The CIA build also generates the HOME Menu icon, banner, and banner audio from
 assets included in this repository.
 
----
-
 ### 1. Install devkitPro
 
 OpenXCOM-3DS is built using
@@ -381,8 +396,6 @@ Useful links:
 - [devkitPro Installer Releases](https://github.com/devkitPro/installer/releases)
 
 Install devkitPro using the official installer. Make sure you select the option for the 3DS toolkit stuff. Should be auto selected.
-
----
 
 ### 2. MinGW64
 
@@ -414,8 +427,6 @@ You can also confirm that the installation directory exists:
 ```bash
 ls /opt/devkitpro
 ```
-
----
 
 ### 3. Install the Required Packages
 
@@ -455,8 +466,6 @@ The main tools used by the build are:
 
 `bannertool` and `makerom` are used during CIA packaging.
 
----
-
 ### 4. Verify the Build Tools
 
 Before continuing, make sure the main build and packaging tools can be found:
@@ -480,8 +489,6 @@ pacman -S --needed git cmake ninja zip 3ds-dev
 
 The CMake configuration step below will verify that the Nintendo 3DS toolchain
 itself is installed and usable.
-
----
 
 ### 5. Clone OpenXCOM-3DS
 
@@ -532,8 +539,6 @@ libs/
 res/
 src/
 ```
-
----
 
 ### 6. Configure the build
 
@@ -590,8 +595,6 @@ Nintendo 3DS CIA package target enabled: openxcom_cia
 Note: this port uses its own software rendering path and does not require the
 desktop OpenGL renderer.
 
----
-
 ### 7. Build the `.3dsx`
 
 Compile the .3dsx with:
@@ -644,8 +647,6 @@ cmake --build build/3ds -j4
 
 You do not need to delete the build directory or reconfigure the project.
 
----
-
 ### 8. Build the `.cia`
 
 The CIA is created using a separate packaging target.
@@ -692,8 +693,6 @@ Verify that it exists:
 ```bash
 ls -lh build/3ds/package/3ds/OpenXCOM-3DS.cia
 ```
-
----
 
 ### 9. Install the Built `.3dsx`
 
@@ -769,8 +768,6 @@ Configuration files and saved games are stored under:
 sdmc:/3ds/OXCE/user/
 ```
 
----
-
 ### 11. Test the `.3dsx` With 3dslink
 
 During development, repeatedly copying the `.3dsx` to the SD card was pretty inconvenient.
@@ -803,8 +800,6 @@ Replace `192.168.1.100` with the actual IP address of your Nintendo 3DS.
 
 It cannot install or launch a CIA.
 
----
-
 ### 12. Rebuilding After Making Changes
 
 You do not normally need to rerun the full CMake configuration every time you
@@ -830,8 +825,6 @@ Rerun the full CMake configuration command if you:
 - change important CMake options
 - change toolchain settings
 - update the project in a way that requires CMake to regenerate the build
-
----
 
 ### 13. Creating a Fresh Build
 
