@@ -92,7 +92,7 @@ while game data and user files remain under `sdmc:/3ds/OXCE/`.
 Do not launch the game until data for UFO Defense, Terror From the Deep, or
 both has been copied using the steps below.
 
-### 2. Prepare the Game Data Directory
+### 2. Prepare the Game Directory
 
 OpenXCOM-3DS always uses:
 
@@ -115,7 +115,7 @@ sdmc:/3ds/OXCE/user/
 The `user` directory stores configuration, saved games, and other
 generated files.
 
-### 3. Install UFO Defense Data
+### 3. Install Game Assets
 
 Locate the original `XCOM` folder from your installation.
 
@@ -466,7 +466,7 @@ The main tools used by the build are:
 
 `bannertool` and `makerom` are used during CIA packaging.
 
-### 4. Verify the Build Tools
+### 4. Verify Build Tools
 
 Before continuing, make sure the main build and packaging tools can be found:
 
@@ -540,7 +540,7 @@ res/
 src/
 ```
 
-### 6. Configure the build
+### 6. Configure the Build
 
 Before compiling the game, CMake needs to configure a Nintendo 3DS build
 directory.
