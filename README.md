@@ -57,13 +57,13 @@ OpenXCOM-3DS is provided in two formats.
 
 #### Homebrew Launcher (`.3dsx`)
 
-Copy the included `OpenXCOM-3DS` application folder into the `3ds` directory
-on your SD card.
+Copy the included `OXCE` folder into the `3ds` directory on your SD card.
+The same `OXCE` folder is also used for game data, configuration, and saved games.
 
 The resulting application path should resemble:
 
 ```text
-sdmc:/3ds/OpenXCOM-3DS/openxcom.3dsx
+sdmc:/3ds/OXCE/openxcom.3dsx
 ```
 
 #### HOME Menu (`.cia`)
@@ -73,24 +73,34 @@ installer such as [FBI](https://github.com/Steveice10/FBI).
 
 After installation, OpenXCOM-3DS will appear directly on the HOME Menu.
 
-Both versions use the same game-data directory:
+Both versions use the same directory on the SD card:
 
 ```text
 sdmc:/3ds/OXCE/
 ```
+
+For the Homebrew Launcher version, this directory also contains
+`openxcom.3dsx` and `openxcom.smdh`.
+
+For the CIA version, the application itself is installed to the HOME Menu,
+while game data and user files remain under `sdmc:/3ds/OXCE/`.
 
 Do not launch the game until data for UFO Defense, Terror From the Deep, or
 both has been copied using the steps below.
 
-### 2. Create the Game Data Directory
+### 2. Prepare the Game Data Directory
 
-Create:
+OpenXCOM-3DS always uses:
 
 ```text
 sdmc:/3ds/OXCE/
 ```
 
-OpenXCOM-3DS always looks for its game data in this location.
+If you installed the Homebrew Launcher version, this folder was already
+created when you copied the included `OXCE` folder to your SD card.
+
+If you installed only the CIA version, create the `OXCE` folder inside
+`sdmc:/3ds/` if it does not already exist.
 
 The game automatically creates and uses:
 
@@ -163,37 +173,39 @@ Do not leave an extra `TFD` directory level.
 
 ### 5. Check the Final Layout
 
-A system with both games installed should resemble:
+A Homebrew Launcher installation with both games installed should resemble:
 
 ```text
-sdmc:/3ds/
-├── OpenXCOM-3DS/
-│   ├── openxcom.3dsx
-│   └── openxcom.smdh
+sdmc:/3ds/OXCE/
+├── openxcom.3dsx
+├── openxcom.smdh
+├── UFO/
+│   ├── GEODATA/
+│   ├── GEOGRAPH/
+│   ├── MAPS/
+│   ├── ROUTES/
+│   ├── SOUND/
+│   ├── TERRAIN/
+│   ├── UFOGRAPH/
+│   ├── UFOINTRO/
+│   └── UNITS/
 │
-└── OXCE/
-    ├── UFO/
-    │   ├── GEODATA/
-    │   ├── GEOGRAPH/
-    │   ├── MAPS/
-    │   ├── ROUTES/
-    │   ├── SOUND/
-    │   ├── TERRAIN/
-    │   ├── UFOGRAPH/
-    │   ├── UFOINTRO/
-    │   └── UNITS/
-    │
-    ├── TFTD/
-    │   └── original TFTD data folders
-    │
-    └── user/
+├── TFTD/
+│   └── original TFTD data folders
+│
+└── user/
 ```
+
+If you use only the CIA version, `openxcom.3dsx` and `openxcom.smdh` are not
+required on the SD card. The `UFO`, `TFTD`, and `user` directories remain in
+the same `sdmc:/3ds/OXCE/` location.
 
 Only the `UFO` or `TFTD` folder for a game you own is required.
 
 ### 6. Launch the Game
 
-Open the Homebrew Launcher and start OpenXCOM-3DS.
+- **Homebrew Launcher:** Open the Homebrew Launcher and start OpenXCOM-3DS.
+- **CIA:** Start OpenXCOM-3DS directly from the Nintendo 3DS HOME Menu.
 
 ## Selecting UFO Defense or Terror From the Deep
 
@@ -673,49 +685,47 @@ ls -lh build/3ds/package/3ds/OpenXCOM-3DS.cia
 
 ---
 
-### 9. Install the Built .3dsx
+### 9. Install the Built `.3dsx`
 
-For a normal Homebrew Launcher installation, create a folder named:
-
-```text
-OpenXCOM-3DS
-```
-
-Place these two files inside it:
-
-```text
-OpenXCOM-3DS/
-├── openxcom.3dsx
-└── openxcom.smdh
-```
-
-Copy them from:
+After the build finishes, the Homebrew Launcher files are located at:
 
 ```text
 build/3ds/src/openxcom.3dsx
 build/3ds/package/3ds/openxcom.smdh
 ```
 
-Then place the entire `OpenXCOM-3DS` folder inside the `3ds` directory on your
-SD card:
-
-```text
-sdmc:/3ds/OpenXCOM-3DS/
-├── openxcom.3dsx
-└── openxcom.smdh
-```
-
-The files serve different purposes:
-
-- `openxcom.3dsx` - the actual application
-- `openxcom.smdh` - Homebrew Launcher metadata such as the application name
-  and icon
-
-The commercial X-COM data is stored separately under:
+OpenXCOM-3DS uses the following directory on the SD card:
 
 ```text
 sdmc:/3ds/OXCE/
 ```
+
+Create that folder if it does not already exist, then copy both files into it.
+
+Your SD card should contain:
+
+```text
+sdmc:/3ds/OXCE/
+├── openxcom.3dsx
+└── openxcom.smdh
+```
+
+If you have already installed your UFO Defense or Terror From the Deep data,
+keep it in the same `OXCE` directory:
+
+```text
+sdmc:/3ds/OXCE/
+├── openxcom.3dsx
+├── openxcom.smdh
+├── UFO/
+├── TFTD/
+└── user/
+```
+
+Only the `UFO` or `TFTD` directory for a game you own is required.
+
+Once the files are copied to the SD card, open the Homebrew Launcher and select
+**OpenXCOM-3DS**.
 
 ---
 
