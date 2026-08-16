@@ -662,8 +662,8 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Nintendo3DS")
     COMMAND "${OXCE_3DS_BANNERTOOL}" makesmdh
             -i "${PROJECT_SOURCE_DIR}/res/linux/icons/openxcom_48x48.png"
             -s "OpenXCOM-3DS"
-            -l "OpenXcom Extended for New Nintendo 3DS"
-            -p "OpenXcom Extended"
+            -l "OpenXcom Extended 8.6.1"
+            -p "OXCE Team, TheRumble"
             -r regionfree
             -f visible,recordusage,new3ds
             -o "${OXCE_3DS_SMDH}"
