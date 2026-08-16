@@ -639,6 +639,9 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Nintendo3DS")
   target_compile_options(openxcom PRIVATE
     $<$<COMPILE_LANGUAGE:C>:-Wno-psabi>
     $<$<COMPILE_LANGUAGE:CXX>:-Wno-psabi>
+
+    # Keep local checkout paths out of compiled 3DS diagnostics.
+    "-ffile-prefix-map=${PROJECT_SOURCE_DIR}=OpenXCOM-3DS"
   )
 
   find_program ( OXCE_3DS_BANNERTOOL NAMES bannertool )
