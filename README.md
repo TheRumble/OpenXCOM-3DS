@@ -23,7 +23,7 @@ OpenXCOM-3DS is a native port of OpenXcom Extended 8.6.1 for the New Nintendo 3D
 - Native OXCE options and configuration support
 - Optimized Geoscape and Battlescape rendering for 3DS hardware
 - Available as:
-  - `.3dsx` for the Homebrew Launcher**
+  - `.3dsx` for the Homebrew Launcher
   - `.cia` for installation directly to the HOME Menu
 - CIA version includes a nifty banner and audio stinger
 - Both versions use the same game-data and save locations, making it easy to switch between them
