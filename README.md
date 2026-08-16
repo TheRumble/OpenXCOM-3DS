@@ -875,6 +875,12 @@ ls -lh \
 
 ---
 
+## What's Next?
+
+Aside from bugfixes if needed, I plan on implementing Citro3D to improve game performance by letting the game use the 3DS's GPU instead of being locked to the CPU. The game normally runs alright, but it can slow down if there's a bunch of effects on screen and stuff. For example, the glowing alien elevator shafts, turning the Geoscape globe, stuff like that. No timeline, but sometime, I promise.
+
+---
+
 ## AI Disclosure
 
 I created this port using OpenAI's ChatGPT. I'm not a coder, I mean I probably know more about it than somebody who's never done it before, but not a whole lot. I'm just a guy who wanted to play X-COM on my new 3DS. Everything I've done I've tested or had someone test extensively, I 'built' this so I and others could have something to enjoy, I'm not interested in shoveling out broken slop for the sake of it. If you don't want to play this because of the AI use, I get it, no hard feelings, just please don't scream in my face about it. 
@@ -883,10 +889,14 @@ I created this port using OpenAI's ChatGPT. I'm not a coder, I mean I probably k
 
 ## Credits and License
 
+First off, a big thank you to the user rhinofinger on Reddit for testing out the port. It was much appreciated!
+
 OpenXCOM-3DS is based on:
 
 - [OpenXcom](https://openxcom.org/)
 - [OpenXcom Extended](https://github.com/MeridianOXC/OpenXcom)
+
+This project would not have been remotely possible without their extraordinary work. Thank you.
 
 OpenXcom is an open-source recreation of the original X-COM games. The original
 commercial game data remains the property of its respective owners and is not
